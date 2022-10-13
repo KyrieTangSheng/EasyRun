@@ -7,7 +7,7 @@
   ```json
   {
   "status": 1,
-  “code”: 100,
+  "code": 100,
   "data": "<requested data>"
 }
   ```
