@@ -77,19 +77,19 @@
         * Error code: None
     * Method `POST`
         * Request
-	  *`email`*: String
-	  *`phoneNumber`*: Long
-	  *`institutionName`*: String
-	  *`firstName`*: String
-	  *`lastName`*: String
-	  *`pwd`: String
-	  *`education`: String         
-          * Response
+	    *`email`*: String
+	    *`phoneNumber`*: Long
+	    *`institutionName`*: String
+	    *`firstName`*: String
+	    *`lastName`*: String
+	    *`pwd`: String
+	    *`education`: String         
+        * Response
             * `data`
                 * Instructor Type
         * Error code
             * `001`: Email taken
-	* `002`: Institution Not Exist
+	    * `002`: Institution Not Exist
 
 * `./account/student/login`: student log in
     * Method `POST`
