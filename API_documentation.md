@@ -65,10 +65,9 @@
         * Request: null
         * Response
             * `data`
-                * List`<Institution>` Type
+                * `List <Institution> Type`
         * Error code: null
         
-* `./account/instructor/register`: instructor register
     * Method `POST`
         * Request
 	    * `email`: String
