@@ -73,7 +73,7 @@
         * Request: None
         * Response
             * `data`
-                * List<Institution> Type
+                * List`<Institution>` Type
         * Error code: None
     * Method `POST`
         * Request
@@ -104,7 +104,7 @@
             * `003`: Email not registered
 	
 *`./account/student/updateProfile`: student update profile
-    *Method `POST`
+    * Method `POST`
         *Request
             * `email`*: String
             * `username`*: String
