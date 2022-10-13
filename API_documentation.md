@@ -98,19 +98,19 @@
 *`./account/student/updateProfile`: student update profile
     * Method `POST`
         *Request
-            * `email`*: String
-            * `username`*: String
-            * `phoneNumber`*: long
-            * `firstName`*: String
-            * `lastName`*: String
-            * `pwd`*: String
-            * `underGradSchool`*: String
-            * `overallGPA`*: Float
-            * `toeflScore`*: Integer
-            * `GREScore`*: Integer
-            * `researchExp`*: String
-            * `internExp`*: String
-            * `majorGPA`*: Float
+            * `email`: String
+            * `username`: String
+            * `phoneNumber`: long
+            * `firstName`: String
+            * `lastName`: String
+            * `pwd`: String
+            * `underGradSchool`: String
+            * `overallGPA`: Float
+            * `toeflScore`: Integer
+            * `GREScore`: Integer
+            * `researchExp`: String
+            * `internExp`: String
+            * `majorGPA`: Float
         * Response
             * `data`
                 * Student Type
