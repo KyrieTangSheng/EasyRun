@@ -71,13 +71,13 @@
 * `./account/instructor/register`: instructor register
     * Method `POST`
         * Request
-	    * `email`: String
-	    * `phoneNumber`: Long
-	    * `institutionName`: String
-	    * `firstName`: String
-	    * `lastName`: String
-	    * `pwd`: String
-	    * `education`: String  
+	    *  `email`: String
+	    *  `phoneNumber`: Long
+	    *  `institutionName`: String
+	    *  `firstName`: String
+	    *  `lastName`: String
+	    *  `pwd`: String
+	    *  `education`: String  
 	           
         * Response
             * `data`
