@@ -317,8 +317,8 @@
 * `./uploadApplicationResult/chooseProgram`
     * Method: `GET`: 
         * Request: 
-			*`schoolName`: String,
-			*`programName`: String
+			* `schoolName`: String,
+			* `programName`: String
         * Response
 			* `data`: List<Program> Type
 		* Error Code: None
