@@ -65,9 +65,10 @@
         * Request: null
         * Response
             * `data`
-                * `List <Institution> Type`
+                * List`<Institution>` Type
         * Error code: null
         
+* `./account/instructor/register`: instructor register
     * Method `POST`
         * Request
 	    * `email`: String
@@ -76,12 +77,11 @@
 	    * `firstName`: String
 	    * `lastName`: String
 	    * `pwd`: String
-	    * `education`: String   
-	          
+	    * `education`: String  
+	           
         * Response
             * `data`
-                * `Instructor Type`
-                
+                * Instructor Type
         * Error code
             * `001`: Email taken
 	    * `002`: Institution Not Exist
