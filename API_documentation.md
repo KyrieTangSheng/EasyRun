@@ -62,20 +62,20 @@
 
 * `./account/instructor/register`: instructor register
     * Method `GET`
-        * Request: None
+        * Request: null
         * Response
             * `data`
                 * List`<Institution>` Type
-        * Error code: None
+        * Error code: null
     * Method `POST`
         * Request
-		* `email`: String
-		* `phoneNumber`: Long
-		* `institutionName`: String
-		* `firstName`: String
-		* `lastName`: String
-		* `pwd`: String
-		* `education`: String         
+	    * `email`: String
+	    * `phoneNumber`: Long
+	    * `institutionName`: String
+	    * `firstName`: String
+	    * `lastName`: String
+	    * `pwd`: String
+	    * `education`: String         
         * Response
             * `data`
                 * Instructor Type
