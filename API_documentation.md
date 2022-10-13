@@ -331,7 +331,7 @@
 
 
 * `./uploadApplicationResult/uploadPersonalInfo`
-    * Method: ‘GET’:
+    * Method: `GET`:
         * Request: None
         * Response: 
 			* `data`: List <Institution> Type
