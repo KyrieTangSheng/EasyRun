@@ -7,7 +7,7 @@
   ```json
   {
   "status": 1,
-  "code": 100,
+  “code”: 100,
   "data": "<requested data>"
 }
   ```
@@ -107,19 +107,19 @@
 * `./account/student/updateProfile`: student update profile
 	* Method `POST`
         * Request
-            * `email`*: String
-            * `username`*: String
-            * `phoneNumber`*: long
-            * `firstName`*: String
-            * `lastName`*: String
-            * `pwd`*: String
-            * `underGradSchool`*: String
-            * `overallGPA`*: Float
-            * `toeflScore`*: Integer
-            * `GREScore`*: Integer
-            * `researchExp`*: String
-            * `internExp`*: String
-            * `majorGPA`*: Float
+            * `email`: String
+            * `username`: String
+            * `phoneNumber`: long
+            * `firstName`: String
+            * `lastName`: String
+            * `pwd`: String
+            * `underGradSchool`: String
+            * `overallGPA`: Float
+            * `toeflScore`: Integer
+            * `GREScore`: Integer
+            * `researchExp`: String
+            * `internExp`: String
+            * `majorGPA`: Float
         * Response
             * `data`
                 * Student Type
@@ -340,11 +340,16 @@
     * Method: `POST`: upload personal info
         * Request:
 			* `programId`: String
-			* `studentId`: String
 			* `instructorName`: String nullable 
 			* `institutionName`: String nullable (Choose from given names, no need for check)
 			* `status`: Boolean (success or fail)
+			* `underGradSchool`: String
+            * `overallGPA`: Float
+            * `toeflScore`: Integer
+            * `GREScore`: Integer
+            * `researchExp`: String
+            * `internExp`: String
+            * `majorGPA`: Float
         * Response
 			* `data`: Application Type
 		* Error Code: None
-
