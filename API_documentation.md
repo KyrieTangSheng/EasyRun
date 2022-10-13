@@ -32,13 +32,6 @@
 
 ## API list
 
-./homepage/viewMyStars
-	GET → Request: Student.studentId → Respsonse: List<Program>
-./homepage/viewMyStars/cancelStar
-POST → Request: Student.studentId, Program.programId → Response: Star
-
-
-
 ### `./index: index page
 
 * `./index`: index page
