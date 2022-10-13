@@ -129,7 +129,7 @@
 * `./account/instructor/login`: staff log in
     * Method `POST`
         * Request
-            * `email`*: String, the email staff used to register
+            * `email`: String, the email staff used to register
             * `pwd`: String, user's password
         * Response
             * `data`
@@ -312,7 +312,7 @@
 			* `data`: List<Instructor> Type
 		* Error Code: None
 
-
+### `./uploadApplicationResult`: upload applications
 
 * `./uploadApplicationResult/chooseProgram`
     * Method: `GET`: 
