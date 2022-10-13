@@ -32,7 +32,7 @@
 
 ## API list
 
-### `./index: index page:
+### `./index: index page`:
 
 * `./index`: index page
     * Method `GET`: index page
