@@ -69,11 +69,11 @@
         * Error code: None
     * Method `POST`
         * Request
-	    * `email`*: String
-	    * `phoneNumber`*: Long
-	    * `institutionName`*: String
-	    * `firstName`*: String
-	    * `lastName`*: String
+	    * `email`: String
+	    * `phoneNumber`: Long
+	    * `institutionName`: String
+	    * `firstName`: String
+	    * `lastName`: String
 	    * `pwd`: String
 	    * `education`: String         
         * Response
