@@ -28,11 +28,11 @@
 
 * `./index`: index page
     * Method `GET`: index page
-        * Request: null
+        * `Request`: `null`
 
-        * Response
-            * `data` null                
-        * Error code: null  
+        * `Response`
+            * `data`: `null`                
+        * `Error code`: `null`  
 
 
 ### `./account`: 
@@ -65,23 +65,23 @@
         * Request: null
         * Response
             * `data`
-                * List`<Institution>` Type
+                * `List <Institution> Type`
         * Error code: null
         
-* `./account/instructor/register`: instructor register
     * Method `POST`
         * Request
-	    *  `email`: String
-	    *  `phoneNumber`: Long
-	    *  `institutionName`: String
-	    *  `firstName`: String
-	    *  `lastName`: String
-	    *  `pwd`: String
-	    *  `education`: String  
-	           
+	    	* `email`: String
+	    	* `phoneNumber`: Long
+	    	* `institutionName`: String
+	    	* `firstName`: String
+	    	* `lastName`: String
+	    	* `pwd`: String
+	    	* `education`: String   
+	          
         * Response
             * `data`
-                * Instructor Type
+                * `Instructor Type`
+                
         * Error code
             * `001`: Email taken
 	    * `002`: Institution Not Exist
