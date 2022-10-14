@@ -75,7 +75,7 @@
         * Request: None
         * Response
             * `data`
-                * List <Institution> Type
+                * List `Institution` Type
         * Error code: None
     * Method `POST`
         * Request
