@@ -124,7 +124,7 @@
             * `data`
                 * Student Type
         * Error code
-			* `001`: Email Taken
+		* `001`: Email Taken
 
 * `./account/instructor/login`: staff log in
     * Method `POST`
@@ -167,7 +167,7 @@
         * Request
             * `studentId`: Long
         * Response
-            * `data`: List<Program> Type (nullable)
+            * `data`: List `Program` Type (nullable)
         * Error code: None
 * `./homepage/student/viewContract`: check contract
     * Method `GET`
@@ -190,7 +190,7 @@
         * Request: 
 			* `institutionId`: Long
         * Response
-            * `data`: List<Student> Type (nullable)
+            * `data`: List `Student` Type (nullable)
         * Error Code: None
 
 * `./homepage/instructor/prepareContract`: send a contract to the student
@@ -198,7 +198,7 @@
         * Request: 
 			* `studentEmail`: String
         * Response
-            * `data`: List<String> Type (all registered students’ email)
+            * `data`: List `String` Type (all registered students’ email)
         * Error Code: None
 
 * `./homepage/instructor/viewInstitutionInfo`: view the information of the institution
@@ -249,7 +249,7 @@
 			* `schoolName`: String       
         * Response
             * `data`: 
-	    		* List<Program> Type
+	    		* List `Program` Type
         * Error code: None
 
 ### `./viewInstitutions`: view institutions
@@ -258,7 +258,7 @@
         * Request: 
 	*`name`: String
         * Response
-            * `data`: List<Institution> Type
+            * `data`: List `Institution` Type
         * Error code: None
 
 * `./viewInstitutions/viewSpecificInstitution/{institutionName}`
@@ -269,8 +269,8 @@
         * Response
             * `data`: 
     			* `institution`: Institution Type
-    			* `ratings`: List<Float> Type
-    			* `comments`: List<Comment> Type
+    			* `ratings`: List `Float` Type
+    			* `comments`: List `Comment` Type
     			* `ratable`: Boolean
         * Error code: None
 
@@ -309,7 +309,7 @@
         * Request:
 			* `institutionName`: String
         * Response
-			* `data`: List<Instructor> Type
+			* `data`: List `Instructor` Type
 		* Error Code: None
 
 ### `./uploadApplicationResult`: upload applications
@@ -334,7 +334,7 @@
     * Method: `GET`:
         * Request: None
         * Response: 
-			* `data`: List <Institution> Type
+			* `data`: List `Institution` Type
 		* Error Code: None
 
     * Method: `POST`: upload personal info
