@@ -261,7 +261,7 @@
             * `data`: List<Institution> Type
         * Error code: None
 
-* `./viewSpecificInstitution/{institutionName}`
+* `./viewInstitutions/viewSpecificInstitution/{institutionName}`
     * Method: `GET`: view specific institution
         * Request: 
 			* `institutionName`: String
@@ -274,7 +274,7 @@
     			* `ratable`: Boolean
         * Error code: None
 
-* `./viewSpecificInstitution/rateInstitution`
+* `./viewInstitutions/viewSpecificInstitution/rateInstitution`
     * Method: `POST`: post ratings
        * Request: 
 			* `institutionId`: String
@@ -291,7 +291,7 @@
 			* `data`: Rating Type
        * Error code: None
 
-* `./viewSpecificInstitution/commentRating`
+* `./viewInstitutions/viewSpecificInstitution/commentRating`
     * Method: `POST`: comment rating
        * Request:
 			* `institutionId`: String
@@ -304,7 +304,7 @@
             * `data`: Track Type
        * Error code: None
 
-* `./viewSpecificInsitution/viewTeam/{insitutionName}`
+* `./viewInstitutions/viewSpecificInsitution/viewTeam/{insitutionName}`
     * Method: `GET`: view all the team members of the institution
         * Request:
 			* `institutionName`: String
