@@ -132,9 +132,9 @@
     * Method `GET`
         * Request: None
         * Response
-			* `data`
-                * List <Institution> Type
-		* Error code: None	
+            * `data`
+            	* List `Institution` Type
+	* Error code: None	
     * Method `POST`
         * Request
             * `email`: String
@@ -164,14 +164,14 @@
         * Request: 
 			* `studentId`: Long
         * Response
-            * `data`: List 'Contract' Type (nullable)
+            * `data`: List `Contract` Type (nullable)
         * Error Code: None
 	* Method `POST`
         * Request: 
 			* `contractId`: Long
 			* `status`: String
         * Response
-            * `data`: List 'Contract' Type (nullable)
+            * `data`: List `Contract` Type (nullable)
         * Error Code: None
 
 ### `./homepage/instructor`: instructor homepage after log in 
@@ -206,7 +206,7 @@
 			* `schoolName`: String,
 			* `programName`: String
         * Response
-            * `data`: List 'Program' Type
+            * `data`: List `Program` Type
         * Error code: None
 
 * `./viewPrograms/viewSpecificProgram/{programId}`
