@@ -188,8 +188,9 @@
         * Request: 
 			* `studentEmail`: String
         * Response
-            * `data`: List `String` Type (all registered students’ email)
-        * Error Code: None
+            * `data`: `Contract` Type (all registered students’ email)
+        * Error Code: 
+        	* `003`: Email not registered
 
 * `./homepage/instructor/viewInstitutionInfo`: view the information of the institution
     * Method `GET`
@@ -227,7 +228,7 @@
             * `data`: Star type
         * Error code: None
     
-    *Method: `DELETE`: cancel starring the program
+    * Method: `DELETE`: cancel starring the program
         * Request
 			* `studentId`: Long
 			* `programId`: Long
