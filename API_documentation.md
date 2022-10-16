@@ -236,7 +236,7 @@
         * Error code: None
 
 ### `./institutions`: view institutions
-* `./institutions`
+* `./institutions/{institutionName}`
     * Method: `GET`: view selected institutions
         * Request: 
 	*`name`: String
@@ -287,7 +287,7 @@
             * `data`: Track Type
        * Error code: None
 
-* `./viewInstitutions/viewSpecificInsitution/viewTeam/{insitutionName}`
+* `./institutions/specificInsitution/team/{insitutionName}`
     * Method: `GET`: view all the team members of the institution
         * Request:
 			* `institutionName`: String
@@ -297,7 +297,7 @@
 
 ### `./applicationResult`: upload applications
 
-* `./applicationResult/program`
+* `./applicationResult/program/{schoolName}/{programName}`
     * Method: `GET`: 
         * Request: 
 			* `schoolName`: String,
