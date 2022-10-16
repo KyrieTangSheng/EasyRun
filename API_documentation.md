@@ -86,7 +86,7 @@
         * Error code
             * `002`: Incorrect password
             * `003`: Email not registered
-* `./account/student/updateProfile`: student update profile
+* `./account/student/profile`: student update profile
 	* Method `POST`
         * Request
             * `email`: String
@@ -120,7 +120,7 @@
             * `002`: Incorrect password
             * `003`: Email not registered
 
-* `./account/instructor/updateProfile`: instructor update profile
+* `./account/instructor/profile`: instructor update profile
     * Method `GET`
         * Request: None
         * Response
@@ -144,14 +144,14 @@
 
 
 ### `./homepage/student`: Student homepage after log in 
-* `./homepage/student/viewStars`: student view starred program
+* `./homepage/student/stars`: student view starred program
     * Method `POST`
         * Request
             * `studentId`: Long
         * Response
             * `data`: List `Program` Type (nullable)
         * Error code: None
-* `./homepage/student/viewContract`: check contract
+* `./homepage/student/contract`: check contract
     * Method `GET`
         * Request: 
 			* `studentId`: Long
@@ -167,7 +167,7 @@
         * Error Code: None
 
 ### `./homepage/instructor`: instructor homepage after log in 
-* `./homepage/instructor/viewEnrolledStudent`: check all student in the institution
+* `./homepage/instructor/enrolledStudent`: check all student in the institution
     * Method `GET`
         * Request: 
 			* `institutionId`: Long
@@ -175,7 +175,7 @@
             * `data`: List `Student` Type (nullable)
         * Error Code: None
 
-* `./homepage/instructor/prepareContract`: send a contract to the student
+* `./homepage/instructor/contract`: send a contract to the student
     * Method `POST`
         * Request: 
 			* `studentEmail`: String
@@ -184,7 +184,7 @@
         * Error Code: 
         	* `003`: Email not registered
 
-* `./homepage/instructor/viewInstitutionInfo`: view the information of the institution
+* `./homepage/instructor/institutionInfo`: view the information of the institution
     * Method `GET`
         * Request: 
  			* `institutionName`:String
@@ -192,8 +192,8 @@
             * `data`: Institution Type 
         * Error Code: None
 
-### `./viewPrograms`: view programs
-* `./viewPrograms`
+### `./programs`: view programs
+* `./programs/{schoolName}?schoolName = value {programName}?programName = value`
     * Method: `GET`: view programs with or without keywords
         * Request 
 			* `schoolName`: String,
@@ -202,7 +202,7 @@
             * `data`: List `Program` Type
         * Error code: None
 
-* `./viewPrograms/viewSpecificProgram/{programId}`
+* `./programs/specificProgram/{programId}`
     * Method: `Get`: view specific program
         * Request         
 			* `programId`: Long
