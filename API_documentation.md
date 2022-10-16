@@ -303,7 +303,7 @@
 			* `schoolName`: String,
 			* `programName`: String
         * Response
-			* `data`: List<Program> Type
+			* `data`: List <Program> Type
 		* Error Code: None
 	* Method: `POST`: upload the program info
         * Request:
