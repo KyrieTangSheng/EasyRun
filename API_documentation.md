@@ -145,7 +145,7 @@
 
 ### `./homepage/student`: Student homepage after log in 
 * `./homepage/student/stars`: student view starred program
-    * Method `POST`
+    * Method `GET`
         * Request
             * `studentId`: Long
         * Response
@@ -193,7 +193,7 @@
         * Error Code: None
 
 ### `./programs`: view programs
-* `./programs/{schoolName}?schoolName = value {programName}?programName = value`
+* `./programs/{schoolName}/{programName}`
     * Method: `GET`: view programs with or without keywords
         * Request 
 			* `schoolName`: String,
@@ -226,7 +226,7 @@
 			* `programId`: Long
         * Response: None
 
-* `./viewPrograms/viewSpecificSchool`
+* `./Programs/SpecificSchool`
     * Method: `Get`: view specific school page
         * Request    
 			* `schoolName`: String       
@@ -235,8 +235,8 @@
 	    		* List `Program` Type
         * Error code: None
 
-### `./viewInstitutions`: view institutions
-* `./viewInstitutions`
+### `./institutions`: view institutions
+* `./institutions`
     * Method: `GET`: view selected institutions
         * Request: 
 	*`name`: String
@@ -244,7 +244,7 @@
             * `data`: List `Institution` Type
         * Error code: None
 
-* `./viewInstitutions/viewSpecificInstitution/{institutionName}`
+* `./institutions/specificInstitution/{institutionName}`
     * Method: `GET`: view specific institution
         * Request: 
 			* `institutionName`: String
@@ -257,7 +257,7 @@
     			* `ratable`: Boolean
         * Error code: None
 
-* `./viewInstitutions/viewSpecificInstitution/rateInstitution`
+* `./institutions/specificInstitution/rating`
     * Method: `POST`: post ratings
        * Request: 
 			* `institutionId`: String
@@ -274,7 +274,7 @@
 			* `data`: Rating Type
        * Error code: None
 
-* `./viewInstitutions/viewSpecificInstitution/commentRating`
+* `./institutions/specificInstitution/commentRating`
     * Method: `POST`: comment rating
        * Request:
 			* `institutionId`: String
@@ -295,9 +295,9 @@
 			* `data`: List `Instructor` Type
 		* Error Code: None
 
-### `./uploadApplicationResult`: upload applications
+### `./applicationResult`: upload applications
 
-* `./uploadApplicationResult/chooseProgram`
+* `./applicationResult/program`
     * Method: `GET`: 
         * Request: 
 			* `schoolName`: String,
@@ -313,7 +313,7 @@
         * Error Code: None
 
 
-* `./uploadApplicationResult/uploadPersonalInfo`
+* `./applicationResult/personalInfo`
     * Method: `GET`:
         * Request: None
         * Response: 
