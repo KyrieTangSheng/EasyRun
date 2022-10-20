@@ -144,7 +144,7 @@
 
 
 ### `./homepage/student`: Student homepage after log in 
-* `./homepage/student/stars`: student view starred program
+* `./homepage/student/stars/{studentId}`: student view starred program
     * Method `GET`
         * Request
             * `studentId`: Long
