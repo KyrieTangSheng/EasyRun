@@ -163,6 +163,7 @@
         * Request: 
 			* `contractId`: Long
 			* `status`: String
+			* `studentId`: Long
         * Response
             * `data`: List `Contract` Type (nullable)
         * Error Code: None
