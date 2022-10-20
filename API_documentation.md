@@ -151,13 +151,14 @@
         * Response
             * `data`: List `Program` Type (nullable)
         * Error code: None
-* `./homepage/student/contract`: check contract
+* `./homepage/student/contract/{studentId}`: check contract
     * Method `GET`
         * Request: 
 			* `studentId`: Long
         * Response
             * `data`: List `Contract` Type (nullable)
         * Error Code: None
+* `./homepage/student/contract`: check contract
 	* Method `POST`
         * Request: 
 			* `contractId`: Long
