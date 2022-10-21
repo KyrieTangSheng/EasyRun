@@ -181,6 +181,9 @@
     * Method `POST`
         * Request: 
 			* `studentEmail`: String
+			* `instructorId`: Long
+			* `institutionId`: Long
+			* `content`: String
         * Response
             * `data`: `Contract` Type (all registered students’ email)
         * Error Code: 
