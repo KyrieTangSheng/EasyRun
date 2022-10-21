@@ -169,7 +169,7 @@
         * Error Code: None
 
 ### `./homepage/instructor`: instructor homepage after log in 
-* `./homepage/instructor/enrolledStudent/{institutionId}`: check all student in the institution
+* `./homepage/instructor/enrolledStudents/{institutionId}`: check all student in the institution
     * Method `GET`
         * Request: 
 			* `institutionId`: Long
