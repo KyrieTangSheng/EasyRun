@@ -169,7 +169,7 @@
         * Error Code: None
 
 ### `./homepage/instructor`: instructor homepage after log in 
-* `./homepage/instructor/enrolledStudent`: check all student in the institution
+* `./homepage/instructor/enrolledStudent/{institution_id}`: check all student in the institution
     * Method `GET`
         * Request: 
 			* `institutionId`: Long
@@ -186,7 +186,7 @@
         * Error Code: 
         	* `003`: Email not registered
 
-* `./homepage/instructor/institutionInfo`: view the information of the institution
+* `./homepage/instructor/institutionInfo/{institutionId}`: view the information of the institution
     * Method `GET`
         * Request: 
  			* `institutionName`:String
