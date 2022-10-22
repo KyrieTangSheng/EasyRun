@@ -132,4 +132,9 @@ public class StudentAccountServiceImpl implements StudentAccountService {
             throw new IllegalStateException("Json Parsing Error");
         }
     }
+
+    @Override
+    public Optional<Student> getStudentInfoById(Long studentId){
+        return studentRepository.findById(studentId);
+    }
 }

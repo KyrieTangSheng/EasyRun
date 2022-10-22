@@ -10,18 +10,25 @@ import java.time.LocalDateTime;
 public class Rating {
     @Id
     @SequenceGenerator(
-            name = "institution_sequence",
-            sequenceName = "institution_sequence",
+            name = "rating_sequence",
+            sequenceName = "rating_sequence",
             allocationSize = 1
     )
     @GeneratedValue(
             strategy = GenerationType.SEQUENCE,
-            generator = "institution_sequence"
+            generator = "rating_sequence"
     )
     private Long id;
+    private Long institutionId;
     private String institutionName;
-    private String studentEmail;
-    private String studentName;
+    @ManyToOne
+    @JoinColumn(name="institution",nullable = true)
+    private Institution institution;
+    private Long studentId;
+    @ManyToOne
+    @JoinColumn(name="student",nullable = true)
+    private Student student;
+    private String studentUserName;
     private Integer overallRating;
     private Integer criteria1Rating;
     private Integer criteria2Rating;
@@ -32,21 +39,16 @@ public class Rating {
     private String review;
     private LocalDateTime dateTime;
 
-    @ManyToOne(optional=false,fetch = FetchType.LAZY)
-    @JoinColumn(name="student_id",nullable = true)
-    private Student student;
-    @ManyToOne(optional=false,fetch = FetchType.LAZY)
-    @JoinColumn(name="institution_id",nullable = true)
-    private Institution institution;
-
     public Rating(){
-
     }
-    public Rating(Long id, String institutionName, String studentEmail, String studentName, Integer overallRating, Integer criteria1Rating, Integer criteria2Rating, Integer criteria3Rating, Integer criteria4Rating, Integer criteria5Rating, Integer criteria6Rating, String review, String dateTimeString) {
-        this.id = id;
+
+    public Rating(Long institutionId, String institutionName, Institution institution, Long studentId, Student student, String studentUserName, Integer overallRating, Integer criteria1Rating, Integer criteria2Rating, Integer criteria3Rating, Integer criteria4Rating, Integer criteria5Rating, Integer criteria6Rating, String review) {
+        this.institutionId = institutionId;
         this.institutionName = institutionName;
-        this.studentEmail = studentEmail;
-        this.studentName = studentName;
+        this.institution = institution;
+        this.studentId = studentId;
+        this.student = student;
+        this.studentUserName = studentUserName;
         this.overallRating = overallRating;
         this.criteria1Rating = criteria1Rating;
         this.criteria2Rating = criteria2Rating;
@@ -55,8 +57,25 @@ public class Rating {
         this.criteria5Rating = criteria5Rating;
         this.criteria6Rating = criteria6Rating;
         this.review = review;
-        LocalDateTime dateTime = LocalDateTime.parse(dateTimeString); //"2018-05-05T11:50:55"
-        this.dateTime = dateTime;
+        this.dateTime = LocalDateTime.now();
+    }
+    public Rating(Long id, Long institutionId, String institutionName, Institution institution, Long studentId, Student student, String studentUserName, Integer overallRating, Integer criteria1Rating, Integer criteria2Rating, Integer criteria3Rating, Integer criteria4Rating, Integer criteria5Rating, Integer criteria6Rating, String review) {
+        this.id = id;
+        this.institutionId = institutionId;
+        this.institutionName = institutionName;
+        this.institution = institution;
+        this.studentId = studentId;
+        this.student = student;
+        this.studentUserName = studentUserName;
+        this.overallRating = overallRating;
+        this.criteria1Rating = criteria1Rating;
+        this.criteria2Rating = criteria2Rating;
+        this.criteria3Rating = criteria3Rating;
+        this.criteria4Rating = criteria4Rating;
+        this.criteria5Rating = criteria5Rating;
+        this.criteria6Rating = criteria6Rating;
+        this.review = review;
+        this.dateTime = LocalDateTime.now();
     }
 
     public Long getId() {
@@ -67,6 +86,14 @@ public class Rating {
         this.id = id;
     }
 
+    public Long getInstitutionId() {
+        return institutionId;
+    }
+
+    public void setInstitutionId(Long institutionId) {
+        this.institutionId = institutionId;
+    }
+
     public String getInstitutionName() {
         return institutionName;
     }
@@ -75,20 +102,36 @@ public class Rating {
         this.institutionName = institutionName;
     }
 
-    public String getStudentEmail() {
-        return studentEmail;
+    public Long getInstitution() {
+        return institution.getId();
     }
 
-    public void setStudentEmail(String studentEmail) {
-        this.studentEmail = studentEmail;
+    public void setInstitution(Institution institution) {
+        this.institution = institution;
     }
 
-    public String getStudentName() {
-        return studentName;
+    public Long getStudentId() {
+        return studentId;
     }
 
-    public void setStudentName(String studentName) {
-        this.studentName = studentName;
+    public void setStudentId(Long studentId) {
+        this.studentId = studentId;
+    }
+
+    public Long getStudent() {
+        return student.getId();
+    }
+
+    public void setStudent(Student student) {
+        this.student = student;
+    }
+
+    public String getStudentUserName() {
+        return studentUserName;
+    }
+
+    public void setStudentUserName(String studentUserName) {
+        this.studentUserName = studentUserName;
     }
 
     public Integer getOverallRating() {
@@ -161,21 +204,5 @@ public class Rating {
 
     public void setDateTime(LocalDateTime dateTime) {
         this.dateTime = dateTime;
-    }
-
-    public Long getStudent() {
-        return student.getId();
-    }
-
-    public void setStudent(Student student) {
-        this.student = student;
-    }
-
-    public Long getInstitution() {
-        return institution.getId();
-    }
-
-    public void setInstitution(Institution institution) {
-        this.institution = institution;
     }
 }

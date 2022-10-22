@@ -31,4 +31,15 @@ public class InstitutionServiceImpl implements InstitutionService {
     public Optional<Institution> getInstitutionInfoById(Long institutionId){
         return institutionRepository.findById(institutionId);
     }
+
+    @Override
+    public List<Institution> getAllInstitutions(){
+        return institutionRepository.findAll();
+    }
+
+    @Override
+    public Optional<Institution> getInstitutionByName(String name){
+        return institutionRepository.findInstitutionByName(name);
+    }
+
 }

@@ -17,4 +17,5 @@ public interface InstructorAccountService {
 
     Response updateInstructor(Long instructorId, Instructor instructor);
 
+    List<Instructor> getInstructorsByInstitutionName(String institutionName);
 }

@@ -19,4 +19,5 @@ public interface StudentAccountService {
     Response updateStudent(Long studentId, Student student);
 
     Optional<Student> getStudentInfoByEmail(String studentEmail);
+    Optional<Student> getStudentInfoById(Long studentId);
 }

@@ -138,4 +138,9 @@ public class InstructorAccountServiceImpl implements InstructorAccountService {
             throw new IllegalStateException("Json Parsing Error");
         }
     }
+
+    @Override
+    public List<Instructor> getInstructorsByInstitutionName(String institutionName){
+        return instructorRepository.findAllByInstitutionName(institutionName);
+    }
 }
