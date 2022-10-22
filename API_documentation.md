@@ -249,7 +249,7 @@
             * `data`: List `Institution` Type
         * Error code: None
 
-* `./institutions/specificInstitution/{institutionName}`
+* `./institutions/specificInstitution/{institutionName}/{studentId}`
     * Method: `GET`: view specific institution
         * Request: 
 			* `institutionName`: String
