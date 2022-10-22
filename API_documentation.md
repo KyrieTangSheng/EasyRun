@@ -267,15 +267,15 @@
     * Method: `POST`: post ratings
        * Request: 
 			* `institutionId`: String
-			* `studentUserName`: String
-			* `criteriaRating1`: Integer
-			* `criteriaRating2`: Integer
-			* `criteriaRating3`: Integer
-			* `criteriaRating4`: Integer
-			* `criteriaRating5`: Integer
-			* `criteriaRating6`: Integer
+			* `studentId`: Long
+			* `overallRating`: Integer
+			* `criteria1Rating`: Integer
+			* `criteria2Rating`: Integer
+			* `criteria3Rating`: Integer
+			* `criteria4Rating`: Integer
+			* `criteria5Rating`: Integer
+			* `criteria6Rating`: Integer
 			* `review`: String
-			* `datatime`: String (format: `2022-11-03T14:22:01`)
        * Response
 			* `data`: Rating Type
        * Error code: None
