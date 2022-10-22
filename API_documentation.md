@@ -260,7 +260,8 @@
     			* `ratings`: List `Float` Type
     			* `comments`: List `Comment` Type
     			* `ratable`: Boolean
-        * Error code: None
+        * Error code: 
+            *`001`: Institution Doesn't Exist
 
 * `./institutions/specificInstitution/rating`
     * Method: `POST`: post ratings
