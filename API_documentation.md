@@ -280,15 +280,13 @@
 			* `data`: Rating Type
        * Error code: None
 
-* `./institutions/specificInstitution/commentRating`
+* `./institutions/specificInstitution/comment`
     * Method: `POST`: comment rating
        * Request:
-			* `institutionId`: String
-			* `ratingid`: integer
-			* `raterName`: String 
-			* `replierName`: String 
+			* `ratingId`: Integer
+			* `userName`: String (the commentor's name ; don't need the user of the original comment/rating)
+			* `parentId`: Integer nullable (the commentId of its parent comment)
 			* `content`: String
-			* `datatime`: String (format: `2022-11-03T14:22:01`)
        * Response
             * `data`: Track Type
        * Error code: None
