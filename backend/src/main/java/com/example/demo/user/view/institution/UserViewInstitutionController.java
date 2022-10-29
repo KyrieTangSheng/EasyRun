@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.Objects;
 
+@CrossOrigin
 @RequestMapping(path= "viewInstitutions")
 public class UserViewInstitutionController {
 

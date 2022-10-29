@@ -6,6 +6,7 @@ import com.example.demo.utils.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+@CrossOrigin
 @RequestMapping(path = "homepage/student")
 @RestController
 public class StudentHomeController {
