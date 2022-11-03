@@ -9,4 +9,6 @@ import java.util.Optional;
 public interface InstitutionService {
   List<Institution> getAllInstitutionsByKeyword(String keyword);
   Optional<Institution> getInstitutionInfoById(Long institutionId);
+
+  List<Institution> getAllInstitutions();
 }

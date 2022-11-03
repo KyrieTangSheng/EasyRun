@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RequestMapping(path = "homepage/student")
 @RestController
+@CrossOrigin
 public class StudentHomeController {
 
     private final StudentHomeServiceImpl studentHomeServiceImpl;

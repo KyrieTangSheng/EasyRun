@@ -8,6 +8,7 @@ import java.util.List;
 
 @RequestMapping(path = "account/student")
 @RestController
+@CrossOrigin
 public class StudentAccountController {
 
     private final StudentAccountServiceImpl studentAccountServiceImpl;

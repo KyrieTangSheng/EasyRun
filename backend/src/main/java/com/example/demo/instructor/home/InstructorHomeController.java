@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RequestMapping(path = "homepage/instructor")
 @RestController
+@CrossOrigin
 public class InstructorHomeController {
 
     private final InstructorHomeServiceImpl instructorHomeServiceImpl;
