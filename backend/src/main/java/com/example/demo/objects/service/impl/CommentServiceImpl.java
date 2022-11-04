@@ -19,8 +19,8 @@ public class CommentServiceImpl implements CommentService {
     }
 
     @Override
-    public List<Comment> getCommentsByInstitutionName(String institutionName){
-        return commentRepository.findByInstitutionName(institutionName);
+    public List<Comment> getCommentsByRatingId(Long ratingId){
+        return commentRepository.findByRatingId(ratingId);
     }
 
     @Override

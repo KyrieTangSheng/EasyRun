@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Optional;
 
 public interface CommentService {
-    List<Comment> getCommentsByInstitutionName(String institutionName);
+    List<Comment> getCommentsByRatingId(Long ratingId);
     Optional<Comment> getCommentById(Long id);
     Comment addNewComment(Comment comment);
 }

@@ -21,6 +21,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -103,7 +104,11 @@ public class UserViewInstitutionServiceImpl implements UserViewInstitutionServic
 
         List<Rating> ratings = ratingServiceImpl.getRatingsByInstitutionName(institutionName);
 
-        List<Comment> comments = commentServiceImpl.getCommentsByInstitutionName(institutionName);
+        List<Comment> comments = new ArrayList<Comment>();
+        for(Rating rating:ratings){
+            List<Comment> commentsByRatingId = commentServiceImpl.getCommentsByRatingId(rating.getId());
+            comments.addAll(commentsByRatingId);
+        }
 
         ObjectMapper mapper = new ObjectMapper();
         try{
