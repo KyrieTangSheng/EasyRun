@@ -22,6 +22,11 @@ public class InstitutionServiceImpl implements InstitutionService {
     }
 
     @Override
+    public List<Institution> getAllInstitutions(){
+        List<Institution> institutions = this.institutionRepository.findAll();
+        return institutions;
+    }
+    @Override
     public List<Institution> getAllInstitutionsByKeyword(String keyword){
         List<Institution> institutions = this.institutionRepository.findByNameContaining(keyword);
         return institutions;

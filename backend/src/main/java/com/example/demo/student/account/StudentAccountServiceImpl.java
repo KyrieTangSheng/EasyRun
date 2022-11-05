@@ -50,6 +50,7 @@ public class StudentAccountServiceImpl implements StudentAccountService {
             Response response = new Response(0,1,null);
             return response;
         }
+
         studentRepository.save(student);
         ObjectMapper mapper = new ObjectMapper();
         try{

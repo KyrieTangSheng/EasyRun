@@ -13,6 +13,7 @@ import java.util.List;
 @CrossOrigin
 @RequestMapping(path = "account/instructor")
 @RestController
+@CrossOrigin
 public class InstructorAccountController {
 
     private final InstructorAccountServiceImpl instructorAccountServiceImpl;
@@ -28,6 +29,22 @@ public class InstructorAccountController {
 //    public List<Instructor> getInstructors(){
 //        return instructorAccountServiceImpl.getInstructors();
 //    }
+
+    @GetMapping(path="register")
+    @ResponseBody
+    public Response getAllInstitutionsInRegister(){
+        List<Institution> institutions = institutionServiceImpl.getAllInstitutions();
+
+        ObjectMapper mapper = new ObjectMapper();
+        try{
+            String jsonInstitutions = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(institutions);
+            Response response = new Response(1,100,jsonInstitutions);
+            return response;
+        }
+        catch(Exception e){
+            throw new IllegalStateException("Json Parsing Error");
+        }
+    }
 
     @PostMapping(path="register")
     public Response registerNewInstructor(@RequestBody Instructor instructor){
@@ -53,7 +70,7 @@ public class InstructorAccountController {
     }
 
     @GetMapping(path = "profile")
-    public Response getAllInstitutions(){
+    public Response getAllInstitutionsInProfile(){
         String keyword = "";
         List<Institution> institutions = institutionServiceImpl.getAllInstitutionsByKeyword(keyword);
         ObjectMapper mapper = new ObjectMapper();

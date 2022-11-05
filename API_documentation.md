@@ -249,7 +249,7 @@
             * `data`: List `Institution` Type
         * Error code: None
 
-* `./institutions/specificInstitution/{institutionName}`
+* `./institutions/specificInstitution/{institutionName}/{studentId}`
     * Method: `GET`: view specific institution
         * Request: 
 			* `institutionName`: String
@@ -260,34 +260,33 @@
     			* `ratings`: List `Float` Type
     			* `comments`: List `Comment` Type
     			* `ratable`: Boolean
-        * Error code: None
+        * Error code: 
+            *`001`: Institution Doesn't Exist
 
 * `./institutions/specificInstitution/rating`
     * Method: `POST`: post ratings
        * Request: 
 			* `institutionId`: String
-			* `studentUserName`: String
-			* `criteriaRating1`: Integer
-			* `criteriaRating2`: Integer
-			* `criteriaRating3`: Integer
-			* `criteriaRating4`: Integer
-			* `criteriaRating5`: Integer
-			* `criteriaRating6`: Integer
+			* `studentId`: Long
+			* `overallRating`: Integer
+			* `criteria1Rating`: Integer
+			* `criteria2Rating`: Integer
+			* `criteria3Rating`: Integer
+			* `criteria4Rating`: Integer
+			* `criteria5Rating`: Integer
+			* `criteria6Rating`: Integer
 			* `review`: String
-			* `datatime`: String (format: `2022-11-03T14:22:01`)
        * Response
 			* `data`: Rating Type
        * Error code: None
 
-* `./institutions/specificInstitution/commentRating`
+* `./institutions/specificInstitution/comment`
     * Method: `POST`: comment rating
        * Request:
-			* `institutionId`: String
-			* `ratingid`: integer
-			* `raterName`: String 
-			* `replierName`: String 
+			* `ratingId`: Integer
+			* `userName`: String (the commentor's name ; don't need the user of the original comment/rating)
+			* `parentId`: Integer nullable (the commentId of its parent comment)
 			* `content`: String
-			* `datatime`: String (format: `2022-11-03T14:22:01`)
        * Response
             * `data`: Track Type
        * Error code: None
