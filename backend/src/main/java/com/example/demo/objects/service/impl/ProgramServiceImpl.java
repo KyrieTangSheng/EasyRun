@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ProgramServiceImpl implements ProgramService {
@@ -32,5 +33,22 @@ public class ProgramServiceImpl implements ProgramService {
             programs.add(program);
         }
         return programs;
+    }
+
+    @Override
+    public Program getProgramById(Long programId){
+        Optional<Program> optionalProgram = programRepository.findById(programId);
+        Program program = optionalProgram.get();
+        return program;
+    }
+
+    @Override
+    public List<Program> getAllPrograms(){
+        return programRepository.findAll();
+    }
+
+    @Override
+    public List<Program> getProgramsByKeyword(String programKeyword){
+        return programRepository.findByNameContaining(programKeyword);
     }
 }
