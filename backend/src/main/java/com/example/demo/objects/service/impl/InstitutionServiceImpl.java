@@ -38,11 +38,6 @@ public class InstitutionServiceImpl implements InstitutionService {
     }
 
     @Override
-    public List<Institution> getAllInstitutions(){
-        return institutionRepository.findAll();
-    }
-
-    @Override
     public Optional<Institution> getInstitutionByName(String name){
         return institutionRepository.findInstitutionByName(name);
     }

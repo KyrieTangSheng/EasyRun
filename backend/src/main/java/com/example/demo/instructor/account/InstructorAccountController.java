@@ -13,7 +13,6 @@ import java.util.List;
 @CrossOrigin
 @RequestMapping(path = "account/instructor")
 @RestController
-@CrossOrigin
 public class InstructorAccountController {
 
     private final InstructorAccountServiceImpl instructorAccountServiceImpl;
