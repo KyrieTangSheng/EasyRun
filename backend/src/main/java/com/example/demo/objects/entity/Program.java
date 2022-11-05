@@ -28,6 +28,9 @@ public class Program{
     @Cascade(org.hibernate.annotations.CascadeType.DELETE)
     private List<Star> stars;
 
+    @OneToMany(mappedBy = "program")
+    @Cascade(org.hibernate.annotations.CascadeType.DELETE)
+    private List<Application> applications;
     @ManyToOne
     @JoinColumn(name="university",nullable=true)
     private University university;
@@ -98,6 +101,18 @@ public class Program{
 
     public void setStars(List<Star> stars) {
         this.stars = stars;
+    }
+
+    public List<Long> getApplications() {
+        List<Long> applicationIds = new ArrayList<Long>();
+        for(Application application:applications){
+            applicationIds.add(application.getId());
+        }
+        return applicationIds;
+    }
+
+    public void setApplications(List<Application> applications) {
+        this.applications = applications;
     }
 }
 

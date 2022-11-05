@@ -1,35 +1,41 @@
 package com.example.demo.user.application;
 
+import com.example.demo.objects.entity.Application;
+import com.example.demo.utils.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-@RequestMapping(path="uploadApplicationResult")
+@RequestMapping(path="applicationResult")
 @RestController
 @CrossOrigin
 public class UserApplicationController {
-//    private final UserApplicationServiceImpl userApplicationServiceImpl;
-//    @Autowired
-//    public UserApplicationController(UserApplicationServiceImpl userApplicationServiceImpl){
-//        this.userApplicationServiceImpl = userApplicationServiceImpl;
-//    }
+    private final UserApplicationServiceImpl userApplicationServiceImpl;
 
-    @GetMapping(path="chooseProgram")
-    public void getProgramsByKeyWord(){
-        ///
+    @Autowired
+    public UserApplicationController(UserApplicationServiceImpl userApplicationServiceImpl){
+        this.userApplicationServiceImpl = userApplicationServiceImpl;
     }
 
-    @PostMapping(path="chooseProgram")
+    @GetMapping(path="program/{schoolKeyword}/{programKeyword}")
+    @ResponseBody
+    public Response getProgramsByKeyWord(@PathVariable String schoolKeyword,
+                                         @PathVariable String programKeyword){
+        return userApplicationServiceImpl.getProgramsByKeyword(schoolKeyword,programKeyword);
+    }
+
+    @PostMapping(path="program")
     public void confirmProgram(){
         ///
     }
 
-    @GetMapping(path="uploadPersonalInfo")
-    public void getStudentPersonalInfo(){
-        ///
+    @GetMapping(path="personalInfo")
+    @ResponseBody
+    public Response getAllInstitutions(){
+        return userApplicationServiceImpl.getAllInstitutions();
     }
 
-    @PostMapping(path="uploadPersonalInfo")
-    public void uploadApplication(){
-        ///
+    @PostMapping(path="personalInfo")
+    public Response uploadApplication(@RequestBody Application application){
+        return userApplicationServiceImpl.uploadApplicationResult(application);
     }
 }

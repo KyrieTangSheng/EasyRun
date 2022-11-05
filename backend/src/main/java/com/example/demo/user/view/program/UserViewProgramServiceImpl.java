@@ -123,17 +123,28 @@ public class UserViewProgramServiceImpl implements UserViewProgramService{
     @Override
     public Response getSchoolsAndProgramsByKeyword(String schoolKeyword, String programKeyword){
         List<University> universities = new ArrayList<University>();
+        List<Long> universityIds= new ArrayList<Long>();
         List<Program> programs = new ArrayList<Program>();
+        List<Program> tempPrograms = new ArrayList<Program>();
+
         if (Objects.equals(schoolKeyword,"all")) {
             universities = universityServiceImpl.getAllUniversities();
         }else {
             universities = universityServiceImpl.getUniversitiesByKeyword(schoolKeyword);
         }
+        for(University university:universities){
+            universityIds.add(university.getId());
+        }
 
         if(Objects.equals(programKeyword,"all")){
-            programs = programServiceImpl.getAllPrograms();
+            tempPrograms = programServiceImpl.getAllPrograms();
         }else{
-            programs = programServiceImpl.getProgramsByKeyword(programKeyword);
+            tempPrograms = programServiceImpl.getProgramsByKeyword(programKeyword);
+        }
+        for(Program program:tempPrograms){
+            if (universityIds.contains(program.getUniversityId())){
+                programs.add(program);
+            }
         }
 
         ObjectMapper mapper = new ObjectMapper();
