@@ -4,6 +4,7 @@ import com.example.demo.student.Student;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 @Entity
 @Table
@@ -198,8 +199,10 @@ public class Rating {
         this.review = review;
     }
 
-    public LocalDateTime getDateTime() {
-        return dateTime;
+    public String getDateTime() {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        String formattedDateTime = dateTime.format(formatter); // "1986-04-08 12:30"
+        return formattedDateTime;
     }
 
     public void setDateTime(LocalDateTime dateTime) {

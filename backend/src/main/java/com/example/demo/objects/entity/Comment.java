@@ -5,6 +5,7 @@ import net.bytebuddy.asm.Advice;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -51,6 +52,7 @@ public class Comment {
         this.studentId = studentId;
         this.studentUserName = studentUserName;
         this.dateTime = LocalDateTime.now();
+        this.childComments = new ArrayList<>();
     }
 
     public Comment(Long id, Long ratingId, Long parentId, String content, Long studentId, String studentUserName) {
@@ -61,6 +63,7 @@ public class Comment {
         this.studentId = studentId;
         this.studentUserName = studentUserName;
         this.dateTime = LocalDateTime.now();
+        this.childComments = new ArrayList<>();
     }
 
     public Long getId() {
@@ -142,9 +145,6 @@ public class Comment {
     public void setChildComments(List<Comment> childComments) {
         this.childComments = childComments;
     }
-    public void addChildComments(Comment comment){
-        this.childComments.add(comment);
-    }
 
     public String getContent() {
         return content;
@@ -154,8 +154,10 @@ public class Comment {
         this.content = content;
     }
 
-    public LocalDateTime getDateTime() {
-        return dateTime;
+    public String getDateTime() {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        String formattedDateTime = dateTime.format(formatter); // "1986-04-08 12:30"
+        return formattedDateTime;
     }
 
     public void setDateTime(LocalDateTime dateTime) {

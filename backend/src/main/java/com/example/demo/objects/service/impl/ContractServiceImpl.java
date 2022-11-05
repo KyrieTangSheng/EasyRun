@@ -1,6 +1,8 @@
 package com.example.demo.objects.service.impl;
 
+import com.example.demo.instructor.Instructor;
 import com.example.demo.objects.entity.Contract;
+import com.example.demo.objects.entity.Institution;
 import com.example.demo.objects.repo.ContractRepository;
 import com.example.demo.objects.service.iface.ContractService;
 import com.example.demo.student.Student;
@@ -38,19 +40,23 @@ public class ContractServiceImpl implements ContractService {
     }
 
     @Override
-    public List<Student> getStudentsByInstitutionId(Long institutionId){
+    public List<Contract> getContractsByInstitutionId(Long institutionId){
         return contractRepository.findAllByInstitutionId(institutionId);
     }
 
     @Override
     public Contract generateNewContract(Long studentId, Long institutionId,
-                                        String content, Long instructorId){
+                                        String content, Long instructorId,
+                                        Student student, Instructor instructor, Institution institution){
         Contract newContract= new Contract(
                 studentId,
                 instructorId,
                 institutionId,
                 "inProcess",
-                content);
+                content,
+                student,
+                instructor,
+                institution);
         return contractRepository.save(newContract);
     }
 }

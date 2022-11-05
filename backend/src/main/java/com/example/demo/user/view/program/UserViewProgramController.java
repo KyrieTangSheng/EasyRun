@@ -8,12 +8,12 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping(path= "viewPrograms")
 public class UserViewProgramController {
 
-    private final UserViewProgramServiceImpl userViewProgramServiceImpl;
-
-    @Autowired
-    public UserViewProgramController(UserViewProgramServiceImpl userViewProgramServiceImpl){
-        this.userViewProgramServiceImpl = userViewProgramServiceImpl;
-    }
+//    private final UserViewProgramServiceImpl userViewProgramServiceImpl;
+//
+//    @Autowired
+//    public UserViewProgramController(UserViewProgramServiceImpl userViewProgramServiceImpl){
+//        this.userViewProgramServiceImpl = userViewProgramServiceImpl;
+//    }
 
     @GetMapping
     public void getProgramByKeyword(){

@@ -35,10 +35,9 @@ public class InstructorHomeController {
         return instructorHomeServiceImpl.generateContract(studentEmail,institutionId, content,instructorId);
     }
 
-    @GetMapping(path="institutionInfo")
+    @GetMapping(path="institutionInfo/{institutionId}")
     @ResponseBody
-    public Response viewMyInstitutionInfo(@PathVariable Institution institution){
-        Long institutionId = institution.getId();
+    public Response viewMyInstitutionInfo(@PathVariable Long institutionId){
         return instructorHomeServiceImpl.getInstitutionInfoById(institutionId);
     }
 }

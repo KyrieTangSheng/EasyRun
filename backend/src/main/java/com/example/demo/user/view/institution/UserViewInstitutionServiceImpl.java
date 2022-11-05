@@ -188,7 +188,7 @@ public class UserViewInstitutionServiceImpl implements UserViewInstitutionServic
 
         comment.setDateTime(LocalDateTime.now());
         Comment savedComment = commentServiceImpl.addNewComment(comment);
-
+        System.out.println(savedComment.getChildComments());
         ObjectMapper mapper = new ObjectMapper();
         try{
             String jsonSavedComment= mapper.writerWithDefaultPrettyPrinter().writeValueAsString(savedComment);

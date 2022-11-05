@@ -35,19 +35,17 @@ public class Program{
     public Program(){
 
     }
-    public Program(String name, Long universityId, String url, University university) {
+    public Program(String name, Long universityId, String url) {
         this.name = name;
         this.universityId = universityId;
         this.url = url;
-        this.university = university;
     }
 
-    public Program(Long id, String name, Long universityId, String url, University university) {
+    public Program(Long id, String name, Long universityId, String url) {
         this.id = id;
         this.name = name;
         this.universityId = universityId;
         this.url = url;
-        this.university = university;
     }
 
     public Long getId() {

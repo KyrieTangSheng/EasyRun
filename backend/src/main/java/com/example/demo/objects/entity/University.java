@@ -33,15 +33,13 @@ public class University{
     public University(){
     }
 
-    public University(String name, List<Program> programs) {
+    public University(String name) {
         this.name = name;
-        this.programs = programs;
     }
 
-    public University(Long id, String name, List<Program> programs) {
+    public University(Long id, String name) {
         this.id = id;
         this.name = name;
-        this.programs = programs;
     }
 
     public Long getId() {
@@ -72,7 +70,9 @@ public class University{
     public void setPrograms(List<Program> programs) {
         this.programs = programs;
     }
-
+    public void addProgram(Program program){
+        this.programs.add(program);
+    }
     public List<Long> getStars() {
         List<Long> starIds = new ArrayList<Long>();
         for(Star star:stars){

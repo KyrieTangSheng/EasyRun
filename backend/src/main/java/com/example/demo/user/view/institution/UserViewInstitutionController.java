@@ -8,8 +8,10 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.Objects;
 
+
 @CrossOrigin
-@RequestMapping(path= "viewInstitutions")
+@RestController
+@RequestMapping(path= "institutions")
 public class UserViewInstitutionController {
 
     private final UserViewInstitutionServiceImpl userViewInstitutionServiceImpl;
@@ -21,7 +23,7 @@ public class UserViewInstitutionController {
 
     @GetMapping(path="{institutionName}")
     @ResponseBody
-    public Response getInstitutionByKeyword(@PathVariable String institutionName){
+    public Response getInstitutionsByKeyword(@PathVariable String institutionName){
         String testStr = "all";
         if(Objects.equals(institutionName,testStr)){
             return userViewInstitutionServiceImpl.getAllInstitutions();
@@ -54,3 +56,4 @@ public class UserViewInstitutionController {
         return userViewInstitutionServiceImpl.getInstitutionMembers(institutionName);
     }
 }
+

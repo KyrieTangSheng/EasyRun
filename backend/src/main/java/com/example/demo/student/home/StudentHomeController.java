@@ -18,7 +18,7 @@ public class StudentHomeController {
         this.studentHomeServiceImpl = studentHomeServiceImpl;
     }
 
-    @PostMapping(path="stars/{studentId}")
+    @GetMapping(path="stars/{studentId}")
     @ResponseBody
     public Response viewStarredPrograms(@PathVariable Long studentId){
         return studentHomeServiceImpl.viewStarredPrograms(studentId);

@@ -2,10 +2,12 @@ package com.example.demo.objects.entity;
 
 import com.example.demo.instructor.Instructor;
 import com.example.demo.student.Student;
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 @Entity
 @Table
@@ -37,21 +39,27 @@ public class Contract {
     private Institution institution;
 
     private String status;
+//    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private LocalDateTime updateDateTime;
     private String content;
 
     public Contract(){
     }
-    public Contract(Long studentId, Long instructorId, Long institutionId, String status, String content) {
+    public Contract(Long studentId, Long instructorId, Long institutionId, String status, String content,
+                    Student student, Instructor instructor, Institution institution) {
         this.studentId = studentId;
         this.instructorId = instructorId;
         this.institutionId = institutionId;
         this.status = status;
         this.updateDateTime = LocalDateTime.now();
         this.content = content;
+        this.student = student;
+        this.instructor = instructor;
+        this.institution = institution;
     }
 
-    public Contract(Long id, Long studentId, Long instructorId, Long institutionId, String status, String content) {
+    public Contract(Long id, Long studentId, Long instructorId, Long institutionId, String status, String content,
+                    Student student, Instructor instructor, Institution institution) {
         this.id = id;
         this.studentId = studentId;
         this.instructorId = instructorId;
@@ -59,6 +67,9 @@ public class Contract {
         this.status = status;
         this.updateDateTime = LocalDateTime.now();
         this.content = content;
+        this.student = student;
+        this.instructor = instructor;
+        this.institution = institution;
     }
 
     public Long getId() {
@@ -125,8 +136,10 @@ public class Contract {
         this.status = status;
     }
 
-    public LocalDateTime getUpdateDateTime() {
-        return updateDateTime;
+    public String getUpdateDateTime() {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        String formattedDateTime = updateDateTime.format(formatter); // "1986-04-08 12:30"
+        return formattedDateTime;
     }
 
     public void setUpdateDateTime(LocalDateTime updateDateTime) {

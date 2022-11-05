@@ -7,11 +7,11 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @CrossOrigin
 public class UserApplicationController {
-    private final UserApplicationServiceImpl userApplicationServiceImpl;
-    @Autowired
-    public UserApplicationController(UserApplicationServiceImpl userApplicationServiceImpl){
-        this.userApplicationServiceImpl = userApplicationServiceImpl;
-    }
+//    private final UserApplicationServiceImpl userApplicationServiceImpl;
+//    @Autowired
+//    public UserApplicationController(UserApplicationServiceImpl userApplicationServiceImpl){
+//        this.userApplicationServiceImpl = userApplicationServiceImpl;
+//    }
 
     @GetMapping(path="chooseProgram")
     public void getProgramsByKeyWord(){
