@@ -87,13 +87,5 @@ public class Institution {
     }
     public void addInstructor(Instructor instructor){
         this.instructors.add(instructor);
-
-        List<Long> ids = this.getInstructors();
-        for(int i=0;i<ids.size();i++){
-            Long id = ids.get(i);
-            if (id!=this.id){
-                this.instructors.remove(i);
-            }
-        }
     }
 }

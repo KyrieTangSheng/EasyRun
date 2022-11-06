@@ -89,7 +89,7 @@ public class Instructor {
     public Long getInstitution(){return institution.getId();}
     public void setInstitution(Institution institution){
         this.institution = institution;
-        this.institution.addInstructor(this);
+//        this.institution.addInstructor(this);
     }
     public String getFirstName() {
         return firstName;

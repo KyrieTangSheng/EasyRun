@@ -62,7 +62,7 @@ public class InstructorAccountController {
 //        instructorAccountServiceImpl.deleteInstructor(instructorId);
 //    }
 
-    @PutMapping(path = "profile")
+    @PostMapping(path = "profile")
     public Response updateInstructor(@RequestBody Instructor instructor){
         Long instructorId = instructor.getId();
         return instructorAccountServiceImpl.updateInstructor(instructorId,instructor);
