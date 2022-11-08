@@ -56,7 +56,7 @@ function Header() {
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
   };
-  localStorage.clear()
+
   return (
     <AppBar position="static" style={{backgroundColor:"#328059"}}>
       <Container maxWidth="xl">

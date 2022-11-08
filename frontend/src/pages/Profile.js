@@ -1,10 +1,17 @@
 import React from 'react'
 
 export default function Profile() {
-  let userInfo = JSON.parse(localStorage.userInfo)
-  let userType = localStorage.userType
-  console.log(localStorage.isLoggedIn)
-  console.log(userInfo, userType)
+
+  if (localStorage.isLoggedIn) {
+    let userInfo = JSON.parse(localStorage.userInfo)
+    let userType = localStorage.userType
+    console.log(localStorage.isLoggedIn)
+    console.log(userInfo, userType)
+  }
+  else{
+    window.location.herf='./home'
+  }
+
   return (
     <div>Profile</div>
   )
