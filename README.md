@@ -1,2 +1,2 @@
 # EasyRun
-A project for us to run more easily
+A project that provides American graduate school application service and intermediate institution rating service for Chinese students
