@@ -32,17 +32,27 @@ public class InstructorAccountServiceImpl implements InstructorAccountService {
 
     @Override
     public Response addNewInstructor(Instructor instructor) {
-        Optional<Instructor> instructorOptional = instructorRepository
+        Optional<Instructor> optionalInstructorByEmail = instructorRepository
                 .findInstructorByEmail(instructor.getEmail());
-        if (instructorOptional.isPresent()){
+        if (optionalInstructorByEmail.isPresent()){
+            //Email Taken
             Response response = new Response(0,1,null);
             return response;
         }
 
+        Optional<Instructor> optionalInstructorByUserName = instructorRepository
+                .findInstructorByUserName(instructor.getUserName());
+        if (optionalInstructorByUserName.isPresent()){
+            //UserName Taken
+            Response response = new Response(0,2,null);
+            return response;
+        }
+
+
         //check if the institution exists
         Optional<Institution> optionalInstitution = institutionRepository.findInstitutionByName(instructor.getInstitutionName());
         if (optionalInstitution.isEmpty()){
-            Response response = new Response(0,2,null);
+            Response response = new Response(0,3,null);
             return response;
         }
         Institution institution = optionalInstitution.get();
@@ -103,20 +113,25 @@ public class InstructorAccountServiceImpl implements InstructorAccountService {
                 () -> new IllegalStateException("Instructor with id "+instructorId+"doesn't exist.")
         );
 
-        String email = instructor.getEmail();
-        if(email != null &&
-                email.length() > 0){
-            Optional<Instructor> instructorOptional = instructorRepository.findInstructorByEmail(email);
-            if (instructorOptional.isPresent()) {
-                Instructor gotInstructor = instructorOptional.get();
-                if (!Objects.equals(gotInstructor.getId(),instructor.getId())){
-                    Response response = new Response(0,1,null);
-                    return response;
-                }
+
+        Optional<Instructor> optionalInstructorByEmail = instructorRepository
+                .findInstructorByEmail(instructor.getEmail());
+        if (optionalInstructorByEmail.isPresent()){
+            if(optionalInstructorByEmail.get().getId() != instructorId){
+                //Email Taken
+                Response response = new Response(0,1,null);
+                return response;
             }
         }
-        else{
-            throw new IllegalStateException("Invalid email");
+
+        Optional<Instructor> optionalInstructorByUserName = instructorRepository
+                .findInstructorByUserName(instructor.getUserName());
+        if (optionalInstructorByUserName.isPresent()){
+            if(optionalInstructorByUserName.get().getId() != instructorId) {
+                //UserName Taken
+                Response response = new Response(0, 2, null);
+                return response;
+            }
         }
 
         //check if the institution exists

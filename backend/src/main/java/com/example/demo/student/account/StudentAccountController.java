@@ -47,7 +47,7 @@ public class StudentAccountController {
 //        studentAccountServiceImpl.deleteStudent(studentId);
 //    }
 
-    @PutMapping(path = "profile")
+    @PostMapping(path = "profile")
     public Response updateStudent(@RequestBody Student student){
         Long studentId = student.getId();
         return studentAccountServiceImpl.updateStudent(studentId,student);

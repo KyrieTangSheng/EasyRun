@@ -1,8 +1,11 @@
 package com.example.demo.instructor;
 
 import com.example.demo.objects.entity.Institution;
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
+import java.util.Date;
 
 @Entity
 @Table
@@ -29,11 +32,13 @@ public class Instructor {
     private Long phoneNumber;
     private String educationExperience;
     private String pwd;
-
+    private String userName;
+    @JsonFormat(pattern="yyyy-MM-dd")
+    private Date dob;
     public Instructor(){
 
     }
-    public Instructor(String email, String institutionName,String firstName,String lastName, Long phoneNumber, String educationExperience, String pwd) {
+    public Instructor(String email, String institutionName,String firstName,String lastName, Long phoneNumber, String educationExperience, String pwd,Date dob,String userName) {
         this.email = email;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -41,9 +46,11 @@ public class Instructor {
         this.educationExperience = educationExperience;
         this.pwd = pwd;
         this.institutionName = institutionName;
+        this.dob = dob;
+        this.userName = userName;
     }
 
-    public Instructor(Long id, String email, String institutionName,String firstName, String lastName, Long phoneNumber, String educationExperience, String pwd) {
+    public Instructor(Long id, String email, String institutionName,String firstName, String lastName, Long phoneNumber, String educationExperience, String pwd, Date dob,String userName) {
         this.id = id;
         this.email = email;
         this.firstName = firstName;
@@ -52,6 +59,16 @@ public class Instructor {
         this.educationExperience = educationExperience;
         this.pwd = pwd;
         this.institutionName = institutionName;
+        this.dob = dob;
+        this.userName = userName;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
     public String getPwd() {

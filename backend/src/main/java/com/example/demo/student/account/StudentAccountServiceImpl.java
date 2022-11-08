@@ -46,15 +46,15 @@ public class StudentAccountServiceImpl implements StudentAccountService {
         Optional<Student> studentOptionalByEmail = studentRepository
                 .findStudentByEmail(student.getEmail());
         if (studentOptionalByEmail.isPresent()){
-            //Email Taken
-            Response response = new Response(0,1,null);
+                //Email Taken
+            Response response = new Response(0, 1, null);
             return response;
         }
         Optional<Student> studentOptionalByUserName = studentRepository
                 .findStudentByUserName(student.getUserName());
         if (studentOptionalByUserName.isPresent()){
-            //UserName Taken
-            Response response = new Response(0,2,null);
+                //UserName Taken
+            Response response = new Response(0, 2, null);
             return response;
         }
 
@@ -116,17 +116,22 @@ public class StudentAccountServiceImpl implements StudentAccountService {
         Optional<Student> studentOptionalByEmail = studentRepository
                 .findStudentByEmail(student.getEmail());
         if (studentOptionalByEmail.isPresent()){
-            //Email Taken
-            Response response = new Response(0,1,null);
-            return response;
+            if(studentOptionalByEmail.get().getId()!=student.getId()) {
+                //Email Taken
+                Response response = new Response(0, 1, null);
+                return response;
+            }
         }
         Optional<Student> studentOptionalByUserName = studentRepository
-                .findStudentByEmail(student.getUserName());
+                .findStudentByUserName(student.getUserName());
         if (studentOptionalByUserName.isPresent()){
-            //UserName Taken
-            Response response = new Response(0,2,null);
-            return response;
+            if(studentOptionalByUserName.get().getId()!=student.getId()) {
+                //UserName Taken
+                Response response = new Response(0, 2, null);
+                return response;
+            }
         }
+
         studentRepository.save(student);
 
         ObjectMapper mapper = new ObjectMapper();
