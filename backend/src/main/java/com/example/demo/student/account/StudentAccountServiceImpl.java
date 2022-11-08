@@ -43,13 +43,22 @@ public class StudentAccountServiceImpl implements StudentAccountService {
     }
     @Override
     public Response addNewStudent(Student student) {
-        Optional<Student> studentOptional = studentRepository
+        Optional<Student> studentOptionalByEmail = studentRepository
                 .findStudentByEmail(student.getEmail());
-        if (studentOptional.isPresent()){
+        if (studentOptionalByEmail.isPresent()){
             //Email Taken
             Response response = new Response(0,1,null);
             return response;
         }
+        Optional<Student> studentOptionalByUserName = studentRepository
+                .findStudentByUserName(student.getUserName());
+        if (studentOptionalByUserName.isPresent()){
+            //UserName Taken
+            Response response = new Response(0,2,null);
+            return response;
+        }
+
+
 
         studentRepository.save(student);
         ObjectMapper mapper = new ObjectMapper();
@@ -103,22 +112,19 @@ public class StudentAccountServiceImpl implements StudentAccountService {
     @Transactional
     public Response updateStudent(Long studentId, Student student) {
         student.setId(studentId);
-        String email = student.getEmail();
-        if(email != null &&
-                email.length() > 0){
-            Optional<Student> studentOptional = studentRepository.findStudentByEmail(email);
-            if (studentOptional.isPresent()) {
-                //Email Taken
-                Student gotStudent = studentOptional.get();
-                if (!Objects.equals(gotStudent.getId(),student.getId())){
-                    Response response = new Response(0,1,null);
-                    return response;
-                }
-            }
-        }
-        else{
-            //Invalid Email
+
+        Optional<Student> studentOptionalByEmail = studentRepository
+                .findStudentByEmail(student.getEmail());
+        if (studentOptionalByEmail.isPresent()){
+            //Email Taken
             Response response = new Response(0,1,null);
+            return response;
+        }
+        Optional<Student> studentOptionalByUserName = studentRepository
+                .findStudentByEmail(student.getUserName());
+        if (studentOptionalByUserName.isPresent()){
+            //UserName Taken
+            Response response = new Response(0,2,null);
             return response;
         }
         studentRepository.save(student);
