@@ -9,7 +9,7 @@ export default function Profile() {
     console.log(userInfo, userType)
   }
   else{
-    window.location.herf='./home'
+    window.location.href='./'
   }
 
   return (

@@ -49,8 +49,22 @@ const login = (info, usertype) => {
         })
       }
 
-      const updateInstructorProfile = (info) => {
-        return fetch(rootURL + "instructor/profile", 
+    const updateInstructorProfile = (info) => {
+      return fetch(rootURL + "instructor/profile", 
+        {
+          method: 'POST',
+          mode: "cors",
+          headers: {
+            'Accept': 'application/json,text/plain,*/*',
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(info)
+        })
+      }
+
+      const updateStudentProfile = (info) => {
+        
+        return fetch(rootURL + "student/profile", 
           {
             method: 'POST',
             mode: "cors",
@@ -61,20 +75,6 @@ const login = (info, usertype) => {
             body: JSON.stringify(info)
           })
         }
-
-        const updateStudentProfile = (info) => {
-          
-          return fetch(rootURL + "student/profile", 
-            {
-              method: 'POST',
-              mode: "cors",
-              headers: {
-                'Accept': 'application/json,text/plain,*/*',
-                'Content-Type': 'application/json'
-              },
-              body: JSON.stringify(info)
-            })
-          }
     
 
 const AccountServices = {
