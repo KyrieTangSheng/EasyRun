@@ -273,9 +273,9 @@ export default function Register() {
 
       <Paper style={paperStyle} variant="outlined">
         <a href="./home">
-        <Avatar style={avatarStyle}>
-          <LockIcon />
-        </Avatar>
+          <Avatar style={avatarStyle}>
+            <LockIcon />
+          </Avatar>
         </a>
         <h2>Let's Run</h2>
         {showForm && (
