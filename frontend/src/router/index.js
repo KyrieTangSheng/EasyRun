@@ -11,12 +11,13 @@ import Institution from '../pages/Institution';
 import Program from '../pages/Program';
 import Application from '../pages/Application';
 import Default from '../pages/Default';
+import SpacingGrid from '../pages/Test';
 
 function BaseRouter() {
   return (
     <Router>
       <Routes> 
-        <Route path="/App" element={<App/>}/>
+        <Route path="/" element={<App/>}/>
         <Route path="/home" element={<Home/>}>
           <Route path="/home" element={<Default/>}></Route>
           <Route path="/home/profile" element={<Profile/>}></Route>
@@ -28,6 +29,7 @@ function BaseRouter() {
         <Route path="/Institutions" element={<Institution/>}></Route>
         <Route path="/programs" element={<Program/>}></Route>
         <Route path="/applicationUpload" element={<Application/>}></Route>
+        <Route path="/test" element={<SpacingGrid/>}></Route>
       </Routes>
     </Router>
   );

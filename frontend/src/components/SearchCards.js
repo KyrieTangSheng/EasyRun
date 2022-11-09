@@ -11,15 +11,14 @@ import SavedSearchIcon from '@mui/icons-material/SavedSearch';
 export default function SearchCards(props) {
   return (
       <Card
-        component="li"
         variant="outlined"
         sx={(theme) => ({
-          //left: props.left,
-          // top: props.top,
+          backgroundColor:"transpparent",
+          left: "5%",
+          top: 90,
           width: 300,
-          hight: 1000,
           gridColumn: 'span 1',
-          flexDirection: 'row',
+          flexDirection: 'column',
           flexWrap: 'wrap',
           resize: 'horizontal',
           overflow: 'hidden',
@@ -35,7 +34,7 @@ export default function SearchCards(props) {
         <AspectRatio
           variant="soft"
           sx={{
-            flexGrow: 10,
+            flexGrow: 1,
             display: 'contents',
             '--AspectRatio-paddingBottom':
               'clamp(0px, (100% - 360px) * 999, min(calc(100% / (16 / 9)), 300px))',
