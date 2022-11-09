@@ -13,6 +13,7 @@ export default function SearchCards(props) {
       <Card
         variant="outlined"
         sx={(theme) => ({
+          backgroundColor:"transpparent",
           left: "5%",
           top: 90,
           width: 300,
