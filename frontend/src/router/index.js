@@ -1,17 +1,17 @@
 import React from 'react';
 import {BrowserRouter as Router, Routes, Route} from 'react-router-dom'
-import Login from '../pages/Login';
-import Register from '../pages/Register';
+import Login from '../basic pages/Login';
+import Register from '../basic pages/Register';
 import App from '../App';
 //import Home from "../pages/Home"
-import Profile from '../pages/Profile';
-import Home from '../pages/Home';
-import School from '../pages/School';
-import Institution from '../pages/Institution';
-import Program from '../pages/Program';
-import Application from '../pages/Application';
-import Default from '../pages/Default';
-import SpacingGrid from '../pages/Test';
+import Profile from '../profile page/Profile';
+import Home from '../basic pages/Home';
+import School from '../basic pages/School';
+import Institution from '../basic pages/Institution';
+import Program from '../basic pages/Program';
+import Application from '../basic pages/Application';
+import Default from '../basic pages/Default';
+import SpacingGrid from '../basic pages/Test';
 
 function BaseRouter() {
   return (
