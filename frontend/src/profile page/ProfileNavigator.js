@@ -4,11 +4,12 @@ import LibraryBooksIcon from "@mui/icons-material/LibraryBooks";
 import CastForEducationIcon from "@mui/icons-material/CastForEducation";
 import StarIcon from "@mui/icons-material/Star";
 import GavelRoundedIcon from "@mui/icons-material/GavelRounded";
+import EmojiPeopleRoundedIcon from "@mui/icons-material/EmojiPeopleRounded";
+import RoomPreferencesRoundedIcon from '@mui/icons-material/RoomPreferencesRounded';
 
 export default function ProfileNavigator(props) {
-  
-
-  if (localStorage.usertype === "student") {
+  const userType = localStorage.userType
+  if (userType === "student") {
     return (
       <Box
         sx={{
@@ -72,10 +73,13 @@ export default function ProfileNavigator(props) {
             label="Education"
             icon={<CastForEducationIcon />}
           />
-          <BottomNavigationAction label="Stars" icon={<StarIcon />} />
           <BottomNavigationAction
-            label="Contract"
-            icon={<GavelRoundedIcon />}
+            label="Enrolled Students"
+            icon={<EmojiPeopleRoundedIcon />}
+          />
+          <BottomNavigationAction
+            label="Ins. Infomation"
+            icon={<RoomPreferencesRoundedIcon />}
           />
         </BottomNavigation>
       </Box>
