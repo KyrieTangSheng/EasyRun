@@ -30,16 +30,28 @@ public class University{
     @Cascade(org.hibernate.annotations.CascadeType.DELETE)
     private List<Program> programs;
 
+    private Integer rank;
+
     public University(){
     }
 
-    public University(String name) {
+    public University(String name,Integer rank) {
+        this.rank = rank;
         this.name = name;
     }
 
-    public University(Long id, String name) {
+    public University(Long id, String name, Integer rank) {
+        this.rank = rank;
         this.id = id;
         this.name = name;
+    }
+
+    public Integer getRank() {
+        return rank;
+    }
+
+    public void setRank(Integer rank) {
+        this.rank = rank;
     }
 
     public Long getId() {

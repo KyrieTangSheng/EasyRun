@@ -34,21 +34,32 @@ public class Program{
     @ManyToOne
     @JoinColumn(name="university",nullable=true)
     private University university;
+    private String universityName;
 
     public Program(){
 
     }
-    public Program(String name, Long universityId, String url) {
+    public Program(String name, Long universityId, String url,String universityName) {
         this.name = name;
         this.universityId = universityId;
         this.url = url;
+        this.universityName = universityName;
     }
 
-    public Program(Long id, String name, Long universityId, String url) {
+    public Program(Long id, String name, Long universityId, String url,String universityName) {
         this.id = id;
         this.name = name;
         this.universityId = universityId;
         this.url = url;
+        this.universityName = universityName;
+    }
+
+    public String getUniversityName() {
+        return universityName;
+    }
+
+    public void setUniversityName(String universityName) {
+        this.universityName = universityName;
     }
 
     public Long getId() {
