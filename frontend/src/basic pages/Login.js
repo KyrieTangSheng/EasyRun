@@ -8,13 +8,10 @@ import {
   TextField,
   MenuItem,
   Button,
-  Collapse,
-  IconButton,
 } from "@mui/material";
 import DirectionsRunIcon from "@mui/icons-material/Directions";
-import CloseIcon from "@mui/icons-material/Close";
 import AccountServices from "../services/account";
-import Alert from "@mui/material/Alert";
+import Alerting from "../components/Alerting";
 
 export default function Login() {
   const paperStyle = { padding: 20, width: 400, margin: "150px" };
@@ -151,30 +148,11 @@ export default function Login() {
 
   return (
     <div align="center">
-      {showAlert ? (
-        <Collapse in={showAlert}>
-          <Alert
-            severity={errors.loginError.status}
-            action={
-              <IconButton
-                aria-label="close"
-                color="inherit"
-                size="small"
-                onClick={() => {
-                  setShowAlert(false);
-                }}
-              >
-                <CloseIcon fontSize="inherit" />
-              </IconButton>
-            }
-            sx={{ mb: 2 }}
-          >
-            {errors.loginError.msg}
-          </Alert>
-        </Collapse>
-      ) : (
-        <></>
-      )}
+      {/* check login status alert */}
+      <Alerting severity={errors.loginError.status} 
+      msg={errors.loginError.msg}
+      showAlert={showAlert}
+      setShowAlert={setShowAlert}/>
 
       <Paper style={paperStyle} variant="outlined">
         <a href="./home">
