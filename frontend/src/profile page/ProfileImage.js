@@ -5,7 +5,7 @@ export default function ProfileImage() {
   return (
     <Box
       sx={{
-        position: "fixed",
+        position: "absolute",
         top: 200,
         left: "8%",
         width: 400,

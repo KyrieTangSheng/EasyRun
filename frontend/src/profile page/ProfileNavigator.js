@@ -5,16 +5,16 @@ import CastForEducationIcon from "@mui/icons-material/CastForEducation";
 import StarIcon from "@mui/icons-material/Star";
 import GavelRoundedIcon from "@mui/icons-material/GavelRounded";
 import EmojiPeopleRoundedIcon from "@mui/icons-material/EmojiPeopleRounded";
-import RoomPreferencesRoundedIcon from '@mui/icons-material/RoomPreferencesRounded';
+import RoomPreferencesRoundedIcon from "@mui/icons-material/RoomPreferencesRounded";
 
 export default function ProfileNavigator(props) {
-  const userType = localStorage.userType
+  const userType = localStorage.userType;
   if (userType === "student") {
     return (
       <Box
         sx={{
           borderRadius: "16px",
-          position: "fixed",
+          position: "absolute",
           top: 120,
           left: "45%",
           width: 700,
@@ -50,7 +50,7 @@ export default function ProfileNavigator(props) {
       <Box
         sx={{
           borderRadius: "16px",
-          position: "fixed",
+          position: "absolute",
           top: 120,
           left: "45%",
           width: 700,
