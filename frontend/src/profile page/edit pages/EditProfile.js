@@ -20,6 +20,8 @@ export default function EditProfile(props) {
 
   const [errors, setErrors] = React.useState(formErrors);
 
+  const setShowAlert = props.setShowAlert
+
   // common info handles
   const handleEmail = (e) => {
     e.preventDefault();
@@ -134,6 +136,11 @@ export default function EditProfile(props) {
   };
 
   const handleSubmit = () => {
+    if (localStorage.userType === "instructor"){
+      values["institutionId"] = values.institution;
+      values.institution = undefined;
+      delete values["institution"];
+    }
     console.log(values);
     AccountServices.updateProfile(values, localStorage.userType)
       .then((response) => response.json())
@@ -180,8 +187,8 @@ export default function EditProfile(props) {
   };
 
   React.useEffect(() => {
-    props.setShowAlert(false);
-  }, []);
+    setShowAlert(false);
+  }, [setShowAlert]);
 
   return (
     <React.Fragment>
@@ -231,28 +238,28 @@ export default function EditProfile(props) {
                     disabled
                     fullWidth
                     variant="standard"
-                    value={values.email}
+                    value={values.email || ""}
                     onChange={handleEmail}
                   />
                   <TextField
                     label="User Name"
                     fullWidth
                     variant="standard"
-                    value={values.userName}
+                    value={values.userName || ""}
                     onChange={handleUserName}
                   />
                   <TextField
                     label="First Name"
                     fullWidth
                     variant="standard"
-                    value={values.firstName}
+                    value={values.firstName || ""}
                     onChange={handleFirstName}
                   />
                   <TextField
                     label="Last Name"
                     fullWidth
                     variant="standard"
-                    value={values.lastName}
+                    value={values.lastName || ""}
                     onChange={handleLastName}
                   />
                   <TextField
@@ -260,7 +267,7 @@ export default function EditProfile(props) {
                     type="date"
                     fullWidth
                     variant="standard"
-                    value={values.dob}
+                    value={values.dob || ""}
                     onChange={handledob}
                   />
                 </React.Fragment>
@@ -272,14 +279,14 @@ export default function EditProfile(props) {
                     label="Undergraduate School"
                     fullWidth
                     variant="standard"
-                    value={values.underGradSchool}
+                    value={values.underGradSchool || ""}
                     onChange={handleUndergradSchool}
                   />
                   <TextField
                     label="Major"
                     fullWidth
                     variant="standard"
-                    value={values.major}
+                    value={values.major || ""}
                     onChange={handleMajor}
                   />
                   <TextField
@@ -287,7 +294,7 @@ export default function EditProfile(props) {
                     fullWidth
                     type="number"
                     variant="standard"
-                    value={values.overallGPA}
+                    value={values.overallGPA || ""}
                     onChange={handleOverallGPA}
                   />
                   <TextField
@@ -295,7 +302,7 @@ export default function EditProfile(props) {
                     fullWidth
                     type="number"
                     variant="standard"
-                    value={values.majorGPA}
+                    value={values.majorGPA || ""}
                     onChange={handleMajorGPA}
                   />
                   <TextField
@@ -303,7 +310,7 @@ export default function EditProfile(props) {
                     fullWidth
                     type="number"
                     variant="standard"
-                    value={values.greScore}
+                    value={values.greScore || ""}
                     onChange={handleGREScore}
                   />
                   <TextField
@@ -311,7 +318,7 @@ export default function EditProfile(props) {
                     fullWidth
                     type="number"
                     variant="standard"
-                    value={values.toeflScore}
+                    value={values.toeflScore || ""}
                     onChange={handleTOEFLScore}
                   />
                   <TextField
@@ -320,7 +327,7 @@ export default function EditProfile(props) {
                     rows={3}
                     fullWidth
                     variant="standard"
-                    value={values.researchExperience}
+                    value={values.researchExperience || ""}
                     onChange={handleResearchExperience}
                   />
                   <TextField
@@ -329,7 +336,7 @@ export default function EditProfile(props) {
                     rows={3}
                     fullWidth
                     variant="standard"
-                    value={values.internshipExperience}
+                    value={values.internshipExperience || ""}
                     onChange={handleInternshipExperience}
                   />
                 </React.Fragment>
@@ -341,7 +348,7 @@ export default function EditProfile(props) {
                     rows={6}
                     fullWidth
                     variant="standard"
-                    value={values.educationExperience}
+                    value={values.educationExperience || ""}
                     onChange={handleEducationExperience}
                   />
                 </React.Fragment>

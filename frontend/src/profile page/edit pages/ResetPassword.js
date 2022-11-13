@@ -27,6 +27,8 @@ export default function ResetPassword(props) {
 
   const [errors, setErrors] = React.useState(formErrors);
 
+  const setShowAlert = props.setShowAlert
+
   const handleOriginalPassword = (e) => {
     e.preventDefault();
     let password = e.target.value;
@@ -40,6 +42,10 @@ export default function ResetPassword(props) {
   const handleNewPassword = (e) => {
     e.preventDefault();
     let password = e.target.value;
+    setErrors({
+      ...errors,
+      confirmedNewPwdError: { status: false, msg: "" },
+    });
     setValues({ ...values, newPwd: password });
   };
 
@@ -100,14 +106,17 @@ export default function ResetPassword(props) {
     setActiveStep(0);
   };
 
-  React.useEffect(() => {
-    props.setShowAlert(false);
-  }, []);
 
   // Submit Function
   const handleSubmit = () => {
     let userInfo = JSON.parse(localStorage.userInfo);
     userInfo.pwd = values.newPwd;
+    if (localStorage.userType === "instructor") {
+      userInfo["institutionId"] = userInfo.institution;
+      userInfo.institution = undefined;
+      delete userInfo["institution"];
+    }
+    console.log(userInfo);
     AccountServices.updateProfile(userInfo, localStorage.userType)
       .then((response) => response.json())
       .then((result) => {
@@ -128,6 +137,10 @@ export default function ResetPassword(props) {
       });
   };
 
+  React.useEffect(() => {
+    setShowAlert(false);
+  }, [setShowAlert]);
+  
   return (
     <Box sx={{ width: "100%" }}>
       {/* stepper properties */}
