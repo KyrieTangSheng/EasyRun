@@ -1,9 +1,6 @@
 const rootURL = "http://localhost:8080/account/";
 
 const login = (info, usertype) => {
-  console.log("login information:\n", info, "usertype:", usertype);
-
-  //console.log(rootURL + "/account/" + usertype + "/login")
   return fetch(rootURL + usertype + "/login", {
     method: "POST",
     mode: "cors",
@@ -16,8 +13,6 @@ const login = (info, usertype) => {
 };
 
 const signup = (info, usertype) => {
-  console.log("sign up information:\n", info, "usertype:", usertype);
-
   return fetch(rootURL + usertype + "/register", {
     method: "POST",
     mode: "cors",
@@ -51,7 +46,6 @@ const updateProfile = (info, usertype) => {
     body: JSON.stringify(info),
   });
 };
-
 
 const AccountServices = {
   login,
