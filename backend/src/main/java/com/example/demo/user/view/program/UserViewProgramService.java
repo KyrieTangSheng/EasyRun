@@ -9,5 +9,5 @@ public interface UserViewProgramService {
 
     Response getSpecificSchoolInfo(Long schoolId);
 
-    Response getSchoolsAndProgramsByKeyword(String schoolKeyword, String programKeyword);
+    Response getSchoolsAndProgramsByKeyword(String schoolKeyword, String programKeyword,Long studentId);
 }

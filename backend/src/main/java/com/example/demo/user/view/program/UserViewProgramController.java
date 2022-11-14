@@ -20,11 +20,12 @@ public class UserViewProgramController {
         this.programServiceImpl = programServiceImpl;
     }
 
-    @GetMapping(path="{schoolKeyword}/{programKeyword}")
+    @GetMapping(path="{schoolKeyword}/{programKeyword}/{studentId}")
     @ResponseBody
     public Response getSchoolsAndProgramsByKeyword(@PathVariable String schoolKeyword,
-                                                   @PathVariable String programKeyword){
-        return userViewProgramServiceImpl.getSchoolsAndProgramsByKeyword(schoolKeyword,programKeyword);
+                                                   @PathVariable String programKeyword,
+                                                   @PathVariable Long studentId){
+        return userViewProgramServiceImpl.getSchoolsAndProgramsByKeyword(schoolKeyword,programKeyword,studentId);
     }
 
     @GetMapping(path="specificProgram/{programId}/{studentId}")

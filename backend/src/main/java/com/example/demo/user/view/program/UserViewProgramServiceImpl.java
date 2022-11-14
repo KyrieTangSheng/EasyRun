@@ -18,6 +18,7 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 
 @Service
 public class UserViewProgramServiceImpl implements UserViewProgramService{
@@ -121,7 +122,7 @@ public class UserViewProgramServiceImpl implements UserViewProgramService{
     }
 
     @Override
-    public Response getSchoolsAndProgramsByKeyword(String schoolKeyword, String programKeyword){
+    public Response getSchoolsAndProgramsByKeyword(String schoolKeyword, String programKeyword,Long studentId){
         List<University> universities = new ArrayList<University>();
         List<Long> universityIds= new ArrayList<Long>();
         List<Program> programs = new ArrayList<Program>();
@@ -147,13 +148,30 @@ public class UserViewProgramServiceImpl implements UserViewProgramService{
             }
         }
 
+        List<Star> stars = starServiceImpl.getStarsByStudentId(studentId);
+        List<Boolean> starStatus = new ArrayList<>();
+        for(Program program:programs){
+            Boolean starred = false;
+            Long programId = program.getId();
+            for(Star star:stars){
+                if(star.getProgramId() == programId){
+                    starred = true;
+                    break;
+                }
+            }
+            starStatus.add(starred);
+        }
+
+
         ObjectMapper mapper = new ObjectMapper();
         try{
             ObjectNode parentNode = mapper.createObjectNode();
-            String jsonUniversities= mapper.writerWithDefaultPrettyPrinter().writeValueAsString(universities);
+//            String jsonUniversities= mapper.writerWithDefaultPrettyPrinter().writeValueAsString(universities);
             String jsonPrograms= mapper.writerWithDefaultPrettyPrinter().writeValueAsString(programs);
-            parentNode.put("universities",jsonUniversities);
+            String jsonStarStatus = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(starStatus);
+//            parentNode.put("universities",jsonUniversities);
             parentNode.put("programs",jsonPrograms);
+            parentNode.put("starStatus",jsonStarStatus);
             String jsonParentNode = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(parentNode);
             Response response = new Response(1,100,jsonParentNode);
             return response;
