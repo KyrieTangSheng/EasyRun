@@ -11,8 +11,20 @@ const ViewStarredPrograms= (studentId) => {
   });
 }
 
+const GetContract = (studentId) => {
+  return fetch(rootURL + "viewContract/" + studentId, {
+    method: "GET",
+    mode: "cors",
+    headers: {
+      Accept: "application/json,text/plain,*/*",
+      "Content-Type": "application/json",
+    },
+  });
+}
+
 const StudentHomepageServices = {
   ViewStarredPrograms,
+  GetContract,
 };
 
 export default StudentHomepageServices;

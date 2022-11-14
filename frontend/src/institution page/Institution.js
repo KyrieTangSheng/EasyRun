@@ -1,6 +1,7 @@
 import React from "react";
 import InstitutionServices from "../services/institutions";
 import Table from "../components/Table";
+import { Typography } from "@mui/material";
 
 export default function Institution() {
   let name = "all";
@@ -11,7 +12,6 @@ export default function Institution() {
   ];
 
   const [myRows, setMyRows] = React.useState([]);
-  const [loading, setLoading] = React.useState(true);
 
   React.useEffect(() => {
     InstitutionServices.ListInstitutions(name)
@@ -19,15 +19,22 @@ export default function Institution() {
       .then((result) => {
         const data = JSON.parse(result.data);
         setMyRows(data);
-        setLoading(false);
       });
   }, [name]);
 
   return (
+    <React.Fragment>
+    <Typography>
+      You can double click on the institution row to see specific institution
+      information.
+    </Typography>
     <Table
       columns={myColumns}
       rows={myRows}
-      loading={loading}
+      height={575}
+      PageSize={10}
+      tableType="institution"
     ></Table>
+  </React.Fragment>
   );
 }
