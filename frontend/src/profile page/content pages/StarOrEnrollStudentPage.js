@@ -1,14 +1,11 @@
 import React from "react";
+import Program from "../../program page/Program";
 
 export default function StarOrEnrollStudentPage(props) {
   // Star Page / Enrolled Student Page
 
-  React.useEffect(() => {
-    return;
-  }, [props.userType]);
-
   if (props.userType === "student") {
-    return <></>;
+    return <Program checkStar={true}/>;
   } else {
     return <></>;
   }

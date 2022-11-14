@@ -1,17 +1,41 @@
 import React from "react";
 import ProgramServices from "../services/programs";
+import StudentHomepageServices from "../services/studentHomepage";
 import Table from "../components/Table";
 import { Checkbox } from "@mui/material";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import FavoriteSharpIcon from "@mui/icons-material/FavoriteSharp";
 import LoyaltyIcon from "@mui/icons-material/Loyalty";
 
-export default function Program() {
+export default function Program(props) {
   const universityName = "all";
   const programName = "all";
+  const checkStar = props.checkStar || false
 
   // for table init
   const [tableRows, setTableRows] = React.useState([]);
+  const tableColumns = [
+    {
+      field: "star",
+      headerName: "Star",
+      width: 100,
+      // render a Star Icon to star the program
+      renderCell: (params) => (
+        <Checkbox
+          icon={<FavoriteBorderIcon />}
+          indeterminateIcon={<LoyaltyIcon />}
+          checkedIcon={<FavoriteSharpIcon style={{ color: "pink" }} />}
+          checked={params.row?.star}
+          onChange={() => {
+            handleStarChange(params.row);
+          }}
+        />
+      ),
+    },
+    { field: "id", headerName: "Program ID", width: 150 },
+    { field: "name", headerName: "Program Name", width: 400 },
+    { field: "universityName", headerName: "University Name", width: 300 },
+  ];
 
   // for skeleton loading
   const [loading, setLoading] = React.useState(true);
@@ -32,7 +56,6 @@ export default function Program() {
             ProgramServices.StarProgram(studentId, programId, starStatus)
               .then((response) => response.json())
               .then((result) => {
-                console.log(result);
                 if (result.status!==1){
                   window.alert("Failed to star / cancel star due to some error.")
                 }
@@ -58,32 +81,9 @@ export default function Program() {
     }
   }
 
-  const tableColumns = [
-    { field: "id", headerName: "Program ID", width: 150 },
-    { field: "name", headerName: "Program Name", width: 400 },
-    { field: "universityName", headerName: "University Name", width: 300 },
-    {
-      field: "star",
-      headerName: "Star",
-      width: 100,
-      // render a Star Icon to star the program
-      renderCell: (params) => (
-        <Checkbox
-          icon={<FavoriteBorderIcon />}
-          indeterminateIcon={<LoyaltyIcon />}
-          checkedIcon={<FavoriteSharpIcon style={{ color: "pink" }} />}
-          checked={params.row?.star}
-          onChange={() => {
-            handleStarChange(params.row);
-          }}
-        />
-      ),
-    },
-  ];
-
   React.useEffect(() => {
     let userID = 0;
-    if (
+    if ( // only student can star programs
       Boolean(localStorage.isLoggedIn) === true &&
       localStorage.userType === "student"
     ) {
@@ -93,7 +93,9 @@ export default function Program() {
     }
 
     // retrieve programs from back-end
-    ProgramServices.ListPrograms(universityName, programName, userID)
+
+    if (checkStar === false){
+      ProgramServices.ListPrograms(universityName, programName, userID)
       .then((response) => response.json())
       .then((result) => {
         const data = JSON.parse(result.data); // program data and school data
@@ -109,9 +111,28 @@ export default function Program() {
         );
         setLoading(false);
       });
-  }, [setTableRows, setLoading]);
+    }
+    else{
+      StudentHomepageServices.ViewStarredPrograms(userID)
+      .then((response) => response.json())
+      .then((result) => {
+        const data = JSON.parse(result.data); // program data and school data
+        const rows = JSON.parse(data.programs); // set program data to rows
+        const starStatus = JSON.parse(data.starStatus); // get star status list
+        // map table values with star contribute
+        setTableRows(
+          rows.map((x, index) => ({
+            ...x,
+            rowId: index,
+            star: starStatus[index],
+          }))
+        );
+        setLoading(false);
+      });
+    }
+  }, [setTableRows, setLoading, checkStar]);
 
   return (
-    <Table columns={tableColumns} rows={tableRows} loading={loading}></Table>
+    <Table columns={tableColumns} rows={tableRows} loading={loading} height={checkStar? 380 : 575} PageSize={checkStar? 5 : 10}></Table>
   );
 }
