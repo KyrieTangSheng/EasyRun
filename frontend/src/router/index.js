@@ -5,7 +5,6 @@ import Register from "../basic pages/Register";
 // import App from "../App";
 import Profile from "../profile page/Profile";
 import Home from "../basic pages/Home";
-import School from "../program page/School";
 import Institution from "../institution page/Institution";
 import Program from "../program page/Program";
 import Application from "../basic pages/Application";
@@ -20,8 +19,7 @@ function BaseRouter() {
         <Route path="/" element={<Home />}>
           <Route path="/home" element={<Default />}></Route>
           <Route path="/home/profile" element={<Profile />}></Route>
-          <Route path="/schools" element={<School />}></Route>
-          <Route path="/Institutions" element={<Institution />}></Route>
+          <Route path="/institutions" element={<Institution />}></Route>
           <Route path="/programs" element={<Program />}></Route>
           <Route path="/applicationUpload" element={<Application />}></Route>
         </Route>

@@ -2,7 +2,7 @@ import React from "react";
 import ProgramServices from "../services/programs";
 import StudentHomepageServices from "../services/studentHomepage";
 import Table from "../components/Table";
-import { Checkbox } from "@mui/material";
+import { Checkbox, Typography } from "@mui/material";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import FavoriteSharpIcon from "@mui/icons-material/FavoriteSharp";
 import LoyaltyIcon from "@mui/icons-material/Loyalty";
@@ -34,12 +34,9 @@ export default function Program(props) {
       ),
     },
     { field: "id", headerName: "Program ID", width: 150 },
-    { field: "name", headerName: "Program Name", width: 400 },
-    { field: "universityName", headerName: "University Name", width: 300 },
+    { field: "name", headerName: "Program Name", width: checkStar ? 207 : 400 },
+    { field: "universityName", headerName: "University Name", width: checkStar ? 206 : 400 },
   ];
-
-  // for skeleton loading
-  const [loading, setLoading] = React.useState(true);
 
   function handleStarChange(clickedRow) {
     let studentId = JSON.parse(localStorage.userInfo).id;
@@ -81,7 +78,8 @@ export default function Program(props) {
     }
 
     // retrieve programs from back-end
-    if (checkStar === false) { // for program view page
+    if (checkStar === false) {
+      // for program view page
       ProgramServices.ListPrograms(universityName, programName, userID)
         .then((response) => response.json())
         .then((result) => {
@@ -96,9 +94,9 @@ export default function Program(props) {
               star: starStatus[index],
             }))
           );
-          setLoading(false);
         });
-    } else { // for student starred program view page
+    } else {
+      // for student starred program view page
       StudentHomepageServices.ViewStarredPrograms(userID)
         .then((response) => response.json())
         .then((result) => {
@@ -113,18 +111,33 @@ export default function Program(props) {
               star: starStatus[index],
             }))
           );
-          setLoading(false);
         });
     }
-  }, [setTableRows, setLoading, checkStar]);
+  }, [setTableRows, checkStar]);
 
   return (
-    <Table
-      columns={tableColumns}
-      rows={tableRows}
-      loading={loading}
-      height={checkStar ? 380 : 575}
-      PageSize={checkStar ? 5 : 10}
-    ></Table>
+    <React.Fragment>
+      {checkStar ? (
+        <React.Fragment />
+      ) : (
+        <React.Fragment>
+          <Typography>
+            You can double click on the program name to see specific program
+            information,
+          </Typography>
+          <Typography>
+            or double click on the university name to see specific university
+            information.
+          </Typography>
+        </React.Fragment>
+      )}
+      <Table
+        columns={tableColumns}
+        rows={tableRows}
+        height={checkStar ? 380 : 575}
+        PageSize={checkStar ? 5 : 10}
+        tableType="program"
+      ></Table>
+    </React.Fragment>
   );
 }

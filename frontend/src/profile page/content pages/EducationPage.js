@@ -111,25 +111,13 @@ export default function EducationPage(props) {
     else if (props.userType === "instructor") {
       return (
         <Stack spacing={-2}>
-          <Stack direction="row" sx={{ position: "flex-start", padding: "10px" }}>
-            {/* TOEFL/IELTS Field*/}
-            <TextField
-              value={props.userInfo.institutionName || ""}
-              label="Institution"
-              margin="normal"
-              variant="filled"
-              InputProps={{
-                readOnly: true,
-              }}
-            />
-          </Stack>
           <Stack direction="row" justifyContent="space-around">
             {/* Education Experience Field */}
             <TextField
-              value={props.userInfo.researchExperience || ""}
+              value={props.userInfo.educationExperience || ""}
               label="Education Experience"
               multiline
-              rows={9}
+              rows={14}
               margin="normal"
               variant="filled"
               style={{ width: "98%" }}
