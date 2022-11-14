@@ -7,7 +7,7 @@ export default function Profile() {
   const [navigatorValue, setNavigatorValue] = React.useState(0);
   if (localStorage.isLoggedIn) {
     let userType = localStorage.userType;
-
+  
     return (
       <div>
         {/* profile image */}
