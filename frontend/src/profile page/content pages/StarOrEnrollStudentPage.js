@@ -5,13 +5,13 @@ import InstructorHomepageServices from "../../services/instructorHomepage";
 
 export default function StarOrEnrollStudentPage(props) {
   // Star Page / Enrolled Student Page
-  const myColumns = [
+  const EnrolledStudentColumns = [
     { field: "email", headerName: "Student Email", width: 220 },
     { field: "firstName", headerName: "First Name", width: 220 },
     { field: "lastName", headerName: "Last Name", width: 220 },
   ];
 
-  const [myRows, setMyRows] = React.useState([]);
+  const [EnrolledStudentRows, setEnrolledStudentRows] = React.useState([]);
 
   React.useEffect(() => {
     if (localStorage.userType === "instructor"){
@@ -20,7 +20,7 @@ export default function StarOrEnrollStudentPage(props) {
         .then((response) => response.json())
         .then((result) => {
           const data = JSON.parse(result.data);
-          setMyRows(data);
+          setEnrolledStudentRows(data);
         })
     }
   },[]);
@@ -30,8 +30,8 @@ export default function StarOrEnrollStudentPage(props) {
   } else {
     return (
       <Table
-        columns={myColumns}
-        rows={myRows}
+        columns={EnrolledStudentColumns}
+        rows={EnrolledStudentRows}
         height={380}
         PageSize={5}
         tableType="enrolledStudent"
