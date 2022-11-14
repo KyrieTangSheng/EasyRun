@@ -8,13 +8,10 @@ import {
   TextField,
   MenuItem,
   Button,
-  Collapse,
-  IconButton,
 } from "@mui/material";
 import LockIcon from "@mui/icons-material/Lock";
-import Alert from "@mui/material/Alert";
-import CloseIcon from "@mui/icons-material/Close";
 import AccountServices from "../services/account";
+import Alerting from "../components/Alerting";
 
 export default function Register() {
   const paperStyle = { padding: 20, width: 400, margin: "150px" };
@@ -54,6 +51,7 @@ export default function Register() {
     setErrors({ ...errors, emailError: { status: false, msg: "" } });
     setValues({ ...values, email: email });
   };
+
   const handleUsername = (e) => {
     e.preventDefault();
     let username = e.target.value;
@@ -246,30 +244,11 @@ export default function Register() {
 
   return (
     <div align="center">
-      {showAlert ? (
-        <Collapse in={showAlert}>
-          <Alert
-            severity={errors.registerError.status}
-            action={
-              <IconButton
-                aria-label="close"
-                color="inherit"
-                size="small"
-                onClick={() => {
-                  setShowAlert(false);
-                }}
-              >
-                <CloseIcon fontSize="inherit" />
-              </IconButton>
-            }
-            sx={{ mb: 2 }}
-          >
-            {errors.registerError.msg}
-          </Alert>
-        </Collapse>
-      ) : (
-        <></>
-      )}
+      <Alerting 
+      severity={errors.registerError.status} 
+      msg={errors.registerError.msg}
+      showAlert={showAlert}
+      setShowAlert={setShowAlert}/>
 
       <Paper style={paperStyle} variant="outlined">
         <a href="./home">

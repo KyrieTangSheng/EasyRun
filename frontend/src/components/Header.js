@@ -20,18 +20,17 @@ function Header() {
   if (localStorage.userType) {
     if (localStorage.userType === "student") {
       pages = ["Institutions", "Programs", "Upload Application Result"];
-      settings = ["Profile", "Message", "My Stars", "My Contract", "Logout"];
+      settings = ["Profile", "My Stars", "My Contract", "Logout"];
     } else if (localStorage.userType === "instructor") {
       pages = [
         "Institutions",
         "Programs",
         "Upload Application Result",
-        "Viewe Enrolled Students",
       ];
       settings = [
         "Profile",
-        "Message",
         "Send a New Contract",
+        "View Enrolled Students",
         "Institution Information",
         "Logout",
       ];
@@ -63,7 +62,7 @@ function Header() {
     <AppBar position="static" style={{ backgroundColor: "rgb(19 115 134)" }}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          <a href={localStorage.isLoggedIn ? "./home" : "./login"}>
+          <a href={localStorage.isLoggedIn ? "./home" : "../login"}>
             <img
               alt="logo"
               src="/favicon.png"
@@ -178,7 +177,7 @@ function Header() {
               onClose={handleCloseUserMenu}
             >
               {settings.map((setting) => (
-                <MenuItem key={setting} onClick={handleCloseUserMenu}>
+                <MenuItem key={setting} onClick={()=>{handleCloseUserMenu(); localStorage.clear(); window.location.href="../login"}}>
                   <Typography textAlign="center">{setting}</Typography>
                 </MenuItem>
               ))}
