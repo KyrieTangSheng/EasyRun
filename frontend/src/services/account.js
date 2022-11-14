@@ -24,9 +24,9 @@ const signup = (info, usertype) => {
   });
 };
 
-const getInstitutions = () => {
+const GETInstitutions = () => {
   return fetch(rootURL + "instructor/register", {
-    method: "get",
+    method: "GET",
     mode: "cors",
     headers: {
       Accept: "application/json,text/plain,*/*",
@@ -50,7 +50,7 @@ const updateProfile = (info, usertype) => {
 const AccountServices = {
   login,
   signup,
-  getInstitutions,
+  GETInstitutions,
   updateProfile,
 };
 

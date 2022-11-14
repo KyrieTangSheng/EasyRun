@@ -3,7 +3,7 @@ const rootURL = "http://localhost:8080/institutions/"
 const ListInstitutions = (name) => {
     return fetch(rootURL + name, 
       {
-        method: 'get',
+        method: 'GET',
         mode: "cors",
         headers: {
           'Accept': 'application/json,text/plain,*/*',
