@@ -9,9 +9,11 @@ import com.example.demo.student.Student;
 import com.example.demo.student.StudentRepository;
 import com.example.demo.utils.Response;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -38,10 +40,21 @@ public class StudentHomeServiceImpl implements StudentHomeService{
     public Response viewStarredPrograms(Long studentId){
         List<Program> programs =programServiceImpl.getProgramsByStudentId(studentId);
 
+        List<Boolean> starStatus = new ArrayList<>();
+        for(Program program:programs){
+            starStatus.add(true);
+        }
+
+
         ObjectMapper mapper = new ObjectMapper();
         try{
+            ObjectNode parentNode = mapper.createObjectNode();
             String jsonPrograms = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(programs);
-            Response response = new Response(1,100,jsonPrograms);
+            String jsonStarStatus = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(starStatus);
+            parentNode.put("programs",jsonPrograms);
+            parentNode.put("starStatus",jsonStarStatus);
+            String jsonParentNode = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(parentNode);
+            Response response = new Response(1,100,jsonParentNode);
             return response;
         }
         catch(Exception e){
