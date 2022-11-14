@@ -51,9 +51,9 @@ public class StarServiceImpl implements StarService {
     @Transactional
     @Override
     public void deleteStar(Long programId, Long studentId){
-        Boolean starred = alreadyStarred(programId,studentId);
+        Boolean starred = alreadyStarred(studentId,programId);
         if(!starred){
-            throw new IllegalStateException("Already starred");
+            throw new IllegalStateException("Not starred");
         }
         starRepository.deleteByStudentIdAndProgramId(studentId,programId);
     }
