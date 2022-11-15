@@ -2,7 +2,7 @@ const rootURL = "http://localhost:8080/programs/";
 
 const ListPrograms = (schoolName, programName, userID) => {
   return fetch(rootURL + schoolName + "/" + programName + "/" + userID, {
-    method: "get",
+    method: "GET",
     mode: "cors",
     headers: {
       Accept: "application/json,text/plain,*/*",
@@ -38,6 +38,7 @@ const StarProgram = (studentID, programID, starStatus) => {
     });
   }
 };
+
 
 const ProgramServices = {
   ListPrograms,

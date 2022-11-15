@@ -104,7 +104,6 @@ export default function ProfileStudent(props) {
           />
         )}
       </Paper>
-      
       {/* Edit Speed Dial For Edit Pages*/}
       <SpeedDial
         ariaLabel="SpeedDial basic example"
