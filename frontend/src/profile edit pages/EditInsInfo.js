@@ -13,7 +13,8 @@ export default function EditInsInfo(props) {
     description: insData.description,
   });
 
-  const setShowAlert = props.setShowAlert;
+
+  const setShowAlert = props.setShowAlert
 
   const handleURL = (e) => {
     e.preventDefault();
