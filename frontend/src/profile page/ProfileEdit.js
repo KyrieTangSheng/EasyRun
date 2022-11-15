@@ -21,7 +21,7 @@ export default function ProfileEdit(props) {
     "Edit Profile":
       "You can edit your personal profile information by filling out this form.",
     "Edit Institution Information":
-      "You can edit your institution information by filling out this form.",
+      "You need to provide your institution verification code, then you can edit your institution information by filling out this form.",
     "Upload Application":
       "You can upload your application result by filling out this form. We appreciate your information provide and it would certainly help other students who intent to apply for master studies",
     "Send a Contract":
