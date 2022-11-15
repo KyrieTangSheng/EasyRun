@@ -8,9 +8,10 @@ import {
   Button,
 } from "@mui/material";
 import Alerting from "../components/Alerting";
-import ResetPassword from "./edit pages/ResetPassword";
-import EditProfile from "./edit pages/EditProfile";
-import EditInsInfo from "./edit pages/EditInsInfo";
+import ResetPassword from "../profile edit pages/ResetPassword";
+import ProfileApplication from "../profile edit pages/Profile&Application";
+import EditInsInfo from "../profile edit pages/EditInsInfo";
+import UploadApplication from "../profile edit pages/UploadApplication";
 
 export default function ProfileEdit(props) {
   const dialogContent = {
@@ -20,6 +21,8 @@ export default function ProfileEdit(props) {
       "You can edit your personal profile information by filling out this form.",
     "Edit Institution Information":
       "You can edit your institution information by filling out this form.",
+    "Upload Application":
+      "You can upload your application result by filling out this form. We appreciate your information provide and it would certainly help other students who intent to apply for master studies",
   };
   const [showAlert, setShowAlert] = React.useState(false);
   const [severity, setSeverity] = React.useState("success");
@@ -37,13 +40,36 @@ export default function ProfileEdit(props) {
       <DialogContent>
         <DialogContentText>{dialogContent[props.dialogType]}</DialogContentText>
         {props.dialogType === "Reset Password" ? (
-          <ResetPassword handleClose={props.handleClose} setShowAlert={setShowAlert} setSeverity={setSeverity} setAlertMsg={setAlertMsg}/>
+          <ResetPassword
+            handleClose={props.handleClose}
+            setShowAlert={setShowAlert}
+            setSeverity={setSeverity}
+            setAlertMsg={setAlertMsg}
+          />
         ) : props.dialogType === "Edit Profile" ? (
-          <EditProfile handleClose={props.handleClose} setShowAlert={setShowAlert} setSeverity={setSeverity} setAlertMsg={setAlertMsg}/>
+          <ProfileApplication
+            handleClose={props.handleClose}
+            setShowAlert={setShowAlert}
+            setSeverity={setSeverity}
+            setAlertMsg={setAlertMsg}
+            formType="edit"
+          />
         ) : props.dialogType === "Edit Institution Information" ? (
-          <EditInsInfo handleClose={props.handleClose} setShowAlert={setShowAlert} setSeverity={setSeverity} setAlertMsg={setAlertMsg}/>
+          <EditInsInfo
+            handleClose={props.handleClose}
+            setShowAlert={setShowAlert}
+            setSeverity={setSeverity}
+            setAlertMsg={setAlertMsg}
+          />
+        ) : props.dialogType === "Upload Application" ? (
+          <UploadApplication
+            handleClose={props.handleClose}
+            setShowAlert={setShowAlert}
+            setSeverity={setSeverity}
+            setAlertMsg={setAlertMsg}
+          />
         ) : (
-          <></>
+          <React.Fragment />
         )}
       </DialogContent>
       <DialogActions>

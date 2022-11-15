@@ -3,6 +3,7 @@ import { Box, Paper, SpeedDial, SpeedDialAction } from "@mui/material";
 import PatternIcon from "@mui/icons-material/Pattern";
 import BadgeSharpIcon from "@mui/icons-material/BadgeSharp";
 import BorderColorRoundedIcon from "@mui/icons-material/BorderColorRounded";
+import UploadFileRoundedIcon from "@mui/icons-material/UploadFileRounded";
 import RoomPreferencesRoundedIcon from "@mui/icons-material/RoomPreferencesRounded";
 import ProfileEdit from "./ProfileEdit";
 import AccountPage from "./content pages/AccountPage";
@@ -52,19 +53,18 @@ export default function ProfileStudent(props) {
     3: { height: 400, width: 700, opacity: 0.9, backgroundColor: "#ffe7ba" },
   };
 
-
   let studentSpeedDialStyle = {
-    0: { position: "absolute", top: 200, right: -100 },
-    1: { position: "absolute", top: 250, right: -100 },
-    2: { position: "absolute", top: 250, right: -100 },
-    3: { position: "absolute", top: 250, right: -100 },
+    0: { position: "absolute", top: 160, right: -100 },
+    1: { position: "absolute", top: 230, right: -100 },
+    2: { position: "absolute", top: 230, right: -100 },
+    3: { position: "absolute", top: 230, right: -100 },
   };
 
   let instructorSpeedDialStyle = {
-    0: { position: "absolute", top: 150, right: -100 },
-    1: { position: "absolute", top: 220, right: -100 },
-    2: { position: "absolute", top: 220, right: -100 },
-    3: { position: "absolute", top: 220, right: -100 },
+    0: { position: "absolute", top: 100, right: -100 },
+    1: { position: "absolute", top: 170, right: -100 },
+    2: { position: "absolute", top: 170, right: -100 },
+    3: { position: "absolute", top: 170, right: -100 },
   };
 
   // speeddial functions
@@ -140,15 +140,28 @@ export default function ProfileStudent(props) {
             handleSetDialogType("Reset Password");
           }}
         />
+
         {/* When instructor logged in, the user can modify institution information. */}
         {localStorage.userType === "instructor" ? (
           <SpeedDialAction
-            key="Edit Insitution Information"
+            key="Edit Institution Information"
             icon={<RoomPreferencesRoundedIcon />}
-            tooltipTitle="Edit Insitution Information"
+            tooltipTitle="Edit Institution Information"
             onClick={() => {
               handleClickOpenDialog();
-              handleSetDialogType("Edit Insitution Information");
+              handleSetDialogType("Edit Institution Information");
+            }}
+          />
+        ) : null}
+        {/* When student logged in, the user can upload application result. */}
+        {localStorage.userType === "student" ? (
+          <SpeedDialAction
+            key="Upload Application"
+            icon={<UploadFileRoundedIcon />}
+            tooltipTitle="Upload Application Result"
+            onClick={() => {
+              handleClickOpenDialog();
+              handleSetDialogType("Upload Application");
             }}
           />
         ) : null}

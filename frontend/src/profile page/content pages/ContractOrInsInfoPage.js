@@ -1,13 +1,15 @@
 import React from "react";
 import { Stack, TextField } from "@mui/material";
-import InstructorHomepageServices from "../../services/instructorHomepage";
 import StudentHomepageServices from "../../services/studentHomepage";
 import Table from "../../components/Table";
 
 // Contract Page / Institution Information Page
 export default function ContractOrInsInfoPage(props) {
   // Set Institution Data for Instructor Homepage
-  const [institutionData, setInstitutionData] = React.useState({});
+  let institutionData = null
+  if (localStorage.userType === "instructor"){
+    institutionData = JSON.parse(localStorage.institutionData);
+  }
 
   // Table columns and rows for contracts
   // Set Contract Data for Student Homepage
@@ -21,26 +23,17 @@ export default function ContractOrInsInfoPage(props) {
   ];
 
   React.useEffect(() => {
-    // get Ins. info
-    if (localStorage.userType === "instructor") {
-      const instructorId = JSON.parse(localStorage.userInfo).id;
-      InstructorHomepageServices.ViewInstitutionInfo(instructorId)
-        .then((response) => response.json())
-        .then((result) => {
-          setInstitutionData(JSON.parse(result.data));
-        });
-    }
     // get contract info
-    else {
+    if (localStorage.userType === "student") {
       const studentId = JSON.parse(localStorage.userInfo).id;
       StudentHomepageServices.GetContract(studentId)
         .then((response) => response.json())
         .then((result) => {
+          console.log(result.data)
           setContractData(JSON.parse(result.data));
         });
     }
-  }, []);
-  console.log(contractData);
+  }, [setContractData]);
 
   if (props.userType === "student") {
     return (

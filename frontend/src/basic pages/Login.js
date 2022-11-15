@@ -2,23 +2,18 @@ import React, { useState } from "react";
 import {
   Paper,
   Avatar,
-  Typography,
-  Link,
-  Box,
-  TextField,
-  MenuItem,
-  Button,
 } from "@mui/material";
 import DirectionsRunIcon from "@mui/icons-material/Directions";
 import AccountServices from "../services/account";
 import Alerting from "../components/Alerting";
+import loginForm from "../forms/loginForm";
 
 export default function Login() {
   const paperStyle = { padding: 20, width: 400, margin: "150px" };
   const avatarStyle = { backgroundColor: "#17adb08f", width: 45, height: 45 };
 
-  // handle values
-  const [values, setValues] = useState({
+  // handle signUpValues
+  const [signUpValues, setSignUpValues] = useState({
     email: "",
     pwd: "",
   });
@@ -40,14 +35,14 @@ export default function Login() {
     e.preventDefault();
     let email = e.target.value;
     setErrors({ ...errors, emailError: { status: false, msg: "" } });
-    setValues({ ...values, email: email });
+    setSignUpValues({ ...signUpValues, email: email });
   };
 
   const handlePassword = (e) => {
     e.preventDefault();
     let password = e.target.value;
     setErrors({ ...errors, passwordError: { status: false, msg: "" } });
-    setValues({ ...values, pwd: password });
+    setSignUpValues({ ...signUpValues, pwd: password });
   };
 
   const handleUserType = (e) => {
@@ -68,16 +63,16 @@ export default function Login() {
       passwordError: { status: false, msg: "" },
       usertypeError: { status: false, msg: "" },
     };
-    if (values.email.length === 0) {
+    if (signUpValues.email.length === 0) {
       newErrorInfo.emailError = {
         status: true,
         msg: "Please enter your email address",
       };
-      validationStatus = validationStatus && values.email.length !== 0;
+      validationStatus = validationStatus && signUpValues.email.length !== 0;
     }
     //valid email
     else if (
-      /^[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[A-Za-z]+$/.test(values.email) === false
+      /^[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[A-Za-z]+$/.test(signUpValues.email) === false
     ) {
       newErrorInfo.emailError = {
         status: true,
@@ -85,15 +80,15 @@ export default function Login() {
       };
       validationStatus =
         validationStatus &&
-        /^[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[A-Za-z]+$/.test(values.email) !== false;
+        /^[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[A-Za-z]+$/.test(signUpValues.email) !== false;
     }
     // valid password
-    if (values.pwd.length === 0) {
+    if (signUpValues.pwd.length === 0) {
       newErrorInfo.passwordError = {
         status: true,
         msg: "Please enter your password",
       };
-      validationStatus = validationStatus && values.pwd.length !== 0;
+      validationStatus = validationStatus && signUpValues.pwd.length !== 0;
     }
     if (usertype.length === 0) {
       newErrorInfo.usertypeError = {
@@ -104,7 +99,7 @@ export default function Login() {
     }
     !validationStatus && setErrors(newErrorInfo);
     if (validationStatus) {
-      let loginInfo = values;
+      let loginInfo = signUpValues;
 
       AccountServices.login(loginInfo, usertype)
         .then((response) => response.json())
@@ -146,6 +141,21 @@ export default function Login() {
     }
   };
 
+  const values={
+    signUpValues,
+    usertype,
+    errors,
+  }
+
+  const functions={
+    setUserType,
+    setShowAlert,
+    handleEmail,
+    handlePassword,
+    handleUserType,
+    handleSubmit
+  }
+
   return (
     <div align="center">
       {/* check login status alert */}
@@ -161,71 +171,7 @@ export default function Login() {
           </Avatar>
         </a>
         <h2>Let's Run</h2>
-        <Box
-          align="center"
-          component="form"
-          onSubmit={handleSubmit}
-          sx={{ "& .MuiTextField-root": { m: 1, width: "40ch" } }}
-          noValidate
-          autoComplete="off"
-        >
-          {/* Email Field*/}
-          <TextField
-            required
-            type="email"
-            id="email"
-            label="Email"
-            onChange={handleEmail}
-            value={values.email}
-            error={errors.emailError.status}
-            helperText={errors.emailError.msg}
-          />
-
-          {/* Password Field*/}
-          <TextField
-            required
-            type="password"
-            id="password"
-            label="Password"
-            onChange={handlePassword}
-            value={values.pwd}
-            error={errors.passwordError.status}
-            helperText={errors.passwordError.msg}
-          />
-
-          {/* Log in Role Field*/}
-          <TextField
-            required
-            id="outlined-select-role"
-            select
-            label="Login As"
-            value={usertype}
-            onChange={handleUserType}
-            error={errors.usertypeError.status}
-            helperText={errors.usertypeError.msg}
-          >
-            <MenuItem value={"student"}>Student</MenuItem>
-            <MenuItem value={"instructor"}>Instructor</MenuItem>
-          </TextField>
-
-          {/* Button */}
-          <Button
-            type="submit"
-            sx={{ m: 1, width: "40ch" }}
-            style={{ backgroundColor: "#328059" }}
-            fontSize="18px"
-            variant="contained"
-          >
-            Sign In
-          </Button>
-          <Typography align="center" fontSize="12px">
-            {" "}
-            Do not have an account?
-            <Link href="./register" fontSize="18px">
-              Join Run Club now!
-            </Link>
-          </Typography>
-        </Box>
+        <loginForm.LoginForm values={values} functions={functions}/>
       </Paper>
     </div>
   );

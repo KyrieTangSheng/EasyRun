@@ -2,23 +2,18 @@ import React, { useState, useEffect } from "react";
 import {
   Paper,
   Avatar,
-  Typography,
-  Link,
-  Box,
-  TextField,
-  MenuItem,
-  Button,
 } from "@mui/material";
 import LockIcon from "@mui/icons-material/Lock";
 import AccountServices from "../services/account";
 import Alerting from "../components/Alerting";
+import registerForm from "../forms/registerForm";
 
 export default function Register() {
   const paperStyle = { padding: 20, width: 400, margin: "150px" };
   const avatarStyle = { backgroundColor: "green" };
 
-  // handle values
-  const [values, setValues] = useState({
+  // handle registerValues
+  const [registerValues, setRegisterValues] = useState({
     email: "",
     userName: "",
     pwd: "",
@@ -49,21 +44,21 @@ export default function Register() {
     e.preventDefault();
     let email = e.target.value;
     setErrors({ ...errors, emailError: { status: false, msg: "" } });
-    setValues({ ...values, email: email });
+    setRegisterValues({ ...registerValues, email: email });
   };
 
   const handleUsername = (e) => {
     e.preventDefault();
     let username = e.target.value;
     setErrors({ ...errors, usernameError: { status: false, msg: "" } });
-    setValues({ ...values, userName: username });
+    setRegisterValues({ ...registerValues, userName: username });
   };
 
   const handlePassword = (e) => {
     e.preventDefault();
     let password = e.target.value;
     setErrors({ ...errors, passwordError: { status: false, msg: "" } });
-    setValues({ ...values, pwd: password });
+    setRegisterValues({ ...registerValues, pwd: password });
   };
 
   const handleConfirmedPassword = (e) => {
@@ -73,14 +68,14 @@ export default function Register() {
       ...errors,
       confirmedPasswordError: { status: false, msg: "" },
     });
-    setValues({ ...values, confirmedPassword: confirmedPassword });
+    setRegisterValues({ ...registerValues, confirmedPassword: confirmedPassword });
   };
 
   const handleIns = (e) => {
     e.preventDefault();
     let ins = e.target.value;
     setErrors({ ...errors, insError: { status: false, msg: "" } });
-    setValues({ ...values, institutionName: ins });
+    setRegisterValues({ ...registerValues, institutionName: ins });
   };
 
   const handleUserType = (e) => {
@@ -89,16 +84,6 @@ export default function Register() {
     setErrors({ ...errors, usertypeError: { status: false, msg: "" } });
     setUserType(usertype);
   };
-
-  useEffect(() => {
-    if (usertype === "instructor") {
-      AccountServices.getInstitutions()
-        .then((response) => response.json())
-        .then((result) => {
-          setInsData(JSON.parse(result.data));
-        });
-    }
-  }, [usertype]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -123,16 +108,16 @@ export default function Register() {
       validationStatus = validationStatus && usertype.length !== 0;
     }
     //valid email
-    if (values.email.length === 0) {
+    if (registerValues.email.length === 0) {
       newErrorInfo.emailError = {
         status: true,
         msg: "Please enter your email address",
       };
-      validationStatus = validationStatus && values.email.length !== 0;
+      validationStatus = validationStatus && registerValues.email.length !== 0;
     }
     // valid email
     else if (
-      /^[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[A-Za-z]+$/.test(values.email) === false
+      /^[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[A-Za-z]+$/.test(registerValues.email) === false
     ) {
       newErrorInfo.emailError = {
         status: true,
@@ -140,50 +125,50 @@ export default function Register() {
       };
       validationStatus =
         validationStatus &&
-        /^[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[A-Za-z]+$/.test(values.email) !== false;
+        /^[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[A-Za-z]+$/.test(registerValues.email) !== false;
     }
 
     // valid username
-    if (values.userName.length === 0) {
+    if (registerValues.userName.length === 0) {
       newErrorInfo.usernameError = {
         status: true,
         msg: "Please enter your username",
       };
-      validationStatus = validationStatus && values.userName.length !== 0;
+      validationStatus = validationStatus && registerValues.userName.length !== 0;
     }
-    if (values.pwd.length === 0) {
+    if (registerValues.pwd.length === 0) {
       newErrorInfo.passwordError = {
         status: true,
         msg: "Please enter your password",
       };
-      validationStatus = validationStatus && values.pwd.length !== 0;
+      validationStatus = validationStatus && registerValues.pwd.length !== 0;
     }
     // same confirmed password
-    if (values.pwd !== values.confirmedPassword) {
+    if (registerValues.pwd !== registerValues.confirmedPassword) {
       newErrorInfo.confirmedPasswordError = {
         status: true,
         msg: "Two passwords are inconsistent",
       };
       validationStatus =
-        validationStatus && values.pwd === values.confirmedPassword;
+        validationStatus && registerValues.pwd === registerValues.confirmedPassword;
     }
-    if (usertype === "instructor" && values.institutionName === "") {
+    if (usertype === "instructor" && registerValues.institutionName === "") {
       newErrorInfo.insError = {
         status: true,
         msg: "Please choose the institution",
       };
       validationStatus =
         validationStatus &&
-        !(usertype === "instructor" && values.institutionName === "");
+        !(usertype === "instructor" && registerValues.institutionName === "");
     }
     !validationStatus && setErrors(newErrorInfo);
     if (validationStatus) {
-      setValues({ ...values, confirmedPassword: "" });
-      delete values.confirmedPassword;
+      setRegisterValues({ ...registerValues, confirmedPassword: "" });
+      delete registerValues.confirmedPassword;
       if (usertype === "student") {
-        delete values.institutionName;
+        delete registerValues.institutionName;
       }
-      let signUpInfo = values;
+      let signUpInfo = registerValues;
       console.log(JSON.stringify(signUpInfo));
       AccountServices.signup(signUpInfo, usertype)
         .then((response) => response.json())
@@ -229,7 +214,7 @@ export default function Register() {
     }
   };
 
-  const handleSubmit1 = (e) => {
+  const handleNextForm = (e) => {
     e.preventDefault();
     setErrors(formErrors);
     if (usertype.length === 0) {
@@ -241,6 +226,38 @@ export default function Register() {
       setShowForm(!showForm);
     }
   };
+
+  const values = {
+    registerValues,
+    usertype,
+    showForm,
+    showAlert,
+    InsData,
+    errors,
+  }
+
+  const functions = {
+    handleEmail,
+    handleUsername,
+    handlePassword,
+    handleConfirmedPassword,
+    handleIns,
+    handleUserType,
+    handleSubmit,
+    handleNextForm,
+    setUserType,
+    setShowForm,
+  }
+
+  useEffect(() => {
+    if (usertype === "instructor") {
+      AccountServices.GETInstitutions()
+        .then((response) => response.json())
+        .then((result) => {
+          setInsData(JSON.parse(result.data));
+        });
+    }
+  }, [usertype]);
 
   return (
     <div align="center">
@@ -257,157 +274,12 @@ export default function Register() {
           </Avatar>
         </a>
         <h2>Let's Run</h2>
-        {showForm && (
-          <Box
-            align="center"
-            component="form"
-            onSubmit={handleSubmit1}
-            sx={{ "& .MuiTextField-root": { m: 1, width: "40ch" } }}
-            noValidate
-            autoComplete="off"
-          >
-            <Typography align="center" fontSize="16px">
-              {" "}
-              Already have an account?
-              <br></br>
-              <Link href="./login" fontSize="18px">
-                Click to log in!
-              </Link>
-            </Typography>
-            <TextField
-              required
-              id="outlined-select-role"
-              select
-              label="Login As"
-              value={usertype}
-              onChange={handleUserType}
-              error={errors.usertypeError.status}
-              helperText={errors.usertypeError.msg}
-            >
-              <MenuItem value={"student"}>Student</MenuItem>
-              <MenuItem value={"instructor"}>Instructor</MenuItem>
-            </TextField>
-
-            <Button
-              type="submit"
-              sx={{ m: 1, width: "40ch" }}
-              style={{ backgroundColor: "#328059" }}
-              fontSize="25px"
-              variant="contained"
-            >
-              Next
-            </Button>
-          </Box>
+        {showForm && ( // Form 1, choose user type
+          <registerForm.registerForm1 values={values} functions={functions}/>
         )}
 
-        {!showForm && usertype.length && (
-          <Box
-            align="center"
-            component="form"
-            onSubmit={handleSubmit}
-            sx={{ "& .MuiTextField-root": { m: 1, width: "40ch" } }}
-            noValidate
-            autoComplete="off"
-          >
-            <Typography align="center" fontSize="16px">
-              {" "}
-              Already have an account?
-              <br></br>
-              <Link href="./login" fontSize="18px">
-                Click to log in!
-              </Link>
-            </Typography>
-
-            {/* Email Field */}
-            <TextField
-              required
-              type="email"
-              id="email"
-              label="Email"
-              onChange={handleEmail}
-              value={values.email}
-              error={errors.emailError.status}
-              helperText={errors.emailError.msg}
-            />
-            {/* UsernameField */}
-            <TextField
-              required
-              id="username"
-              label="Username"
-              onChange={handleUsername}
-              value={values.userName}
-              error={errors.usernameError.status}
-              helperText={errors.usernameError.msg}
-            />
-
-            {/* Password Field */}
-            <TextField
-              required
-              type="password"
-              id="password"
-              label="Password"
-              onChange={handlePassword}
-              value={values.pwd}
-              error={errors.passwordError.status}
-              helperText={errors.passwordError.msg}
-            />
-
-            {/* confirmed Password Field */}
-            <TextField
-              required
-              type="password"
-              id="confirmedPassword"
-              label="Confirmed Password"
-              onChange={handleConfirmedPassword}
-              value={values.confirmedPassword}
-              error={errors.confirmedPasswordError.status}
-              helperText={errors.confirmedPasswordError.msg}
-            />
-
-            {usertype === "instructor" && (
-              <TextField
-                required
-                id="outlined-select-role"
-                select
-                label="Institutions"
-                value={values.institutionName}
-                onChange={handleIns}
-                error={errors.insError.status}
-                helperText={errors.insError.msg}
-              >
-                {Object.entries(InsData).map(([key, value]) => (
-                  <MenuItem key={key} value={value.name}>
-                    {value.name}
-                  </MenuItem>
-                ))}
-              </TextField>
-            )}
-
-            <Button
-              type="submit"
-              sx={{ m: 1, width: "20ch" }}
-              style={{ backgroundColor: "#328059" }}
-              fontSize="25px"
-              variant="contained"
-              onClick={() => {
-                setUserType("");
-                setShowForm(!showForm);
-              }}
-            >
-              Last Step
-            </Button>
-
-            {/* Button  */}
-            <Button
-              type="submit"
-              sx={{ m: 1, width: "20ch" }}
-              style={{ backgroundColor: "black" }}
-              fontSize="25px"
-              variant="contained"
-            >
-              Register
-            </Button>
-          </Box>
+        {!showForm && usertype.length && ( // Form 2, give informations
+           <registerForm.registerForm2 values={values} functions={functions}/>
         )}
       </Paper>
     </div>
