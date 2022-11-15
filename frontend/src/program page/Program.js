@@ -21,7 +21,7 @@ export default function Program(props) {
       width: 100,
       hide: !(localStorage.isLoggedIn && localStorage.userType === "student"),
       // render a Star Icon to star the program
-      renderCell: (params) => (
+      renderCell: (params) => ( 
         <Checkbox
           icon={<FavoriteBorderIcon />}
           indeterminateIcon={<LoyaltyIcon />}
