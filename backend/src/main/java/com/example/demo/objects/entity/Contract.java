@@ -32,7 +32,7 @@ public class Contract {
     @ManyToOne
     @JoinColumn(name = "instructor")
     private Instructor instructor;
-
+    private String instructorName;
     private Long institutionId;
     private String institutionName;
     @ManyToOne
@@ -71,6 +71,14 @@ public class Contract {
         this.student = student;
         this.instructor = instructor;
         this.institution = institution;
+    }
+
+    public String getInstructorName() {
+        return instructorName;
+    }
+
+    public void setInstructorName(String instructorName) {
+        this.instructorName = instructorName;
     }
 
     public String getInstitutionName() {
@@ -113,8 +121,8 @@ public class Contract {
         this.instructorId = instructorId;
     }
 
-    public Long getInstructor() {
-        return instructor.getId();
+    public Instructor getInstructor() {
+        return instructor;
     }
 
     public void setInstructor(Instructor instructor) {

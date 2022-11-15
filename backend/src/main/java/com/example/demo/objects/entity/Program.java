@@ -114,12 +114,17 @@ public class Program{
         this.stars = stars;
     }
 
-    public List<Long> getApplications() {
-        List<Long> applicationIds = new ArrayList<Long>();
-        for(Application application:applications){
-            applicationIds.add(application.getId());
-        }
-        return applicationIds;
+//    public List<Long> getApplications() {
+//        List<Long> applicationIds = new ArrayList<Long>();
+//        for(Application application:applications){
+//            applicationIds.add(application.getId());
+//        }
+//        return applicationIds;
+//    }
+
+
+    public List<Application> getApplications() {
+        return applications;
     }
 
     public void setApplications(List<Application> applications) {

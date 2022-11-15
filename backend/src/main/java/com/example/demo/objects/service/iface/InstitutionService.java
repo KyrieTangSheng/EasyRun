@@ -11,4 +11,5 @@ public interface InstitutionService {
   Optional<Institution> getInstitutionInfoById(Long institutionId);
   List<Institution> getAllInstitutions();
   Optional<Institution> getInstitutionByName(String name);
+  Institution updateInstitutionInfo(Institution institution);
 }

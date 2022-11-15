@@ -42,4 +42,9 @@ public class InstitutionServiceImpl implements InstitutionService {
         return institutionRepository.findInstitutionByName(name);
     }
 
+    @Override
+    public Institution updateInstitutionInfo(Institution institution){
+        return institutionRepository.save(institution);
+    }
+
 }

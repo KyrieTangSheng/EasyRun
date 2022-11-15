@@ -103,4 +103,26 @@ public class InstructorHomeServiceImpl implements InstructorHomeService{
             throw new IllegalStateException("Json Parsing Error");
         }
     }
+
+    @Override
+    public Response reviseInstitutionInfo(Institution institution){
+        String verificationCode = institution.getVerificationCode();
+        Long institutionId = institution.getId();
+        String correctCode = institutionServiceImpl.getInstitutionInfoById(institutionId).get().getVerificationCode();
+        if(!Objects.equals(correctCode,verificationCode)){
+            Response response = new Response(0,1,"Incorrect Verification Code");
+            return response;
+        }
+        institution.setInstructors(institutionServiceImpl.getInstitutionInfoById(institutionId).get().getInstructors());
+        Institution revisedInstitution = institutionServiceImpl.updateInstitutionInfo(institution);
+        ObjectMapper mapper = new ObjectMapper();
+        try{
+            String jsonInstitution = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(revisedInstitution);
+            Response response = new Response(1,100,jsonInstitution);
+            return response;
+        }
+        catch(Exception e){
+            throw new IllegalStateException("Json Parsing Error");
+        }
+    }
 }

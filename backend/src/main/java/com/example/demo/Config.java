@@ -99,17 +99,20 @@ public class Config {
                     Institution aaa = new Institution(
                             "aaa",
                             "aaa",
-                            "aaa"
+                            "aaa",
+                            "123456"
                     );
                     Institution bbb = new Institution(
                             "bbb",
                             "bbb",
-                            "bbb"
+                            "bbb",
+                            "123456"
                     );
                     Institution ccc = new Institution(
                             "ccc",
                             "ccc",
-                            "ccc"
+                            "ccc",
+                            "123456"
                     );
                     institutionRepository.saveAll(List.of(aaa, bbb, ccc));
                 }

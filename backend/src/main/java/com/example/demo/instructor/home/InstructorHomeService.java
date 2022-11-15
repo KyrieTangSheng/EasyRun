@@ -1,5 +1,6 @@
 package com.example.demo.instructor.home;
 
+import com.example.demo.objects.entity.Institution;
 import com.example.demo.utils.Response;
 
 public interface InstructorHomeService {
@@ -8,4 +9,5 @@ public interface InstructorHomeService {
                               String content, Long instructorId);
     Response getInstitutionInfoById(Long institutionId);
 
+    Response reviseInstitutionInfo(Institution institution);
 }

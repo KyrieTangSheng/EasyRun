@@ -1,12 +1,10 @@
 package com.example.demo.objects.entity;
 
 import com.example.demo.instructor.Instructor;
-import org.hibernate.annotations.Cascade;
 
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 @Entity
 @Table
@@ -25,21 +23,32 @@ public class Institution {
     private String name;
     private String description;
     private String url;
+    private String verificationCode;
     @OneToMany(mappedBy = "institution")
     private List<Instructor> instructors;
     public Institution(){
 
     }
-    public Institution(String name, String description, String url) {
+    public Institution(String name, String description, String url,String verificationCode) {
         this.name = name;
         this.description = description;
         this.url = url;
+        this.verificationCode = verificationCode;
     }
-    public Institution(Long id, String name, String description, String url) {
+    public Institution(Long id, String name, String description, String url,String verificationCode) {
         this.id = id;
         this.name = name;
         this.description = description;
         this.url = url;
+        this.verificationCode = verificationCode;
+    }
+
+    public String getVerificationCode() {
+        return verificationCode;
+    }
+
+    public void setVerificationCode(String verificationCode) {
+        this.verificationCode = verificationCode;
     }
 
     public Long getId() {
@@ -74,12 +83,8 @@ public class Institution {
         this.url = url;
     }
 
-    public List<Long> getInstructors() {
-        List<Long> instructorIds = new ArrayList<Long>();
-        for(Instructor instructor:instructors){
-            instructorIds.add(instructor.getId());
-        }
-        return instructorIds;
+    public List<Instructor> getInstructors() {
+        return instructors;
     }
 
     public void setInstructors(List<Instructor> instructors) {

@@ -40,4 +40,9 @@ public class InstructorHomeController {
     public Response viewMyInstitutionInfo(@PathVariable Long institutionId){
         return instructorHomeServiceImpl.getInstitutionInfoById(institutionId);
     }
+
+    @PostMapping(path="institutionInfo")
+    public Response reviseInstitutionInfo(@RequestBody Institution institution){
+        return instructorHomeServiceImpl.reviseInstitutionInfo(institution);
+    }
 }
