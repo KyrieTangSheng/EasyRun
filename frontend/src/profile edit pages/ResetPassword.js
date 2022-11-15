@@ -8,7 +8,7 @@ import {
   StepLabel,
   Typography,
 } from "@mui/material";
-import AccountServices from "../../services/account";
+import AccountServices from "../services/account";
 
 export default function ResetPassword(props) {
   // Reset Password Business Logic
@@ -191,6 +191,7 @@ export default function ResetPassword(props) {
                 type="password"
                 fullWidth
                 variant="standard"
+                margin="normal"
                 onChange={handleOriginalPassword}
                 value={values.originalPwd}
                 error={errors.origianlPwdError.status}
@@ -204,6 +205,7 @@ export default function ResetPassword(props) {
                 type="password"
                 fullWidth
                 variant="standard"
+                margin="normal"
                 onChange={handleNewPassword}
                 value={values.newPwd}
               />
@@ -215,6 +217,7 @@ export default function ResetPassword(props) {
                 type="password"
                 fullWidth
                 variant="standard"
+                margin="normal"
                 onChange={handleConfirmedPassword}
                 value={values.confirmedNewPwd}
                 error={errors.confirmedNewPwdError.status}
