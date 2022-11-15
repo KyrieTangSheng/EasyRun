@@ -6,8 +6,8 @@ import Table from "../../components/Table";
 // Contract Page / Institution Information Page
 export default function ContractOrInsInfoPage(props) {
   // Set Institution Data for Instructor Homepage
-  let institutionData = null
-  if (localStorage.userType === "instructor"){
+  let institutionData = null;
+  if (localStorage.userType === "instructor") {
     institutionData = JSON.parse(localStorage.institutionData);
   }
 
@@ -17,8 +17,14 @@ export default function ContractOrInsInfoPage(props) {
   const contractColumns = [
     { field: "status", headerName: "Status", width: 100 },
     { field: "institutionName", headerName: "Institution Name", width: 140 },
-    { field: "instructorName", headerName: "Instructor Name", width: 140 },
     { field: "content", headerName: "Content", width: 100 },
+    { field: "instructorName", headerName: "Instructor Name", width: 140 },
+    { field: "instructorEmail", headerName: "Instructor Email", width: 240 },
+    {
+      field: "instructorPhoneNumber",
+      headerName: "Instructor Phone",
+      width: 130,
+    },
     { field: "updateDateTime", headerName: "Update Time", width: 155 },
   ];
 
@@ -29,12 +35,13 @@ export default function ContractOrInsInfoPage(props) {
       StudentHomepageServices.GetContract(studentId)
         .then((response) => response.json())
         .then((result) => {
-          console.log(result.data)
+          console.log(result.data);
           setContractData(JSON.parse(result.data));
         });
     }
   }, [setContractData]);
 
+  // student need to render a table for the contract
   if (props.userType === "student") {
     return (
       <Table
@@ -45,7 +52,9 @@ export default function ContractOrInsInfoPage(props) {
         tableType="contract"
       />
     );
-  } else {
+  }
+  // Instructor directly get institution information
+  else {
     return (
       <React.Fragment>
         <Stack direction="row" sx={{ position: "flex-start", padding: "5px" }}>

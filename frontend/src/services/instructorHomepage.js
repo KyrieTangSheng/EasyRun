@@ -22,9 +22,35 @@ const ViewInstitutionInfo= (instructorId) => {
   });
 }
 
+const UpdateInstitutionInfo= (institutionInfo) => {
+  return fetch(rootURL + "institutionInfo", {
+    method: "POST",
+    mode: "cors",
+    headers: {
+      Accept: "application/json,text/plain,*/*",
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(institutionInfo)
+  });
+}
+
+const SendContract = (contractInfo) => {
+  return fetch(rootURL + "contract", {
+    method: "POST",
+    mode: "cors",
+    headers: {
+      Accept: "application/json,text/plain,*/*",
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(contractInfo)
+  });
+}
+
 const InstructorHomepageServices = {
   GetEnrolledStudents,
   ViewInstitutionInfo,
+  UpdateInstitutionInfo,
+  SendContract
 };
 
 export default InstructorHomepageServices;
