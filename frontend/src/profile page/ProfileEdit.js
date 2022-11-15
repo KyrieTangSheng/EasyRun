@@ -12,6 +12,7 @@ import ResetPassword from "../profile edit pages/ResetPassword";
 import ProfileApplication from "../profile edit pages/Profile&Application";
 import EditInsInfo from "../profile edit pages/EditInsInfo";
 import UploadApplication from "../profile edit pages/UploadApplication";
+import SendNewContract from "../profile edit pages/SendNewContract"
 
 export default function ProfileEdit(props) {
   const dialogContent = {
@@ -23,6 +24,8 @@ export default function ProfileEdit(props) {
       "You can edit your institution information by filling out this form.",
     "Upload Application":
       "You can upload your application result by filling out this form. We appreciate your information provide and it would certainly help other students who intent to apply for master studies",
+    "Send a Contract":
+      "You can send a contract to a student.",
   };
   const [showAlert, setShowAlert] = React.useState(false);
   const [severity, setSeverity] = React.useState("success");
@@ -63,6 +66,13 @@ export default function ProfileEdit(props) {
           />
         ) : props.dialogType === "Upload Application" ? (
           <UploadApplication
+            handleClose={props.handleClose}
+            setShowAlert={setShowAlert}
+            setSeverity={setSeverity}
+            setAlertMsg={setAlertMsg}
+          />
+        ) : props.dialogType === "Send a Contract" ? (
+          <SendNewContract
             handleClose={props.handleClose}
             setShowAlert={setShowAlert}
             setSeverity={setSeverity}

@@ -16,8 +16,8 @@ export default function ContractOrInsInfoPage(props) {
   const [contractData, setContractData] = React.useState([]);
   const contractColumns = [
     { field: "status", headerName: "Status", width: 100 },
-    { field: "institution", headerName: "Institution Name", width: 140 },
-    { field: "instructor", headerName: "Instructor Name", width: 140 },
+    { field: "institutionName", headerName: "Institution Name", width: 140 },
+    { field: "instructorName", headerName: "Instructor Name", width: 140 },
     { field: "content", headerName: "Content", width: 100 },
     { field: "updateDateTime", headerName: "Update Time", width: 155 },
   ];
