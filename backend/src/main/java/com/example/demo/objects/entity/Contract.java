@@ -34,6 +34,7 @@ public class Contract {
     private Instructor instructor;
 
     private Long institutionId;
+    private String institutionName;
     @ManyToOne
     @JoinColumn(name = "institution")
     private Institution institution;
@@ -70,6 +71,14 @@ public class Contract {
         this.student = student;
         this.instructor = instructor;
         this.institution = institution;
+    }
+
+    public String getInstitutionName() {
+        return institutionName;
+    }
+
+    public void setInstitutionName(String institutionName) {
+        this.institutionName = institutionName;
     }
 
     public Long getId() {
