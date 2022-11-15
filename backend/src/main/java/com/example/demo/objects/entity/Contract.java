@@ -33,6 +33,8 @@ public class Contract {
     @JoinColumn(name = "instructor")
     private Instructor instructor;
     private String instructorName;
+    private String instructorEmail;
+    private Long instructorPhoneNumber;
     private Long institutionId;
     private String institutionName;
     @ManyToOne
@@ -73,8 +75,24 @@ public class Contract {
         this.institution = institution;
     }
 
+    public String getInstructorEmail() {
+        return instructor.getEmail();
+    }
+
+    public void setInstructorEmail(String instructorEmail) {
+        this.instructorEmail = instructorEmail;
+    }
+
+    public Long getInstructorPhoneNumber() {
+        return instructor.getPhoneNumber();
+    }
+
+    public void setInstructorPhoneNumber(Long instructorPhoneNumber) {
+        this.instructorPhoneNumber = instructorPhoneNumber;
+    }
+
     public String getInstructorName() {
-        return instructorName;
+        return instructor.getFirstName()+" "+instructor.getLastName();
     }
 
     public void setInstructorName(String instructorName) {

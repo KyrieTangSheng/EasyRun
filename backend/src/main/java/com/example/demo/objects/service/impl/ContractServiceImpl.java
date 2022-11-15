@@ -57,6 +57,7 @@ public class ContractServiceImpl implements ContractService {
                 student,
                 instructor,
                 institution);
+        newContract.setInstructorName(instructor.getFirstName()+" "+instructor.getLastName());
         newContract.setInstitutionName(institution.getName());
         return contractRepository.save(newContract);
     }
