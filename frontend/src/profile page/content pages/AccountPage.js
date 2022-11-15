@@ -22,15 +22,16 @@ export default function AccountPage(props) {
   
           {/* Password Field*/}
           <TextField
-            type="password"
-            value={"abc12345678910"}
-            label="Password"
+            type="number"
+            value={"12345678910"}
+            label="Phone Number"
             margin="normal"
             variant="filled"
             InputProps={{
               readOnly: true,
             }}
           />
+
           {/* UserName Field*/}
           <TextField
             value={props.userInfo.userName || ""}
