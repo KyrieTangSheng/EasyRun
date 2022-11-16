@@ -39,17 +39,13 @@ public class UserApplicationServiceImpl implements UserApplicationService{
     }
 
     @Override
-    public Response getProgramsByKeyword(String schoolKeyword, String programKeyword) {
+    public Response getProgramsByKeyword(String schoolName, String programKeyword) {
         List<University> universities = new ArrayList<University>();
         List<Long> universityIds= new ArrayList<Long>();
         List<Program> programs = new ArrayList<Program>();
         List<Program> tempPrograms = new ArrayList<Program>();
 
-        if (Objects.equals(schoolKeyword,"all")) {
-            universities = universityServiceImpl.getAllUniversities();
-        }else {
-            universities = universityServiceImpl.getUniversitiesByKeyword(schoolKeyword);
-        }
+        universities = universityServiceImpl.getUniversitiesByName(schoolName);
         for(University university:universities){
             universityIds.add(university.getId());
         }
@@ -106,5 +102,25 @@ public class UserApplicationServiceImpl implements UserApplicationService{
         catch(Exception e){
             throw new IllegalStateException("Json Parsing Error");
         }
+    }
+
+    @Override
+    public Response getUniversitiesByKeyword(String schoolKeyword){
+        List<University> universities = new ArrayList<>();
+        if (Objects.equals("all",schoolKeyword)){
+            universities = universityServiceImpl.getAllUniversities();
+        }else{
+            universities = universityServiceImpl.getUniversitiesByKeyword(schoolKeyword);
+        }
+        ObjectMapper mapper = new ObjectMapper();
+        try{
+            String jsonUniversities= mapper.writerWithDefaultPrettyPrinter().writeValueAsString(universities);
+            Response response = new Response(1,100,jsonUniversities);
+            return response;
+        }
+        catch(Exception e){
+            throw new IllegalStateException("Json Parsing Error");
+        }
+
     }
 }

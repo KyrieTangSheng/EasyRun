@@ -11,4 +11,6 @@ import java.util.Optional;
 public interface UniversityRepository extends JpaRepository<University,Long> {
 
     List<University> findByNameContaining(String nameKeyword);
+
+    List<University> findByName(String schoolName);
 }

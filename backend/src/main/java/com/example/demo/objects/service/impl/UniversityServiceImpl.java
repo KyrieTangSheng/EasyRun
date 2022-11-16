@@ -44,4 +44,9 @@ public class UniversityServiceImpl implements UniversityService {
     public List<University> getUniversitiesByKeyword(String schoolKeyword) {
         return universityRepository.findByNameContaining(schoolKeyword);
     }
+
+    @Override
+    public List<University> getUniversitiesByName(String schoolName){
+        return universityRepository.findByName(schoolName);
+    }
 }

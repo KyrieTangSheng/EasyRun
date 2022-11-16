@@ -16,11 +16,16 @@ public class UserApplicationController {
         this.userApplicationServiceImpl = userApplicationServiceImpl;
     }
 
-    @GetMapping(path="program/{schoolKeyword}/{programKeyword}")
+    @GetMapping(path="program/{schoolKeyword}")
     @ResponseBody
-    public Response getProgramsByKeyWord(@PathVariable String schoolKeyword,
+    public Response getUniversitiesByKeyword(@PathVariable String schoolKeyword){
+        return  userApplicationServiceImpl.getUniversitiesByKeyword(schoolKeyword);
+    }
+    @GetMapping(path="program/{schoolName}/{programKeyword}")
+    @ResponseBody
+    public Response getProgramsByKeyword(@PathVariable String schoolName,
                                          @PathVariable String programKeyword){
-        return userApplicationServiceImpl.getProgramsByKeyword(schoolKeyword,programKeyword);
+        return userApplicationServiceImpl.getProgramsByKeyword(schoolName,programKeyword);
     }
 
     @PostMapping(path="program")

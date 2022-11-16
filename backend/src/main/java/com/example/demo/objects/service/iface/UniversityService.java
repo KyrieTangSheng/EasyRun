@@ -12,4 +12,6 @@ public interface UniversityService {
     List<University> getAllUniversities();
 
     List<University> getUniversitiesByKeyword(String schoolKeyword);
+
+    List<University> getUniversitiesByName(String schoolName);
 }
