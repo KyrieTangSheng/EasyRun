@@ -9,8 +9,9 @@ import {
 } from "@mui/material";
 import AccountServices from "../services/account";
 import editProfileForm from "../forms/editProfileForm";
+import uploadApplicationForm from "../forms/uploadApplicationForm";
 
-export default function ProfileApplication(props) {
+export default function EditProfile(props) {
   // Stepper Functions
   const steps = {
     edit: ["Common Information", "Education Experience"],
@@ -20,11 +21,11 @@ export default function ProfileApplication(props) {
       "Institution Information",
     ],
   };
- 
+
   const [activeStep, setActiveStep] = React.useState(0);
 
-  const setShowAlert = props.setShowAlert
-  
+  const setShowAlert = props.setShowAlert;
+
   const handleNext = () => {
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
   };
@@ -40,7 +41,7 @@ export default function ProfileApplication(props) {
 
   // Form information
   const userInfo = JSON.parse(localStorage.userInfo);
-  const [PAvalues, setPAvalues] = React.useState(userInfo);
+  const [PAvalues, setPAvalues] = React.useState(userInfo); //ProfileApplication values
 
   let formErrors = {
     editError: { status: false, msg: "" },
@@ -144,6 +145,7 @@ export default function ProfileApplication(props) {
       setPAvalues({ ...PAvalues, internshipExperience: internshipExperience });
   };
 
+  // Edit Profile form submit
   const handleEditSubmit = (e) => {
     e.preventDefault();
     setShowAlert(true);
@@ -191,6 +193,9 @@ export default function ProfileApplication(props) {
         return err;
       });
   };
+
+  // // Upload Application form submit
+  // const handleUploadApplicationSubmit = (e) => {};
 
   const forms = {
     PAvalues,
@@ -250,13 +255,29 @@ export default function ProfileApplication(props) {
         </React.Fragment>
       ) : (
         <React.Fragment>
-          {activeStep === 0 && props.formType === "edit" ? ( // Edit Profile Page 1
+          {          
+          // Edit Profile Page
+          activeStep === 0 && props.formType === "edit" ? ( // Edit Profile Page 1
             <editProfileForm.CommonForm forms={forms} />
-          ) : activeStep === 1 && localStorage.userType === "student" ? ( // Edit Profile Page for Student
+          ) : activeStep === 1 &&
+            localStorage.userType === "student" &&
+            props.formType === "edit" ? ( // Edit Profile Page for Student Page 2
             <editProfileForm.StudentEducationForm forms={forms} />
-          ) : activeStep === 1 && localStorage.userType === "instructor" ? ( // Edit Profile Page for Instructor
+          ) : activeStep === 1 &&
+            localStorage.userType === "instructor" &&
+            props.formType === "edit" ? ( // Edit Profile Page for Instructor Page 2
             <editProfileForm.InstructorEducationForm forms={forms} />
+          ) 
+          
+          // Upload Application Page
+          : activeStep === 0 && props.formType === "upload" ? ( // Upload Application Page 1
+            <uploadApplicationForm.SelectPrograms forms={forms} />
+          ) : activeStep === 1 && props.formType === "upload" ? ( // Upload Application Page 2, use the student education form
+            <editProfileForm.StudentEducationForm forms={forms} />
+          ) : activeStep === 2 && props.formType === "upload" ? ( // Upload Application Page 3
+            <uploadApplicationForm.InstitutionInfoForm forms={forms} />
           ) : null}
+
           <Box sx={{ display: "flex", flexDirection: "row", pt: 2 }}>
             {/* Step Back Button */}
             <Button
