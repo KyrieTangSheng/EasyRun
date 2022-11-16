@@ -9,7 +9,7 @@ import {
 } from "@mui/material";
 import Alerting from "../components/Alerting";
 import ResetPassword from "../user action pages/ResetPassword";
-import ProfileApplication from "../user action pages/Profile&Application";
+import ProfileApplication from "../user action pages/EditProfile";
 import EditInsInfo from "../user action pages/EditInsInfo";
 import UploadApplication from "../user action pages/UploadApplication";
 import SendNewContract from "../user action pages/SendNewContract";
