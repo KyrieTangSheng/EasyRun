@@ -10,6 +10,8 @@ import LoyaltyIcon from "@mui/icons-material/Loyalty";
 export default function Program(props) {
   const universityName = "all";
   const programName = "all";
+
+  // Check if it is for student star page
   const checkStar = props.checkStar || false;
 
   // for table init

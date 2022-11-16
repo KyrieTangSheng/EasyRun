@@ -22,9 +22,22 @@ const GetContract = (studentId) => {
   });
 }
 
+const ChangeContractStatus = (contractInfo) => {
+  return fetch(rootURL + "viewContract/", {
+    method: "POST",
+    mode: "cors",
+    headers: {
+      Accept: "application/json,text/plain,*/*",
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(contractInfo)
+  });
+}
+
 const StudentHomepageServices = {
   ViewStarredPrograms,
   GetContract,
+  ChangeContractStatus
 };
 
 export default StudentHomepageServices;
