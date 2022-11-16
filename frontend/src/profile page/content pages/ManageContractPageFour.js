@@ -2,7 +2,7 @@ import React from "react";
 import { Button } from "@mui/material";
 import StudentHomepageServices from "../../services/studentHomepage";
 import Table from "../../components/Table";
-import InsInfoPage from "./InsInfoPage";
+import InsInfoPage from "./InsInfoPageFour";
 
 // Contract Page / Institution Information Page
 export default function PageFour(props) {
