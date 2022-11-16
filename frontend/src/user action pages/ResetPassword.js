@@ -27,7 +27,7 @@ export default function ResetPassword(props) {
 
   const [errors, setErrors] = React.useState(formErrors);
 
-  const setShowAlert = props.setShowAlert
+  const setShowAlert = props.setShowAlert;
 
   const handleOriginalPassword = (e) => {
     e.preventDefault();
@@ -106,9 +106,9 @@ export default function ResetPassword(props) {
     setActiveStep(0);
   };
 
-
   // Submit Function
-  const handleSubmit = () => {
+  const handleSubmit = (e) => {
+    e.preventDefault();
     let userInfo = JSON.parse(localStorage.userInfo);
     userInfo.pwd = values.newPwd;
     if (localStorage.userType === "instructor") {
@@ -116,12 +116,11 @@ export default function ResetPassword(props) {
       userInfo.institution = undefined;
       delete userInfo["institution"];
     }
-    console.log(userInfo);
     AccountServices.updateProfile(userInfo, localStorage.userType)
       .then((response) => response.json())
       .then((result) => {
         if (result.status === 1) {
-          props.setShowAlert(true);
+          setShowAlert(true);
           props.setSeverity("success");
           props.setAlertMsg(
             "Password reset success. To verify, you need to sign in again."
@@ -140,7 +139,7 @@ export default function ResetPassword(props) {
   React.useEffect(() => {
     setShowAlert(false);
   }, [setShowAlert]);
-  
+
   return (
     <Box sx={{ width: "100%" }}>
       {/* stepper properties */}
@@ -171,13 +170,7 @@ export default function ResetPassword(props) {
           <Box sx={{ display: "flex", flexDirection: "row", pt: 2 }}>
             <Box sx={{ flex: "1 1 auto" }} />
             <Button onClick={handleReset}>Reset</Button>
-            <Button
-              onClick={() => {
-                handleSubmit();
-              }}
-            >
-              Submit
-            </Button>
+            <Button onClick={handleSubmit}>Submit</Button>
           </Box>
         </React.Fragment>
       ) : (

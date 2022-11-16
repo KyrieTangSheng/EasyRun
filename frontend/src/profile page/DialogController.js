@@ -8,21 +8,26 @@ import {
   Button,
 } from "@mui/material";
 import Alerting from "../components/Alerting";
-import ResetPassword from "../profile edit pages/ResetPassword";
-import ProfileApplication from "../profile edit pages/Profile&Application";
-import EditInsInfo from "../profile edit pages/EditInsInfo";
-import UploadApplication from "../profile edit pages/UploadApplication";
+import ResetPassword from "../user action pages/ResetPassword";
+import ProfileApplication from "../user action pages/Profile&Application";
+import EditInsInfo from "../user action pages/EditInsInfo";
+import UploadApplication from "../user action pages/UploadApplication";
+import SendNewContract from "../user action pages/SendNewContract";
+import SignContract from "../user action pages/SignContract";
 
-export default function ProfileEdit(props) {
+export default function DialogController(props) {
   const dialogContent = {
     "Reset Password":
       "If you want to reset your password, you need to enter your orginal password, then set your new password. You need to login again to varify your account.",
     "Edit Profile":
       "You can edit your personal profile information by filling out this form.",
     "Edit Institution Information":
-      "You can edit your institution information by filling out this form.",
+      "You need to provide your institution verification code, then you can edit your institution information by filling out this form.",
     "Upload Application":
       "You can upload your application result by filling out this form. We appreciate your information provide and it would certainly help other students who intent to apply for master studies",
+    "Send a Contract": "You can send a contract to a student.",
+    "Sign Contract":
+      "Make sure if you are going to sign this contract. You can either choose Accept or Reject, or you can close the window to make a second thought.",
   };
   const [showAlert, setShowAlert] = React.useState(false);
   const [severity, setSeverity] = React.useState("success");
@@ -38,7 +43,16 @@ export default function ProfileEdit(props) {
       />
       <DialogTitle>{props.dialogType}</DialogTitle>
       <DialogContent>
-        <DialogContentText>{dialogContent[props.dialogType]}</DialogContentText>
+        {props.dialogType === ("Sign Contract" || "Send a Contract") ? (
+          <DialogContentText style={{ fontSize: 24, color: "red" }}>
+            WARNING: THIS ACTION CANNOT BE UNDONE!
+          </DialogContentText>
+        ) : (
+          <React.Fragment></React.Fragment>
+        )}
+        <DialogContentText sx={{ pt: 2 }}>
+          {dialogContent[props.dialogType]}
+        </DialogContentText>
         {props.dialogType === "Reset Password" ? (
           <ResetPassword
             handleClose={props.handleClose}
@@ -63,6 +77,20 @@ export default function ProfileEdit(props) {
           />
         ) : props.dialogType === "Upload Application" ? (
           <UploadApplication
+            handleClose={props.handleClose}
+            setShowAlert={setShowAlert}
+            setSeverity={setSeverity}
+            setAlertMsg={setAlertMsg}
+          />
+        ) : props.dialogType === "Send a Contract" ? (
+          <SendNewContract
+            handleClose={props.handleClose}
+            setShowAlert={setShowAlert}
+            setSeverity={setSeverity}
+            setAlertMsg={setAlertMsg}
+          />
+        ) : props.dialogType === "Sign Contract" ? (
+          <SignContract
             handleClose={props.handleClose}
             setShowAlert={setShowAlert}
             setSeverity={setSeverity}

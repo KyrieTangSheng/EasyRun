@@ -5,11 +5,12 @@ import BadgeSharpIcon from "@mui/icons-material/BadgeSharp";
 import BorderColorRoundedIcon from "@mui/icons-material/BorderColorRounded";
 import UploadFileRoundedIcon from "@mui/icons-material/UploadFileRounded";
 import RoomPreferencesRoundedIcon from "@mui/icons-material/RoomPreferencesRounded";
-import ProfileEdit from "./ProfileEdit";
+import GavelRoundedIcon from '@mui/icons-material/GavelRounded';
+import DialogController from "./DialogController";
 import AccountPage from "./content pages/AccountPage";
 import EducationPage from "./content pages/EducationPage";
 import StarOrEnrollStudentPage from "./content pages/StarOrEnrollStudentPage";
-import ContractOrInsInfoPage from "./content pages/ContractOrInsInfoPage";
+import ContractOrInsInfoPage from "./content pages/ManageContractPageFour";
 
 export default function ProfileStudent(props) {
   let userInfo = JSON.parse(localStorage.userInfo);
@@ -101,9 +102,12 @@ export default function ProfileStudent(props) {
           <ContractOrInsInfoPage
             userInfo={userInfo}
             userType={props.userType}
+            handleClickOpenDialog = {handleClickOpenDialog}
+            handleSetDialogType = {handleSetDialogType}
           />
         )}
       </Paper>
+
       {/* Edit Speed Dial For Edit Pages*/}
       <SpeedDial
         ariaLabel="SpeedDial basic example"
@@ -141,7 +145,7 @@ export default function ProfileStudent(props) {
           }}
         />
 
-        {/* When instructor logged in, the user can modify institution information. */}
+        {/* When instructor logged in, the user can modify institution information and send a new contract */}
         {localStorage.userType === "instructor" ? (
           <SpeedDialAction
             key="Edit Institution Information"
@@ -153,6 +157,18 @@ export default function ProfileStudent(props) {
             }}
           />
         ) : null}
+        {localStorage.userType === "instructor" ? (
+          <SpeedDialAction
+            key="Send a Contract"
+            icon={<GavelRoundedIcon />}
+            tooltipTitle="Send a Contract"
+            onClick={() => {
+              handleClickOpenDialog();
+              handleSetDialogType("Send a Contract");
+            }}
+          />
+        ) : null}
+
         {/* When student logged in, the user can upload application result. */}
         {localStorage.userType === "student" ? (
           <SpeedDialAction
@@ -167,7 +183,7 @@ export default function ProfileStudent(props) {
         ) : null}
       </SpeedDial>
       {/* Edit Page */}
-      <ProfileEdit
+      <DialogController
         open={dialogOpen}
         setOpen={setDialogOpen}
         handleClose={handleCloseDialog}

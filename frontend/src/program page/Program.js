@@ -10,6 +10,8 @@ import LoyaltyIcon from "@mui/icons-material/Loyalty";
 export default function Program(props) {
   const universityName = "all";
   const programName = "all";
+
+  // Check if it is for student star page
   const checkStar = props.checkStar || false;
 
   // for table init
@@ -21,7 +23,7 @@ export default function Program(props) {
       width: 100,
       hide: !(localStorage.isLoggedIn && localStorage.userType === "student"),
       // render a Star Icon to star the program
-      renderCell: (params) => (
+      renderCell: (params) => ( 
         <Checkbox
           icon={<FavoriteBorderIcon />}
           indeterminateIcon={<LoyaltyIcon />}

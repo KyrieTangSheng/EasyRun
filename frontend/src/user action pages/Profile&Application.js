@@ -20,9 +20,11 @@ export default function ProfileApplication(props) {
       "Institution Information",
     ],
   };
-
+ 
   const [activeStep, setActiveStep] = React.useState(0);
 
+  const setShowAlert = props.setShowAlert
+  
   const handleNext = () => {
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
   };
@@ -32,7 +34,7 @@ export default function ProfileApplication(props) {
   };
 
   const handleReset = () => {
-    props.setShowAlert(false);
+    setShowAlert(false);
     setActiveStep(0);
   };
 
@@ -45,8 +47,6 @@ export default function ProfileApplication(props) {
   };
 
   const [errors, setErrors] = React.useState(formErrors);
-
-  const setShowAlert = props.setShowAlert;
 
   // common info handles
   const handleEmail = (e) => {
@@ -144,7 +144,9 @@ export default function ProfileApplication(props) {
       setPAvalues({ ...PAvalues, internshipExperience: internshipExperience });
   };
 
-  const handleEditSubmit = () => {
+  const handleEditSubmit = (e) => {
+    e.preventDefault();
+    setShowAlert(true);
     if (localStorage.userType === "instructor") {
       PAvalues["institutionId"] = PAvalues.institution;
       PAvalues.institution = undefined;
@@ -156,7 +158,6 @@ export default function ProfileApplication(props) {
       .then((result) => {
         console.log(result);
         if (result.status === 1) {
-          props.setShowAlert(true);
           props.setSeverity("success");
           props.setAlertMsg(
             "Profile update succeeded. Close the window to see the updates."
@@ -166,7 +167,6 @@ export default function ProfileApplication(props) {
           }, 500);
         } else {
           if (result.code === 1) {
-            props.setShowAlert(true);
             props.setSeverity("error");
             props.setAlertMsg(
               "Profile update failed. The email has been taken."
@@ -175,9 +175,7 @@ export default function ProfileApplication(props) {
               ...errors,
               editError: { status: "error", msg: "Email Already Exist." },
             });
-            props.setShowAlert(true);
           } else if (result.code === 2) {
-            props.setShowAlert(true);
             props.setSeverity("error");
             props.setAlertMsg(
               "Profile update failed. The user name has been taken."
@@ -186,7 +184,6 @@ export default function ProfileApplication(props) {
               ...errors,
               editError: { status: "error", msg: "User Name Already Taken." },
             });
-            props.setShowAlert(true);
           }
         }
       })
@@ -211,77 +208,75 @@ export default function ProfileApplication(props) {
     handleTOEFLScore,
     handleResearchExperience,
     handleInternshipExperience,
-  }
-
+  };
 
   React.useEffect(() => {
     setShowAlert(false);
   }, [setShowAlert]);
 
   return (
-
-      <Box sx={{ width: "100%" }}>
-        {/* stepper properties */}
-        <Stepper activeStep={activeStep}>
-          {steps[props.formType].map((label, index) => {
-            const stepProps = {};
-            const labelProps = {};
-            return (
-              <Step key={label} {...stepProps}>
-                <StepLabel {...labelProps}>{label}</StepLabel>
-              </Step>
-            );
-          })}
-        </Stepper>
-        {/* form properties */}
-        {activeStep === steps[props.formType].length ? (
-          <React.Fragment>
-            <Typography sx={{ mt: 2, mb: 1 }}>
-              {props.formType === "edit"
-                ? "All steps completed - you can click on Submit button to change your account information, or click Reset Button to refill the form."
-                : "All steps completed - you can click on Submit button to upload your application result, or click Reset Button to refill the form. We appreciate your information provide and it would certainly help other students who intent to apply for master studies"}
-            </Typography>
-            <Box sx={{ display: "flex", flexDirection: "row", pt: 2 }}>
-              <Box sx={{ flex: "1 1 auto" }} />
-              <Button onClick={handleReset}>Reset</Button>
-              <Button
-                onClick={
-                  props.formType === "edit" ? handleEditSubmit : console.log("hi")
-                }
-              >
-                Submit
-              </Button>
-            </Box>
-          </React.Fragment>
-        ) : (
-          <React.Fragment>
-            {activeStep === 0 && props.formType === "edit" ? (  // Edit Profile Page 1
-              <editProfileForm.CommonForm forms={forms}/>
-            ) : activeStep === 1 && localStorage.userType === "student" ? ( // Edit Profile Page for Student
-              <editProfileForm.StudentEducationForm forms={forms}/> 
-            ) : activeStep === 1 && localStorage.userType === "instructor" ? ( // Edit Profile Page for Instructor
-              <editProfileForm.InstructorEducationForm forms={forms}/>
-            ) : null}
-            <Box sx={{ display: "flex", flexDirection: "row", pt: 2 }}>
-              {/* Step Back Button */}
-              <Button
-                color="inherit"
-                disabled={activeStep === 0}
-                onClick={handleBack}
-                sx={{ mr: 1 }}
-              >
-                Back
-              </Button>
-              <Box sx={{ flex: "1 1 auto" }} />
-              {/* Step Next Button */}
-              <Button onClick={handleNext}>
-                {activeStep === steps[props.formType].length - 1
-                  ? "Finish"
-                  : "Next"}
-              </Button>
-            </Box>
-          </React.Fragment>
-        )}
-      </Box>
+    <Box sx={{ width: "100%" }}>
+      {/* stepper properties */}
+      <Stepper activeStep={activeStep}>
+        {steps[props.formType].map((label, index) => {
+          const stepProps = {};
+          const labelProps = {};
+          return (
+            <Step key={label} {...stepProps}>
+              <StepLabel {...labelProps}>{label}</StepLabel>
+            </Step>
+          );
+        })}
+      </Stepper>
+      {/* form properties */}
+      {activeStep === steps[props.formType].length ? (
+        <React.Fragment>
+          <Typography sx={{ mt: 2, mb: 1 }}>
+            {props.formType === "edit"
+              ? "All steps completed - you can click on Submit button to change your account information, or click Reset Button to refill the form."
+              : "All steps completed - you can click on Submit button to upload your application result, or click Reset Button to refill the form. We appreciate your information provide and it would certainly help other students who intent to apply for master studies"}
+          </Typography>
+          <Box sx={{ display: "flex", flexDirection: "row", pt: 2 }}>
+            <Box sx={{ flex: "1 1 auto" }} />
+            <Button onClick={handleReset}>Reset</Button>
+            <Button
+              onClick={
+                props.formType === "edit" ? handleEditSubmit : console.log("hi")
+              }
+            >
+              Submit
+            </Button>
+          </Box>
+        </React.Fragment>
+      ) : (
+        <React.Fragment>
+          {activeStep === 0 && props.formType === "edit" ? ( // Edit Profile Page 1
+            <editProfileForm.CommonForm forms={forms} />
+          ) : activeStep === 1 && localStorage.userType === "student" ? ( // Edit Profile Page for Student
+            <editProfileForm.StudentEducationForm forms={forms} />
+          ) : activeStep === 1 && localStorage.userType === "instructor" ? ( // Edit Profile Page for Instructor
+            <editProfileForm.InstructorEducationForm forms={forms} />
+          ) : null}
+          <Box sx={{ display: "flex", flexDirection: "row", pt: 2 }}>
+            {/* Step Back Button */}
+            <Button
+              color="inherit"
+              disabled={activeStep === 0}
+              onClick={handleBack}
+              sx={{ mr: 1 }}
+            >
+              Back
+            </Button>
+            <Box sx={{ flex: "1 1 auto" }} />
+            {/* Step Next Button */}
+            <Button onClick={handleNext}>
+              {activeStep === steps[props.formType].length - 1
+                ? "Finish"
+                : "Next"}
+            </Button>
+          </Box>
+        </React.Fragment>
+      )}
+    </Box>
   );
 }
