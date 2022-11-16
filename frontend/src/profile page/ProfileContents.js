@@ -6,11 +6,11 @@ import BorderColorRoundedIcon from "@mui/icons-material/BorderColorRounded";
 import UploadFileRoundedIcon from "@mui/icons-material/UploadFileRounded";
 import RoomPreferencesRoundedIcon from "@mui/icons-material/RoomPreferencesRounded";
 import GavelRoundedIcon from '@mui/icons-material/GavelRounded';
-import ProfileEdit from "./ProfileEdit";
+import DialogController from "./DialogController";
 import AccountPage from "./content pages/AccountPage";
 import EducationPage from "./content pages/EducationPage";
 import StarOrEnrollStudentPage from "./content pages/StarOrEnrollStudentPage";
-import ContractOrInsInfoPage from "./content pages/ContractOrInsInfoPage";
+import ContractOrInsInfoPage from "./content pages/PageFour";
 
 export default function ProfileStudent(props) {
   let userInfo = JSON.parse(localStorage.userInfo);
@@ -102,6 +102,8 @@ export default function ProfileStudent(props) {
           <ContractOrInsInfoPage
             userInfo={userInfo}
             userType={props.userType}
+            handleClickOpenDialog = {handleClickOpenDialog}
+            handleSetDialogType = {handleSetDialogType}
           />
         )}
       </Paper>
@@ -181,7 +183,7 @@ export default function ProfileStudent(props) {
         ) : null}
       </SpeedDial>
       {/* Edit Page */}
-      <ProfileEdit
+      <DialogController
         open={dialogOpen}
         setOpen={setDialogOpen}
         handleClose={handleCloseDialog}
