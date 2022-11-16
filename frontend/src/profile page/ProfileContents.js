@@ -10,7 +10,7 @@ import DialogController from "./DialogController";
 import AccountPage from "./content pages/AccountPage";
 import EducationPage from "./content pages/EducationPage";
 import StarOrEnrollStudentPage from "./content pages/StarOrEnrollStudentPage";
-import ContractOrInsInfoPage from "./content pages/PageFour";
+import ContractOrInsInfoPage from "./content pages/ManageContractPageFour";
 
 export default function ProfileStudent(props) {
   let userInfo = JSON.parse(localStorage.userInfo);
