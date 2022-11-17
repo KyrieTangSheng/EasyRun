@@ -19,6 +19,7 @@ export default function PageFour(props) {
       width: 100,
       renderCell: (params) => {
         if (params.row?.status === "inProcess") {
+          // choose accept or reject the contract
           return (
             <Button
               onClick={() => {
@@ -39,6 +40,37 @@ export default function PageFour(props) {
         }
       },
     },
+    {
+      field: "rate",
+      headerName: "Your Rate",
+      width: 140,
+      renderCell: (params) => {
+        if (params.row?.rate === "rate") {
+          // rate on the institution
+          return (
+            <Button
+              onClick={(e) => {
+                e.preventDefault();
+                let userName = JSON.parse(localStorage.userInfo).userName;
+                localStorage.setItem(
+                  "contractInfo",
+                  JSON.stringify({
+                    institutionId: params.row.institutionId,
+                    institutionName: params.row.institutionName,
+                    studentId: params.row.studentId,
+                    studentUserName: userName,
+                  })
+                );
+                props.handleClickOpenDialog();
+                props.handleSetDialogType("Rate Institution");
+              }}
+            >
+              Rate
+            </Button>
+          );
+        }
+      },
+    },
     { field: "institutionName", headerName: "Institution Name", width: 140 },
     { field: "content", headerName: "Content", width: 100 },
     { field: "instructorName", headerName: "Instructor Name", width: 140 },
@@ -51,7 +83,8 @@ export default function PageFour(props) {
     { field: "updateDateTime", headerName: "Update Time", width: 155 },
   ];
 
-  React.useEffect(() => { // Should keep updating in case of new contract 
+  React.useEffect(() => {
+    // Should keep updating in case of new contract
     // get contract info
     if (localStorage.userType === "student") {
       const studentId = JSON.parse(localStorage.userInfo).id;
@@ -59,10 +92,15 @@ export default function PageFour(props) {
         .then((response) => response.json())
         .then((result) => {
           localStorage.setItem("contractData", result.data);
-          setContractData(JSON.parse(result.data));
+          setContractData(
+            JSON.parse(result.data).map((x) => ({
+              ...x,
+              rate: x.status === "accepted" ? "rate" : "invalid", // check if the institution could be rated
+            }))
+          );
         });
     }
-  }, [setContractData]); 
+  }, [setContractData]);
 
   // student need to render a table for the contract
   if (props.userType === "student") {
