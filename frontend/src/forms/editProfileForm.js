@@ -15,6 +15,14 @@ const CommonForm = (props) => {
         onChange={props.forms.handleEmail}
       />
       <TextField
+        type="number"
+        label="Phone Number"
+        variant="standard"
+        fullWidth
+        margin="normal"
+        value={"12345678910"}
+      />
+      <TextField
         label="User Name"
         fullWidth
         variant="standard"
@@ -96,6 +104,7 @@ const StudentEducationForm = (props) => {
         margin="normal"
         value={props.forms.PAvalues.greScore || ""}
         onChange={props.forms.handleGREScore}
+        InputProps={{ inputProps: { min: 260, max: 340 } }}
       />
       <TextField
         label="TOEFL / IELTS Score"
@@ -105,6 +114,7 @@ const StudentEducationForm = (props) => {
         margin="normal"
         value={props.forms.PAvalues.toeflScore || ""}
         onChange={props.forms.handleTOEFLScore}
+        InputProps={{ inputProps: { min: 0, max: 120 } }}
       />
       <TextField
         label="Research Experience"

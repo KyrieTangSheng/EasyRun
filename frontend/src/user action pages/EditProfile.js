@@ -85,64 +85,55 @@ export default function EditProfile(props) {
   const handleEducationExperience = (e) => {
     e.preventDefault();
     let educationExperience = e.target.value;
-    localStorage.userType === "instructor" &&
-      setPAvalues({ ...PAvalues, educationExperience: educationExperience });
+    setPAvalues({ ...PAvalues, educationExperience: educationExperience });
   };
   //-- student type --
   const handleUndergradSchool = (e) => {
     e.preventDefault();
     let underGradSchool = e.target.value;
-    localStorage.userType === "student" &&
-      setPAvalues({ ...PAvalues, underGradSchool: underGradSchool });
+    setPAvalues({ ...PAvalues, underGradSchool: underGradSchool });
   };
 
   const handleMajor = (e) => {
     e.preventDefault();
     let major = e.target.value;
-    localStorage.userType === "student" &&
-      setPAvalues({ ...PAvalues, major: major });
+    setPAvalues({ ...PAvalues, major: major });
   };
 
   const handleOverallGPA = (e) => {
     e.preventDefault();
     let overallGPA = e.target.value;
-    localStorage.userType === "student" &&
-      setPAvalues({ ...PAvalues, overallGPA: overallGPA });
+    setPAvalues({ ...PAvalues, overallGPA: overallGPA });
   };
 
   const handleMajorGPA = (e) => {
     e.preventDefault();
     let majorGPA = e.target.value;
-    localStorage.userType === "student" &&
-      setPAvalues({ ...PAvalues, majorGPA: majorGPA });
+    setPAvalues({ ...PAvalues, majorGPA: majorGPA });
   };
 
   const handleGREScore = (e) => {
     e.preventDefault();
     let greScore = e.target.value;
-    localStorage.userType === "student" &&
-      setPAvalues({ ...PAvalues, greScore: greScore });
+    setPAvalues({ ...PAvalues, greScore: greScore });
   };
 
   const handleTOEFLScore = (e) => {
     e.preventDefault();
     let toeflScore = e.target.value;
-    localStorage.userType === "student" &&
-      setPAvalues({ ...PAvalues, toeflScore: toeflScore });
+    setPAvalues({ ...PAvalues, toeflScore: toeflScore });
   };
 
   const handleResearchExperience = (e) => {
     e.preventDefault();
     let researchExperience = e.target.value;
-    localStorage.userType === "student" &&
-      setPAvalues({ ...PAvalues, researchExperience: researchExperience });
+    setPAvalues({ ...PAvalues, researchExperience: researchExperience });
   };
 
   const handleInternshipExperience = (e) => {
     e.preventDefault();
     let internshipExperience = e.target.value;
-    localStorage.userType === "student" &&
-      setPAvalues({ ...PAvalues, internshipExperience: internshipExperience });
+    setPAvalues({ ...PAvalues, internshipExperience: internshipExperience });
   };
 
   // Edit Profile form submit
@@ -255,28 +246,27 @@ export default function EditProfile(props) {
         </React.Fragment>
       ) : (
         <React.Fragment>
-          {          
-          // Edit Profile Page
-          activeStep === 0 && props.formType === "edit" ? ( // Edit Profile Page 1
-            <editProfileForm.CommonForm forms={forms} />
-          ) : activeStep === 1 &&
-            localStorage.userType === "student" &&
-            props.formType === "edit" ? ( // Edit Profile Page for Student Page 2
-            <editProfileForm.StudentEducationForm forms={forms} />
-          ) : activeStep === 1 &&
-            localStorage.userType === "instructor" &&
-            props.formType === "edit" ? ( // Edit Profile Page for Instructor Page 2
-            <editProfileForm.InstructorEducationForm forms={forms} />
-          ) 
-          
-          // Upload Application Page
-          : activeStep === 0 && props.formType === "upload" ? ( // Upload Application Page 1
-            <uploadApplicationForm.SelectPrograms forms={forms} />
-          ) : activeStep === 1 && props.formType === "upload" ? ( // Upload Application Page 2, use the student education form
-            <editProfileForm.StudentEducationForm forms={forms} />
-          ) : activeStep === 2 && props.formType === "upload" ? ( // Upload Application Page 3
-            <uploadApplicationForm.InstitutionInfoForm forms={forms} />
-          ) : null}
+          {
+            // Edit Profile Page
+            activeStep === 0 && props.formType === "edit" ? ( // Edit Profile Page 1
+              <editProfileForm.CommonForm forms={forms} />
+            ) : activeStep === 1 &&
+              localStorage.userType === "student" &&
+              props.formType === "edit" ? ( // Edit Profile Page for Student Page 2
+              <editProfileForm.StudentEducationForm forms={forms} />
+            ) : activeStep === 1 &&
+              localStorage.userType === "instructor" &&
+              props.formType === "edit" ? ( // Edit Profile Page for Instructor Page 2
+              <editProfileForm.InstructorEducationForm forms={forms} />
+            ) : // Upload Application Page
+            activeStep === 0 && props.formType === "upload" ? ( // Upload Application Page 1
+              <uploadApplicationForm.SelectPrograms forms={forms} />
+            ) : activeStep === 1 && props.formType === "upload" ? ( // Upload Application Page 2, use the student education form
+              <editProfileForm.StudentEducationForm forms={forms} />
+            ) : activeStep === 2 && props.formType === "upload" ? ( // Upload Application Page 3
+              <uploadApplicationForm.InstitutionInfoForm forms={forms} />
+            ) : null
+          }
 
           <Box sx={{ display: "flex", flexDirection: "row", pt: 2 }}>
             {/* Step Back Button */}
