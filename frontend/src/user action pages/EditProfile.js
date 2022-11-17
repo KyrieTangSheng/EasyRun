@@ -56,6 +56,12 @@ export default function EditProfile(props) {
     setPAvalues({ ...PAvalues, email: email });
   };
 
+  const handlePhoneNumber = (e) => {
+    e.preventDefault();
+    let phoneNumber = e.target.value;
+    setPAvalues({ ...PAvalues, phoneNumber: phoneNumber });
+  };
+
   const handleUserName = (e) => {
     e.preventDefault();
     let userName = e.target.value;
@@ -145,11 +151,9 @@ export default function EditProfile(props) {
       PAvalues.institution = undefined;
       delete PAvalues["institution"];
     }
-    console.log(PAvalues);
     AccountServices.updateProfile(PAvalues, localStorage.userType)
       .then((response) => response.json())
       .then((result) => {
-        console.log(result);
         if (result.status === 1) {
           props.setSeverity("success");
           props.setAlertMsg(
@@ -191,6 +195,7 @@ export default function EditProfile(props) {
   const forms = {
     PAvalues,
     handleEmail,
+    handlePhoneNumber,
     handleUserName,
     handleFirstName,
     handleLastName,
@@ -211,7 +216,7 @@ export default function EditProfile(props) {
   }, [setShowAlert]);
 
   return (
-    <Box sx={{ width: "100%" }}>
+    <Box sx={{ width: "100%" , pt: 2}}>
       {/* stepper properties */}
       <Stepper activeStep={activeStep}>
         {steps[props.formType].map((label, index) => {
