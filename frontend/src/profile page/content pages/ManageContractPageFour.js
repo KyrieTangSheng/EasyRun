@@ -37,15 +37,7 @@ export default function PageFour(props) {
               Sign
             </Button>
           );
-        }
-      },
-    },
-    {
-      field: "rate",
-      headerName: "Your Rate",
-      width: 140,
-      renderCell: (params) => {
-        if (params.row?.rate === "rate") {
+        } else if (params.row?.status === "accepted") {
           // rate on the institution
           return (
             <Button
@@ -71,6 +63,7 @@ export default function PageFour(props) {
         }
       },
     },
+    { field: "rate", headerName: "Your Rate", width: 140 },
     { field: "institutionName", headerName: "Institution Name", width: 140 },
     { field: "content", headerName: "Content", width: 100 },
     { field: "instructorName", headerName: "Instructor Name", width: 140 },
@@ -95,7 +88,7 @@ export default function PageFour(props) {
           setContractData(
             JSON.parse(result.data).map((x) => ({
               ...x,
-              rate: x.status === "accepted" ? "rate" : "invalid", // check if the institution could be rated
+              rate: x.status === "accepted" ? x.overallRate || "Not rated yet" : "Invalid", // check if the institution could be rated
             }))
           );
         });
