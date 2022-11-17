@@ -14,9 +14,11 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 
 @Service
 public class UserApplicationServiceImpl implements UserApplicationService{
@@ -88,9 +90,19 @@ public class UserApplicationServiceImpl implements UserApplicationService{
     }
 
     @Override
+//    @Transactional
     public Response uploadApplicationResult(Application application){
         Program program = programServiceImpl.getProgramById(application.getProgramId());
         application.setProgram(program);
+        Optional<Institution> optionalInstitution = institutionServiceImpl.getInstitutionByName(application.getInstitutionName());
+//        if (Objects.isNull(institution.getApplications())){
+//            institution.setApplications(new ArrayList<>());
+//        }
+//        application.setInstitution(institution);
+        if (optionalInstitution.isPresent()){
+            application.setInstitution(optionalInstitution.get());
+        }
+
         Application newApplication = applicationServiceImpl.addNewApplicationResult(application);
 
         ObjectMapper mapper = new ObjectMapper();

@@ -1,6 +1,7 @@
 package com.example.demo.objects.entity;
 
 import javax.persistence.*;
+import java.util.Objects;
 
 @Entity
 @Table
@@ -21,7 +22,9 @@ public class Application {
     @ManyToOne
     @JoinColumn(name="program",nullable=true)
     private Program program;
-
+    @ManyToOne
+    @JoinColumn(name="institution",nullable=true)
+    private Institution institution;
     private String instructorName;
     private String institutionName;
     private Boolean status;
@@ -33,7 +36,8 @@ public class Application {
     private Integer greScore;
     private String researchExp;
     private String internExp;
-
+    private String universityName;
+    private String programName;
     public Application(){
 
     }
@@ -67,13 +71,23 @@ public class Application {
         this.researchExp = researchExp;
         this.internExp = internExp;
     }
-
     public Long getId() {
         return id;
     }
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public Long getInstitution() {
+        if(Objects.isNull(institution)){
+            return -1L;
+        } else{
+            return institution.getId();
+        }
+    }
+    public void setInstitution(Institution institution) {
+        this.institution = institution;
     }
 
     public Long getProgramId() {
@@ -87,7 +101,8 @@ public class Application {
     public Long getProgram() {
         return program.getId();
     }
-
+    public String getUniversityName(){return program.getUniversityName();}
+    public String getProgramName(){return program.getName();}
     public void setProgram(Program program) {
         this.program = program;
     }

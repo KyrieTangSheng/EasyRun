@@ -55,7 +55,7 @@ public class Program{
     }
 
     public String getUniversityName() {
-        return universityName;
+        return university.getName();
     }
 
     public void setUniversityName(String universityName) {
@@ -114,18 +114,16 @@ public class Program{
         this.stars = stars;
     }
 
+    public List<Application> getApplications(){
+        return applications;
+    }
 //    public List<Long> getApplications() {
-//        List<Long> applicationIds = new ArrayList<Long>();
+//        List<Long> applicationIds = new ArrayList<>();
 //        for(Application application:applications){
 //            applicationIds.add(application.getId());
 //        }
 //        return applicationIds;
 //    }
-
-
-    public List<Application> getApplications() {
-        return applications;
-    }
 
     public void setApplications(List<Application> applications) {
         this.applications = applications;

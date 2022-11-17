@@ -5,6 +5,7 @@ import com.example.demo.instructor.Instructor;
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @Entity
 @Table
@@ -24,6 +25,8 @@ public class Institution {
     private String description;
     private String url;
     private String verificationCode;
+    @OneToMany(mappedBy = "institution")
+    private List<Application> applications;
     @OneToMany(mappedBy = "institution")
     private List<Instructor> instructors;
     public Institution(){
@@ -71,8 +74,22 @@ public class Institution {
         return description;
     }
 
+    public List<Application> getApplications(){
+        return applications;
+    }
+//    public List<Long> getApplications() {
+//        List<Long> applicationIds = new ArrayList<>();
+//        for(Application application:applications){
+//            applicationIds.add(application.getId());
+//        }
+//        return applicationIds;
+//    }
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public void setApplications(List<Application> applications) {
+        this.applications = applications;
     }
 
     public String getUrl() {
