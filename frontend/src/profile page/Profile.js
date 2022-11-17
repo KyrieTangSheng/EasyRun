@@ -3,6 +3,7 @@ import ProfileImage from "./ProfileImage";
 import ProfileNavigator from "./ProfileNavigator";
 import ProfileContents from "./ProfileContents";
 import InstructorHomepageServices from "../services/instructorHomepage";
+import StudentHomepageServices from "../services/studentHomepage";
 
 export default function Profile() {
   const [navigatorValue, setNavigatorValue] = React.useState(0);
@@ -14,6 +15,14 @@ export default function Profile() {
         .then((response) => response.json())
         .then((result) => {
           localStorage.setItem("institutionData", result.data)
+        });
+    }
+    else if (localStorage.isLoggedIn && localStorage.userType === "student"){
+      const studentId = JSON.parse(localStorage.userInfo).id;
+      StudentHomepageServices.GetContract(studentId)
+        .then((response) => response.json())
+        .then((result) => {
+          localStorage.setItem("contractData", result.data)
         });
     }
   }, []);

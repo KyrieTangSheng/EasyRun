@@ -50,7 +50,6 @@ export default function SignContract(props) {
   }, [setShowAlert, updateSuccess]);
 
   return (
-    <React.Fragment>
       <Box sx={{ display: "flex", flexDirection: "row", pt: 3 }}>
         <Button
           style={{ backgroundColor: "pink" }}
@@ -76,6 +75,5 @@ export default function SignContract(props) {
           Accept
         </Button>
       </Box>
-    </React.Fragment>
   );
 }

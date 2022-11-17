@@ -11,7 +11,6 @@ export default function PageFour(props) {
 
   // Table columns and rows for contracts
   // Set Contract Data for Student Homepage
-  let controlContractData = localStorage.contractData // control the data update
   const [contractData, setContractData] = React.useState([]);
   const contractColumns = [
     {
@@ -52,18 +51,18 @@ export default function PageFour(props) {
     { field: "updateDateTime", headerName: "Update Time", width: 155 },
   ];
 
-  React.useEffect(() => {
+  React.useEffect(() => { // Should keep updating in case of new contract 
     // get contract info
     if (localStorage.userType === "student") {
-        const studentId = JSON.parse(localStorage.userInfo).id;
-        StudentHomepageServices.GetContract(studentId)
-          .then((response) => response.json())
-          .then((result) => {
-            localStorage.setItem("contractData", result.data);
-            setContractData(JSON.parse(result.data));
-          });
+      const studentId = JSON.parse(localStorage.userInfo).id;
+      StudentHomepageServices.GetContract(studentId)
+        .then((response) => response.json())
+        .then((result) => {
+          localStorage.setItem("contractData", result.data);
+          setContractData(JSON.parse(result.data));
+        });
     }
-  }, [setContractData, controlContractData]);
+  }, [setContractData]); 
 
   // student need to render a table for the contract
   if (props.userType === "student") {
