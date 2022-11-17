@@ -10,7 +10,37 @@ const Selecting = (props) => {
       disablePortal
       options={props.options}
       onChange={(event, newValue) => {
-        props.setInfo(newValue.label);
+        event.preventDefault();
+        if (newValue === null) {
+          //Just give a value to a value to avoid null
+          newValue = "";
+          props.setInfo("");
+        } else {
+          if (props.type === "university") { // return university name
+            props.setErrors({
+              ...props.errors,
+              universityError: { status: false, msg: "" },
+            });
+            props.setInfo(newValue.label);
+          } else if (props.type === "program") { // return program id
+            props.setErrors({
+              ...props.errors,
+              programError: { status: false, msg: "" },
+            });
+            props.setInfo(newValue.id);
+          } else if (props.type === "result") { // return application result
+            props.setErrors({
+              ...props.errors,
+              resultError: { status: false, msg: "" },
+            });
+            props.setInfo(newValue.label === "offer" ? true : false); 
+          } else if (props.type === "institution") {
+            props.setInfo({
+              institutionName: newValue.institutionName,
+              instructorName: newValue.instructorName,
+            });
+          }
+        }
       }}
       isOptionEqualToValue={(option, value) => option.label === value.label}
       renderInput={(params) => (
@@ -20,10 +50,30 @@ const Selecting = (props) => {
           {...params}
           label={
             props.type === "university"
-              ? "Select a University"
+              ? "Select a university"
               : props.type === "program"
-              ? "Select a Program"
-              : ""
+              ? "Select a program"
+              : props.type === "result"
+              ? "Select the application result"
+              : "Select your signed institution"
+          }
+          error={
+            props.type === "university"
+              ? props.errors.universityError.status
+              : props.type === "program"
+              ? props.errors.programError.status
+              : props.type === "result"
+              ? props.errors.resultError.status
+              : false
+          }
+          helperText={
+            props.type === "university"
+              ? props.errors.universityError.msg
+              : props.type === "program"
+              ? props.errors.programError.msg
+              : props.type === "result"
+              ? props.errors.resultError.msg
+              : null
           }
         />
       )}
@@ -32,7 +82,18 @@ const Selecting = (props) => {
 };
 
 const InstitutionInfoForm = (props) => {
-  return <div>InstitutionInfoForm</div>;
+  return (
+    <TextField
+      fullWidth
+      value={props.forms.institutionData.institutionName || ""}
+      label="Institution Name"
+      variant="standard"
+      margin="normal"
+      InputProps={{
+        readOnly: true,
+      }}
+    />
+  );
 };
 
 const uploadApplicationForm = {

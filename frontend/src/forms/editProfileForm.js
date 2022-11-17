@@ -20,7 +20,8 @@ const CommonForm = (props) => {
         variant="standard"
         fullWidth
         margin="normal"
-        value={"12345678910"}
+        value={props.forms.PAvalues.phoneNumber || ""}
+        onChange={props.forms.handlePhoneNumber}
       />
       <TextField
         label="User Name"

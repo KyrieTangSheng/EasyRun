@@ -24,7 +24,7 @@ export default function DialogController(props) {
     "Edit Institution Information":
       "You need to provide your institution verification code, then you can edit your institution information by filling out this form.",
     "Upload Application":
-      "You can upload your application result by filling out this form. We appreciate your information provide and it would certainly help other students who intent to apply for master studies",
+      "You can upload your application result by filling out this form. We appreciate your information provide and it would certainly help other students who intent to apply for master studies. Feel free to delete those information you do not want to share.",
     "Send a Contract": "You can send a contract to a student.",
     "Sign Contract":
       "Make sure if you are going to sign this contract. You can either choose Accept or Reject, or you can close the window to make a second thought.",

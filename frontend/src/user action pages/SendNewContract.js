@@ -62,7 +62,8 @@ export default function SendNewContract(props) {
   };
 
   // check email
-  const emailValidationCheck = () => {
+  const emailValidationCheck = (e) => {
+    e.preventDefault();
     if (contractInfo.studentEmail.length === 0) {
       setErrors({
         ...errors,
@@ -91,7 +92,8 @@ export default function SendNewContract(props) {
   };
 
   // check content
-  const contentCheck = () => {
+  const contentCheck = (e) => {
+    e.preventDefault();
     if (contractInfo.content.length === 0) {
       setErrors({
         ...errors,
@@ -132,7 +134,7 @@ export default function SendNewContract(props) {
   }, [setShowAlert]);
 
   return (
-    <Box sx={{ width: "100%" }}>
+    <Box sx={{ width: "100%", pt: 2 }}>
       {/* stepper properties */}
       <Stepper activeStep={activeStep}>
         {steps.map((label, index) => {
@@ -209,11 +211,11 @@ export default function SendNewContract(props) {
             <Box sx={{ flex: "1 1 auto" }} />
             {/* Step Next Button */}
             <Button
-              onClick={() => {
+              onClick={(e) => {
                 if (activeStep === 0) {
-                  emailValidationCheck();
+                  emailValidationCheck(e);
                 } else if (activeStep === 1) {
-                  contentCheck();
+                  contentCheck(e);
                 } else {
                   handleNext();
                 }
