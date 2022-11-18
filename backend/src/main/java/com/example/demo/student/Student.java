@@ -25,6 +25,7 @@ public class Student {
             generator = "student_sequence"
     )
     private Long id;
+    private Long phoneNumber;
     private String email;
     private String firstName;
     private String lastName;
@@ -46,7 +47,7 @@ public class Student {
     public Student(){
 
     }
-    public Student(String email, String firstName, String lastName, String userName, String underGradSchool, Float overallGPA, Float majorGPA, String major, Long greScore, Long toeflScore, String researchExperience, String internshipExperience, Date dob, String pwd) {
+    public Student(String email, String firstName, String lastName, String userName, String underGradSchool, Float overallGPA, Float majorGPA, String major, Long greScore, Long toeflScore, String researchExperience, String internshipExperience, Date dob, String pwd, Long phoneNumber) {
         this.email = email;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -61,9 +62,10 @@ public class Student {
         this.internshipExperience = internshipExperience;
         this.dob = dob;
         this.pwd = pwd;
+        this.phoneNumber = phoneNumber;
     }
 
-    public Student(Long id, String email, String firstName, String lastName, String userName, String underGradSchool, Float overallGPA, Float majorGPA, String major, Long greScore, Long toeflScore, String researchExperience, String internshipExperience, Date dob, String pwd) {
+    public Student(Long id, String email, String firstName, String lastName, String userName, String underGradSchool, Float overallGPA, Float majorGPA, String major, Long greScore, Long toeflScore, String researchExperience, String internshipExperience, Date dob, String pwd,Long phoneNumber) {
         this.id = id;
         this.email = email;
         this.firstName = firstName;
@@ -79,6 +81,15 @@ public class Student {
         this.internshipExperience = internshipExperience;
         this.dob = dob;
         this.pwd = pwd;
+        this.phoneNumber = phoneNumber;
+    }
+
+    public Long getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(Long phoneNumber) {
+        this.phoneNumber = phoneNumber;
     }
 
     public String getFirstName() {

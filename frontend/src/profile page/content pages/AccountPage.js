@@ -23,7 +23,7 @@ export default function AccountPage(props) {
           {/* Password Field*/}
           <TextField
             type="number"
-            value={"12345678910"}
+            value={props.userInfo.phoneNumber || ""}
             label="Phone Number"
             margin="normal"
             variant="filled"

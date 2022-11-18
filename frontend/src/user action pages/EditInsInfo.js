@@ -67,7 +67,7 @@ export default function EditInsInfo(props) {
   return (
     <React.Fragment>
       {/* Ins Info */}
-      <React.Fragment>
+      <Box sx={{ width: "100%" , pt: 2}}>
         <TextField
           fullWidth
           value={institutionData.name || ""}
@@ -109,7 +109,7 @@ export default function EditInsInfo(props) {
           margin="normal"
           onChange={handleDescription}
         />
-      </React.Fragment>
+      </Box>
 
       {/* Submit Button */}
       <Box sx={{ display: "flex", flexDirection: "row", pt: 2 }}>

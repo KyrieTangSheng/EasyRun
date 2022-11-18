@@ -59,8 +59,8 @@ export default function ResetPassword(props) {
     setValues({ ...values, confirmedNewPwd: password });
   };
 
-  function checkOriginalPwd() {
-    console.log(values.originalPwd, pwd);
+  function checkOriginalPwd(e) {
+    e.preventDefault();
     if (values.originalPwd !== pwd) {
       setErrors({
         ...errors,
@@ -71,8 +71,8 @@ export default function ResetPassword(props) {
     }
   }
 
-  function checkNewPwd() {
-    console.log(values.newPwd, values.confirmedNewPwd);
+  function checkNewPwd(e) {
+    e.preventDefault();
     if (values.newPwd !== values.confirmedNewPwd) {
       setErrors({
         ...errors,
@@ -141,7 +141,7 @@ export default function ResetPassword(props) {
   }, [setShowAlert]);
 
   return (
-    <Box sx={{ width: "100%" }}>
+    <Box sx={{ width: "100%"  , pt: 2}}>
       {/* stepper properties */}
       <Stepper activeStep={activeStep}>
         {steps.map((label, index) => {
@@ -231,11 +231,11 @@ export default function ResetPassword(props) {
             <Box sx={{ flex: "1 1 auto" }} />
             {/* Step Next Button */}
             <Button
-              onClick={() => {
+              onClick={(e) => {
                 if (activeStep === 0) {
-                  checkOriginalPwd();
+                  checkOriginalPwd(e);
                 } else if (activeStep === 2) {
-                  checkNewPwd();
+                  checkNewPwd(e);
                 } else {
                   handleNext();
                 }

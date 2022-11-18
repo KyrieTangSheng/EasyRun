@@ -7,13 +7,19 @@ import {
   DialogTitle,
   Button,
 } from "@mui/material";
-import Alerting from "../components/Alerting";
+import Alerting from "./Alerting";
 import ResetPassword from "../user action pages/ResetPassword";
 import ProfileApplication from "../user action pages/EditProfile";
 import EditInsInfo from "../user action pages/EditInsInfo";
 import UploadApplication from "../user action pages/UploadApplication";
 import SendNewContract from "../user action pages/SendNewContract";
 import SignContract from "../user action pages/SignContract";
+import RateInstitution from "../user action pages/RateInstitution";
+
+
+// The dialog controller controls all the behaviors of opening dialog,
+// which including "Edit Profile", "Edit Institution Information", "Reset User Password"
+// "Send New Contract", "Sign Contract", "Upload Application Result", "Rate Institution",
 
 export default function DialogController(props) {
   const dialogContent = {
@@ -24,10 +30,12 @@ export default function DialogController(props) {
     "Edit Institution Information":
       "You need to provide your institution verification code, then you can edit your institution information by filling out this form.",
     "Upload Application":
-      "You can upload your application result by filling out this form. We appreciate your information provide and it would certainly help other students who intent to apply for master studies",
+      "You can upload your application result by filling out this form. We appreciate your information provide and it would certainly help other students who intent to apply for master studies. Feel free to delete those information you do not want to share.",
     "Send a Contract": "You can send a contract to a student.",
     "Sign Contract":
       "Make sure if you are going to sign this contract. You can either choose Accept or Reject, or you can close the window to make a second thought.",
+    "Rate Institution":
+      "You can rate your signed institution here. Your comment would help others to supervise the institution behaviors. You can change your rating result by rating again.",
   };
   const [showAlert, setShowAlert] = React.useState(false);
   const [severity, setSeverity] = React.useState("success");
@@ -41,7 +49,7 @@ export default function DialogController(props) {
         showAlert={showAlert}
         setShowAlert={setShowAlert}
       />
-      <DialogTitle>{props.dialogType}</DialogTitle>
+      <DialogTitle style={{ fontSize: 28, fontFamily: ["Segoe UI"] }}>{props.dialogType}</DialogTitle>
       <DialogContent>
         {props.dialogType === ("Sign Contract" || "Send a Contract") ? (
           <DialogContentText style={{ fontSize: 24, color: "red" }}>
@@ -50,7 +58,7 @@ export default function DialogController(props) {
         ) : (
           <React.Fragment></React.Fragment>
         )}
-        <DialogContentText sx={{ pt: 2 }}>
+        <DialogContentText sx={{ pt: 2, fontFamily: ["Segoe UI"] }}>
           {dialogContent[props.dialogType]}
         </DialogContentText>
         {props.dialogType === "Reset Password" ? (
@@ -91,6 +99,13 @@ export default function DialogController(props) {
           />
         ) : props.dialogType === "Sign Contract" ? (
           <SignContract
+            handleClose={props.handleClose}
+            setShowAlert={setShowAlert}
+            setSeverity={setSeverity}
+            setAlertMsg={setAlertMsg}
+          />
+        ) : props.dialogType === "Rate Institution" ? (
+          < RateInstitution
             handleClose={props.handleClose}
             setShowAlert={setShowAlert}
             setSeverity={setSeverity}

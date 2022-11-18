@@ -5,8 +5,8 @@ import BadgeSharpIcon from "@mui/icons-material/BadgeSharp";
 import BorderColorRoundedIcon from "@mui/icons-material/BorderColorRounded";
 import UploadFileRoundedIcon from "@mui/icons-material/UploadFileRounded";
 import RoomPreferencesRoundedIcon from "@mui/icons-material/RoomPreferencesRounded";
-import GavelRoundedIcon from '@mui/icons-material/GavelRounded';
-import DialogController from "./DialogController";
+import GavelRoundedIcon from "@mui/icons-material/GavelRounded";
+import DialogController from "../components/DialogController";
 import AccountPage from "./content pages/AccountPage";
 import EducationPage from "./content pages/EducationPage";
 import StarOrEnrollStudentPage from "./content pages/StarOrEnrollStudentPage";
@@ -62,10 +62,10 @@ export default function ProfileStudent(props) {
   };
 
   let instructorSpeedDialStyle = {
-    0: { position: "absolute", top: 100, right: -100 },
-    1: { position: "absolute", top: 170, right: -100 },
-    2: { position: "absolute", top: 170, right: -100 },
-    3: { position: "absolute", top: 170, right: -100 },
+    0: { position: "absolute", top: 50, right: -100 },
+    1: { position: "absolute", top: 120, right: -100 },
+    2: { position: "absolute", top: 120, right: -100 },
+    3: { position: "absolute", top: 120, right: -100 },
   };
 
   // speeddial functions
@@ -102,8 +102,8 @@ export default function ProfileStudent(props) {
           <ContractOrInsInfoPage
             userInfo={userInfo}
             userType={props.userType}
-            handleClickOpenDialog = {handleClickOpenDialog}
-            handleSetDialogType = {handleSetDialogType}
+            handleClickOpenDialog={handleClickOpenDialog}
+            handleSetDialogType={handleSetDialogType}
           />
         )}
       </Paper>
@@ -168,19 +168,15 @@ export default function ProfileStudent(props) {
             }}
           />
         ) : null}
-
-        {/* When student logged in, the user can upload application result. */}
-        {localStorage.userType === "student" ? (
-          <SpeedDialAction
-            key="Upload Application"
-            icon={<UploadFileRoundedIcon />}
-            tooltipTitle="Upload Application Result"
-            onClick={() => {
-              handleClickOpenDialog();
-              handleSetDialogType("Upload Application");
-            }}
-          />
-        ) : null}
+        <SpeedDialAction
+          key="Upload Application"
+          icon={<UploadFileRoundedIcon />}
+          tooltipTitle="Upload Application Result"
+          onClick={() => {
+            handleClickOpenDialog();
+            handleSetDialogType("Upload Application");
+          }}
+        />
       </SpeedDial>
       {/* Edit Page */}
       <DialogController

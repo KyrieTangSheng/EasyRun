@@ -70,7 +70,8 @@ public class Config {
                             "DSTC11",
                             "HelloBike",
                             StringToDate("2000-10-18"),
-                            "abc1234"
+                            "abc1234",
+                            15972590909L
                     );
 
                     Student jay = new Student(
@@ -87,7 +88,8 @@ public class Config {
                             "DSTC11",
                             "Alipay",
                             StringToDate("2001-04-17"),
-                            "abc1234"
+                            "abc1234",
+                            1238273828L
                     );
 
                     studentRepository.saveAll(
