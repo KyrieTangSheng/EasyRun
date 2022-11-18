@@ -2,8 +2,8 @@ import React from "react";
 import { styled } from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import Rating from "@mui/material/Rating";
-import FavoriteIcon from "@mui/icons-material/Favorite";
-import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
+import ThumbUpIcon from "@mui/icons-material/ThumbUp";
+import ThumbUpOffAltIcon from "@mui/icons-material/ThumbUpOffAlt";
 import Typography from "@mui/material/Typography";
 
 const StyledRating = styled(Rating)({
@@ -11,7 +11,7 @@ const StyledRating = styled(Rating)({
     color: "#ff6d75",
   },
   "& .MuiRating-iconHover": {
-    color: "red",
+    color: "#ff3d47",
   },
 });
 
@@ -34,28 +34,58 @@ function getLabelText(value) {
 
 export default function RateBox(props) {
   const [hover, setHover] = React.useState(-1);
+  const classes = {
+    "icon-1": { color: "red" },
+    "icon-2": { color: "coral" },
+    "icon-3": { color: "orange" },
+    "icon-4": { color: "skyblue" },
+    "icon-5": { color: "green" },
+  };
+
   return (
-    <Box
-      sx={{
-        "& > legend": {
-          mt: 1,
-          display: "flex",
-          alignItems: "center",
-          width: 200,
-        },
-      }}
-    >
-      <Typography component="legend">{props.criteria}</Typography>
+    <Box className={classes.root}>
+      <Typography component="legend">
+        {props.type === "overallRating"
+          ? "Overall Rating"
+          : props.type === "criteria1Rating"
+          ? "Service Quality"
+          : props.type === "criteria2Rating"
+          ? "Service Attitude"
+          : props.type === "criteria3Rating"
+          ? "Interact Frequency"
+          : props.type === "criteria4Rating"
+          ? "Instructing Style"
+          : props.type === "criteria5Rating"
+          ? "Price Set"
+          : props.type === "criteria6Rating"
+          ? "Result Satisfaction"
+          : null}
+      </Typography>
       <Box sx={{ display: "flex", flexDirection: "row", mt: 1 }}>
         <StyledRating
-          name="customized-color"
-          value={props.value}
+          classes={{ iconHover: "green" }}
+          value={props.value[props.type]}
           getLabelText={getLabelText}
           precision={0.5}
-          icon={<FavoriteIcon fontSize="inherit" />}
-          emptyIcon={<FavoriteBorderIcon fontSize="inherit" />}
+          icon={<ThumbUpIcon fontSize="inherit" />}
+          emptyIcon={<ThumbUpOffAltIcon fontSize="inherit" />}
           onChange={(event, newValue) => {
-            props.setValue(newValue);
+            event.preventDefault();
+            if (props.type === "overallRating") {
+              props.setValue({ ...props.value, overallRating: newValue });
+            } else if (props.type === "criteria1Rating") {
+              props.setValue({ ...props.value, criteria1Rating: newValue });
+            } else if (props.type === "criteria2Rating") {
+              props.setValue({ ...props.value, criteria2Rating: newValue });
+            } else if (props.type === "criteria3Rating") {
+              props.setValue({ ...props.value, criteria3Rating: newValue });
+            } else if (props.type === "criteria4Rating") {
+              props.setValue({ ...props.value, criteria4Rating: newValue });
+            } else if (props.type === "criteria5Rating") {
+              props.setValue({ ...props.value, criteria5Rating: newValue });
+            } else if (props.type === "criteria6Rating") {
+              props.setValue({ ...props.value, criteria6Rating: newValue });
+            }
           }}
           onChangeActive={(event, newHover) => {
             setHover(newHover);
@@ -63,7 +93,7 @@ export default function RateBox(props) {
         />
         {props.value !== null && (
           <Box sx={{ ml: 4, mt: 0.2 }}>
-            {labels[hover !== -1 ? hover : props.value]}
+            {labels[hover !== -1 ? hover : props.value[props.type]]}
           </Box>
         )}
       </Box>
