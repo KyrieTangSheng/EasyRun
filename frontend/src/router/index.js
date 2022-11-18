@@ -7,9 +7,7 @@ import Profile from "../profile page/Profile";
 import Home from "../basic pages/Home";
 import Institution from "../institution page/Institution";
 import Program from "../program page/Program";
-import Application from "../basic pages/Application";
 import Default from "../basic pages/Default";
-import SpacingGrid from "../basic pages/Test";
 
 function BaseRouter() {
   return (
@@ -21,11 +19,9 @@ function BaseRouter() {
           <Route path="/home/profile" element={<Profile />}></Route>
           <Route path="/institutions" element={<Institution />}></Route>
           <Route path="/programs" element={<Program />}></Route>
-          <Route path="/applicationUpload" element={<Application />}></Route>
         </Route>
         <Route path="/login" element={<Login />}></Route>
         <Route path="/register" element={<Register />}></Route>
-        <Route path="/test" element={<SpacingGrid />}></Route>
       </Routes>
     </Router>
   );
