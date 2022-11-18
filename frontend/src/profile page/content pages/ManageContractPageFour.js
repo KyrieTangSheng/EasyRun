@@ -63,7 +63,7 @@ export default function PageFour(props) {
         }
       },
     },
-    { field: "rate", headerName: "Your Rate", width: 140 },
+    { field: "rate", headerName: "Your Overall Rate", width: 140 },
     { field: "institutionName", headerName: "Institution Name", width: 140 },
     { field: "content", headerName: "Content", width: 100 },
     { field: "instructorName", headerName: "Instructor Name", width: 140 },
@@ -88,7 +88,7 @@ export default function PageFour(props) {
           setContractData(
             JSON.parse(result.data).map((x) => ({
               ...x,
-              rate: x.status === "accepted" ? x.overallRate || "Not rated yet" : "Invalid", // check if the institution could be rated
+              rate: x.status === "accepted" ? x.overallRate || "Not rated yet" : "Rate Invalid", // check if the institution could be rated
             }))
           );
         });

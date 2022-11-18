@@ -138,7 +138,7 @@ export default function Program(props) {
         rows={tableRows}
         height={checkStar ? 380 : 575}
         PageSize={checkStar ? 5 : 10}
-        tableType="program"
+        tableType= {props.specificPage ? "uprogram" : "program"}
       ></Table>
     </React.Fragment>
   );
