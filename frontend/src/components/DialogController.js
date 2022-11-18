@@ -8,13 +8,13 @@ import {
   Button,
 } from "@mui/material";
 import Alerting from "./Alerting";
-import ResetPassword from "../user action pages/ResetPassword";
-import ProfileApplication from "../user action pages/EditProfile";
-import EditInsInfo from "../user action pages/EditInsInfo";
-import UploadApplication from "../user action pages/UploadApplication";
-import SendNewContract from "../user action pages/SendNewContract";
-import SignContract from "../user action pages/SignContract";
-import RateInstitution from "../user action pages/RateInstitution";
+import ResetPassword from "../user actions/ResetPassword";
+import ProfileApplication from "../user actions/EditProfile";
+import EditInsInfo from "../user actions/EditInsInfo";
+import UploadApplication from "../user actions/UploadApplication";
+import SendNewContract from "../user actions/SendNewContract";
+import SignContract from "../user actions/SignContract";
+import RateInstitution from "../user actions/RateInstitution";
 
 
 // The dialog controller controls all the behaviors of opening dialog,
