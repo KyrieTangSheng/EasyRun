@@ -15,11 +15,12 @@ import UploadApplication from "../user actions/UploadApplication";
 import SendNewContract from "../user actions/SendNewContract";
 import SignContract from "../user actions/SignContract";
 import RateInstitution from "../user actions/RateInstitution";
-
+import Specific from "../program page/Specific";
 
 // The dialog controller controls all the behaviors of opening dialog,
 // which including "Edit Profile", "Edit Institution Information", "Reset User Password"
 // "Send New Contract", "Sign Contract", "Upload Application Result", "Rate Institution",
+// "Specific University", "Specific Program", "Specific Institution"
 
 export default function DialogController(props) {
   const dialogContent = {
@@ -42,23 +43,33 @@ export default function DialogController(props) {
   const [alertMsg, setAlertMsg] = React.useState("");
 
   return (
-    <Dialog open={props.open} onClose={props.handleClose}>
+    <Dialog
+      open={props.open}
+      onClose={props.handleClose}
+      fullScreen={
+        props.dialogType === "Specific University" ||
+        props.dialogType === "Specific Program" ||
+        props.dialogType === "Specific Institution"
+      }
+    >
       <Alerting
         severity={severity}
         msg={alertMsg}
         showAlert={showAlert}
         setShowAlert={setShowAlert}
       />
-      <DialogTitle style={{ fontSize: 28, fontFamily: ["Segoe UI"] }}>{props.dialogType}</DialogTitle>
+      <DialogTitle style={{ fontSize: 28, fontFamily: ["Segoe UI"] }}>
+        {props.dialogType}
+      </DialogTitle>
       <DialogContent>
-        {props.dialogType === ("Sign Contract" || "Send a Contract") ? (
+        {props.dialogType === ("Sign Contract" || "Send a Contract") ? ( // Warning Only when it calls Contract related actions
           <DialogContentText style={{ fontSize: 24, color: "red" }}>
             WARNING: THIS ACTION CANNOT BE UNDONE!
           </DialogContentText>
         ) : (
           <React.Fragment></React.Fragment>
         )}
-        <DialogContentText sx={{ pt: 2, fontFamily: ["Segoe UI"] }}>
+        <DialogContentText sx={{ fontFamily: ["Segoe UI"] }}>
           {dialogContent[props.dialogType]}
         </DialogContentText>
         {props.dialogType === "Reset Password" ? (
@@ -105,11 +116,29 @@ export default function DialogController(props) {
             setAlertMsg={setAlertMsg}
           />
         ) : props.dialogType === "Rate Institution" ? (
-          < RateInstitution
+          <RateInstitution
             handleClose={props.handleClose}
             setShowAlert={setShowAlert}
             setSeverity={setSeverity}
             setAlertMsg={setAlertMsg}
+          />
+        ) : props.dialogType === "Specific University" ? (
+          <Specific
+            handleClose={props.handleClose}
+            setShowAlert={setShowAlert}
+            setSeverity={setSeverity}
+            setAlertMsg={setAlertMsg}
+            specific={props.specific}
+            type="university"
+          />
+        ) : props.dialogType === "Specific Program" ? (
+          <Specific
+            handleClose={props.handleClose}
+            setShowAlert={setShowAlert}
+            setSeverity={setSeverity}
+            setAlertMsg={setAlertMsg}
+            specific={props.specific}
+            type="program"
           />
         ) : (
           <React.Fragment />

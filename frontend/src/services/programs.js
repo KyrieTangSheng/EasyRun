@@ -39,10 +39,33 @@ const StarProgram = (studentID, programID, starStatus) => {
   }
 };
 
+const ViewSpecificUniversity = (universityId) => {
+  return fetch(rootURL + "specificSchool/" + universityId, {
+    method: "GET",
+    mode: "cors",
+    headers: {
+      Accept: "application/json,text/plain,*/*",
+      "Content-Type": "application/json",
+    },
+  });
+};
+
+const ViewSpecificProgram = (programId, studentId) => {
+  return fetch(rootURL + "specificProgram/" + programId + "/" + studentId, {
+    method: "GET",
+    mode: "cors",
+    headers: {
+      Accept: "application/json,text/plain,*/*",
+      "Content-Type": "application/json",
+    },
+  });
+};
 
 const ProgramServices = {
   ListPrograms,
   StarProgram,
+  ViewSpecificUniversity,
+  ViewSpecificProgram
 };
 
 export default ProgramServices;
