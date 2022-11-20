@@ -88,7 +88,6 @@ export default function Program(props) {
 
     // retrieve programs from back-end
     if (checkStar === false && checkUniversity === false) {
-      console.log('test1')
       // for program view page
       ProgramServices.ListPrograms(universityName, programName, userID)
         .then((response) => response.json())
@@ -106,7 +105,6 @@ export default function Program(props) {
           );
         });
     } else if (checkStar === true) {
-      console.log('test2')
       // for student starred program view page
       StudentHomepageServices.ViewStarredPrograms(userID)
         .then((response) => response.json())

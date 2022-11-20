@@ -19,7 +19,7 @@ const GetNewUniversity = (currentId, setSpecificObj, setSpecificContent) => {
     });
 };
 
-export default function SpecificUniversity(props) {
+export default function Specific(props) {
   // Use localStorage.specificUniversity to store a specific university information
   // If clicked university id equals to localStorage.specificUniversity.id equals to
   // props.specific.id, then just use localstorage information
