@@ -1,16 +1,19 @@
 import * as React from "react";
-import AppBar from "@mui/material/AppBar";
-import Box from "@mui/material/Box";
-import Toolbar from "@mui/material/Toolbar";
-import IconButton from "@mui/material/IconButton";
-import Typography from "@mui/material/Typography";
-import Menu from "@mui/material/Menu";
+import {
+  AppBar,
+  Box,
+  Toolbar,
+  IconButton,
+  Typography,
+  Menu,
+  Container,
+  Avatar,
+  Button,
+  Tooltip,
+  MenuItem,
+  Link,
+} from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
-import Container from "@mui/material/Container";
-import Avatar from "@mui/material/Avatar";
-import Button from "@mui/material/Button";
-import Tooltip from "@mui/material/Tooltip";
-import MenuItem from "@mui/material/MenuItem";
 import AdbIcon from "@mui/icons-material/Adb";
 
 function Header() {
@@ -20,20 +23,15 @@ function Header() {
   if (localStorage.userType) {
     if (localStorage.userType === "student") {
       pages = ["Institutions", "Programs", "Upload Application Result"];
-      settings = ["Profile", "My Stars", "My Contract", "Logout"];
+      settings = ["Profile", "Logout"];
     } else if (localStorage.userType === "instructor") {
       pages = [
         "Institutions",
         "Programs",
         "Upload Application Result",
-      ];
-      settings = [
-        "Profile",
         "Send a New Contract",
-        "View Enrolled Students",
-        "Institution Information",
-        "Logout",
       ];
+      settings = ["Profile", "Logout"];
     }
   } else {
     pages = ["Institutions", "Programs"];
@@ -62,7 +60,8 @@ function Header() {
     <AppBar position="static" style={{ backgroundColor: "rgb(19 115 134)" }}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          <a href={localStorage.isLoggedIn ? "./home" : "../login"}>
+          {/* App logo */}
+          <a href={localStorage.isLoggedIn ? "./" : "../login"}>
             <img
               alt="logo"
               src="/favicon.png"
@@ -73,7 +72,7 @@ function Header() {
             variant="h6"
             noWrap
             component="a"
-            href={localStorage.isLoggedIn ? "./home" : "./login"}
+            href={localStorage.isLoggedIn ? "./" : "./login"}
             sx={{
               mr: 2,
               display: { xs: "block", md: "block" },
@@ -87,6 +86,7 @@ function Header() {
             EasyRun
           </Typography>
 
+          {/* App Content */}
           <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
             <IconButton
               size="large"
@@ -100,7 +100,7 @@ function Header() {
             </IconButton>
             <Menu
               id="menu-appbar"
-              anchorEl={anchorElNav}
+              // anchorEl={anchorElNav}
               anchorOrigin={{
                 vertical: "bottom",
                 horizontal: "left",
@@ -112,36 +112,47 @@ function Header() {
               }}
               open={Boolean(anchorElNav)}
               onClose={handleCloseNavMenu}
+              onClick={() => {
+                console.log("hi");
+              }}
               sx={{
                 display: { xs: "block", md: "none" },
               }}
             >
               {pages.map((page) => (
-                <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center">{page}</Typography>
+                <MenuItem
+                  key={page}
+                  onClick={(e) => {
+                    handleCloseNavMenu(e);
+                    console.log(page);
+                    if (page === "Institutions") {
+                      window.location.href = "../institutions";
+                    } else if (page === "Programs") {
+                      window.location.href = "../programs";
+                    }
+                  }}
+                >
+                  <Typography variant="text">
+                    <Link
+                      to={
+                        page === "Insitutions"
+                          ? "../institutions"
+                          : page === "Programs"
+                          ? "../programs"
+                          : "./"
+                      }
+                    >
+                      {" "}
+                      {page}{" "}
+                    </Link>
+                  </Typography>
                 </MenuItem>
               ))}
             </Menu>
           </Box>
           <AdbIcon sx={{ display: { xs: "flex", md: "none" }, mr: 1 }} />
-          <Typography
-            variant="h5"
-            noWrap
-            component="a"
-            href=""
-            sx={{
-              mr: 2,
-              display: { xs: "flex", md: "none" },
-              flexGrow: 1,
-              fontFamily: "monospace",
-              fontWeight: 700,
-              letterSpacing: ".3rem",
-              color: "inherit",
-              textDecoration: "none",
-            }}
-          >
-            EasyRun
-          </Typography>
+
+          {/* Navigation Menu */}
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
             {pages.map((page) => (
               <Button
@@ -177,7 +188,20 @@ function Header() {
               onClose={handleCloseUserMenu}
             >
               {settings.map((setting) => (
-                <MenuItem key={setting} onClick={()=>{handleCloseUserMenu(); localStorage.clear(); window.location.href="../login"}}>
+                <MenuItem
+                  key={setting}
+                  onClick={() => {
+                    handleCloseUserMenu();
+                    if (setting === "Logout") {
+                      localStorage.clear();
+                      window.location.href = "../login";
+                    } else if (setting === "Login") {
+                      window.location.href = "../login";
+                    } else if (setting === "Profile") {
+                      window.location.href = "../profile";
+                    }
+                  }}
+                >
                   <Typography textAlign="center">{setting}</Typography>
                 </MenuItem>
               ))}

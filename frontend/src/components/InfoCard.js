@@ -31,7 +31,6 @@ export default function InfoCard(props) {
   const [object, setObject] = React.useState(
     props.object || { universityName: "", name: "", id: "" }
   );
-  console.log(object);
 
   return (
     <Card variant="outlined" sx={{ width: 370 }}>

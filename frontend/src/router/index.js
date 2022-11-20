@@ -15,8 +15,8 @@ function BaseRouter() {
       <Routes>
         {/* <Route path="/" element={<App />} /> */}
         <Route path="/" element={<Home />}>
-          <Route path="/home" element={<Default />}></Route>
-          <Route path="/home/profile" element={<Profile />}></Route>
+          <Route path="/" element={<Default />}></Route>
+          <Route path="/profile" element={<Profile />}></Route>
           <Route path="/institutions" element={<Institution />}></Route>
           <Route path="/programs" element={<Program />}></Route>
         </Route>
