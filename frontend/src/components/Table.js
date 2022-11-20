@@ -34,7 +34,7 @@ export default function Table(props) {
     contract: "No contract available",
     specificUniversityPrograms: "No program available",
     specificProgramApplications: "No application result available",
-    staffs: "No staff available",
+    specificInstitutionStaffs: "No staff available",
     specificInstitutionOffers: "No offer available",
   };
 
@@ -46,8 +46,9 @@ export default function Table(props) {
   // On institution row click, specific institution dialog would show up
   function handleRowDoubleClick(clickedRow) {
     if (props.tableType === "institution") {
-      //window.location.href="./institutions/institution"
-      console.log(clickedRow);
+      handleSetDialogType("Specific Institution");
+      handleClickOpenDialog();
+      setSpecific(clickedRow);
     }
   }
 

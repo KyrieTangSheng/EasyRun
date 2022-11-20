@@ -28,7 +28,7 @@ export default function CurrentProgram(props) {
   ];
 
   const ProgramInfoCard = () => {
-    return <InfoCard object={props.Object} />;
+    return <InfoCard object={props.Object} cardType={"program"} />;
   };
 
   const ApplicationTable = () => {
@@ -42,7 +42,6 @@ export default function CurrentProgram(props) {
       />
     );
   };
-
 
   return (
     <SpecificPageSkeleton
