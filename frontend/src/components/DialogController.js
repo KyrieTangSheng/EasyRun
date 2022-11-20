@@ -16,6 +16,7 @@ import SendNewContract from "../user actions/SendNewContract";
 import SignContract from "../user actions/SignContract";
 import RateInstitution from "../user actions/RateInstitution";
 import Specific from "../program page/Specific";
+import Currentnstitution from "../institution page/CurrentInstitution";
 
 // The dialog controller controls all the behaviors of opening dialog,
 // which including "Edit Profile", "Edit Institution Information", "Reset User Password"
@@ -47,31 +48,39 @@ export default function DialogController(props) {
       open={props.open}
       onClose={props.handleClose}
       fullScreen={
+        // fullscreen when showing specific page
         props.dialogType === "Specific University" ||
         props.dialogType === "Specific Program" ||
         props.dialogType === "Specific Institution"
       }
     >
+      {/* Alerting result */}
       <Alerting
         severity={severity}
         msg={alertMsg}
         showAlert={showAlert}
         setShowAlert={setShowAlert}
       />
+
+      {/* Dialog Title */}
       <DialogTitle style={{ fontSize: 28, fontFamily: ["Segoe UI"] }}>
         {props.dialogType}
       </DialogTitle>
+
       <DialogContent>
+        {/* Dialog Content Text */}
         {props.dialogType === ("Sign Contract" || "Send a Contract") ? ( // Warning Only when it calls Contract related actions
           <DialogContentText style={{ fontSize: 24, color: "red" }}>
             WARNING: THIS ACTION CANNOT BE UNDONE!
           </DialogContentText>
         ) : (
-          <React.Fragment></React.Fragment>
+          <React.Fragment />
         )}
         <DialogContentText sx={{ fontFamily: ["Segoe UI"] }}>
           {dialogContent[props.dialogType]}
         </DialogContentText>
+
+        {/* Dialog Content Body Render */}
         {props.dialogType === "Reset Password" ? (
           <ResetPassword
             handleClose={props.handleClose}
@@ -139,6 +148,15 @@ export default function DialogController(props) {
             setAlertMsg={setAlertMsg}
             specific={props.specific}
             type="program"
+          />
+        ) : props.dialogType === "Specific Institution" ? (
+          <Currentnstitution
+            handleClose={props.handleClose}
+            setShowAlert={setShowAlert}
+            setSeverity={setSeverity}
+            setAlertMsg={setAlertMsg}
+            specific={props.specific}
+            type="institution"
           />
         ) : (
           <React.Fragment />

@@ -12,6 +12,7 @@ export default function PageSkeleton(props) {
           left: "7.5%",
           width: 400,
           height: props.type === "institution" ? 300 : 400,
+          // backgroundColor: "green"
         }}
       >
         <props.InfoCard />
@@ -24,9 +25,12 @@ export default function PageSkeleton(props) {
           top: "60%",
           width: 600,
           height: 250,
-          backgroundColor: props.type==="institution" ? "green" : undefined
+          backgroundColor: props.type === "institution" ? undefined : undefined,
         }}
-      ></Box>
+      >
+        <Typography>{props.type === "institution" ? "Staffs" : ""}</Typography>
+        {props.type === "institution" ? <props.Table1 /> : <React.Fragment />}
+      </Box>
 
       {/* Programs for U || Applications for P || Forum for I */}
       <Box
@@ -53,12 +57,15 @@ export default function PageSkeleton(props) {
         sx={{
           position: "absolute",
           left: "42%",
-          top: "70%",
-          width: 870,
+          top: "65%",
+          width: 800,
           height: 200,
-          backgroundColor: props.type==="institution" ? "green" : undefined
+          backgroundColor: props.type === "institution" ? undefined : undefined,
         }}
-      ></Box>
+      >
+        <Typography>{props.type === "institution" ? "Offers" : ""}</Typography>
+        {props.type === "institution" && <props.Table3 />}
+      </Box>
     </React.Fragment>
   );
 }
