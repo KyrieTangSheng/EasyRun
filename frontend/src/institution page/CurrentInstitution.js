@@ -6,12 +6,12 @@ import Box from '@mui/material/Box';
 import Typography from "@mui/joy/Typography";
 import RateBox from "../components/RateBox";
 import RateInstitution from "../user actions/RateInstitution";
-import Commentbox from "../components/Comment";
+import Commentbox from "../rating forum/Comment";
 
 
 export default function Currentnstitution(props) {
   let specific = props.specific;
-  console.log(specific);
+  // console.log(specific);
 
   const OfferColumns = [
     {
