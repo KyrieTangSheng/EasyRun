@@ -17,6 +17,7 @@ import SignContract from "../user actions/SignContract";
 import RateInstitution from "../user actions/RateInstitution";
 import Specific from "../program page/Specific";
 import Currentnstitution from "../institution page/CurrentInstitution";
+import PostComment from "./PostComment";
 
 // The dialog controller controls all the behaviors of opening dialog,
 // which including "Edit Profile", "Edit Institution Information", "Reset User Password"
@@ -38,6 +39,8 @@ export default function DialogController(props) {
       "Make sure if you are going to sign this contract. You can either choose Accept or Reject, or you can close the window to make a second thought.",
     "Rate Institution":
       "You can rate your signed institution here. Your comment would help others to supervise the institution behaviors. You can change your rating result by rating again.",
+    "Post Comment":
+      "Comment on others"
   };
   const [showAlert, setShowAlert] = React.useState(false);
   const [severity, setSeverity] = React.useState("success");
@@ -130,6 +133,14 @@ export default function DialogController(props) {
             setShowAlert={setShowAlert}
             setSeverity={setSeverity}
             setAlertMsg={setAlertMsg}
+          />
+        ) : props.dialogType === "Comment Others" ? (
+          <PostComment
+            handleClose={props.handleClose}
+            setShowAlert={setShowAlert}
+            setSeverity={setSeverity}
+            setAlertMsg={setAlertMsg}
+            type="comment"
           />
         ) : props.dialogType === "Specific University" ? (
           <Specific
