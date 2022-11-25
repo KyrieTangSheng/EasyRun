@@ -37,8 +37,8 @@ export default function PageSkeleton(props) {
         sx={{
           position: "absolute",
           top: props.type === "institution" ? "5%" : "10%",
-          left: "45%",
-          width: 800,
+          left: "43%",
+          width: 780,
           height: props.type === "institution" ? 450 : 500,
         }}
       >
@@ -56,9 +56,9 @@ export default function PageSkeleton(props) {
       <Box
         sx={{
           position: "absolute",
-          left: "42%",
+          left: "45%",
           top: "65%",
-          width: 800,
+          width: 780,
           height: 200,
           backgroundColor: props.type === "institution" ? undefined : undefined,
         }}
