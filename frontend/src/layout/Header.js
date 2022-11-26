@@ -57,15 +57,25 @@ function Header() {
     setAnchorElUser(null);
   };
 
-  const handleClickOpenDialog = () => {
-    setDialogOpen(true);
+  const handleClickOpenDialogApplication = () => {
+    setDialogOpenApplication(true);
   };
 
-  const handleCloseDialog = () => {
-    setDialogOpen(false);
+  const handleCloseDialogApplication = () => {
+    setDialogOpenApplication(false);
   };
 
-  const [dialogOpen, setDialogOpen] = React.useState(false);
+  const [dialogOpenApplication, setDialogOpenApplication] = React.useState(false);
+
+  const handleClickOpenDialogContract = () => {
+    setDialogOpenContract(true);
+  };
+
+  const handleCloseDialogContract = () => {
+    setDialogOpenContract(false);
+  };
+
+  const [dialogOpenContract, setDialogOpenContract] = React.useState(false);
 
   return (
     <AppBar position="static" style={{ backgroundColor: "rgb(19 115 134)" }}>
@@ -168,8 +178,10 @@ function Header() {
                     window.location.href = "http://localhost:3000/institutions";
                   } else if (page === "Programs") {
                     window.location.href = "http://localhost:3000/programs";
+                  } else if (page === "Upload Application Result"){
+                    handleClickOpenDialogApplication();
                   } else {
-                    handleClickOpenDialog();
+                    handleClickOpenDialogContract();
                   }
               }}
                 sx={{ my: 2, color: "white", display: "block" }}
@@ -179,10 +191,16 @@ function Header() {
             ))}
           </Box>
           <DialogController
-              open={dialogOpen}
-              setOpen={setDialogOpen}
-              handleClose={handleCloseDialog}
+              open={dialogOpenApplication}
+              setOpen={setDialogOpenApplication}
+              handleClose={handleCloseDialogApplication}
               dialogType={"Upload Application"}
+            />
+          <DialogController
+              open={dialogOpenContract}
+              setOpen={setDialogOpenContract}
+              handleClose={handleCloseDialogContract}
+              dialogType={"Send a Contract"}
             />
 
           <Box sx={{ flexGrow: 0 }}>
