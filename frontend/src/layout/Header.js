@@ -15,6 +15,7 @@ import {
 } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import AdbIcon from "@mui/icons-material/Adb";
+import DialogController from "../components/DialogController";
 
 function Header() {
   let pages = [];
@@ -56,12 +57,22 @@ function Header() {
     setAnchorElUser(null);
   };
 
+  const handleClickOpenDialog = () => {
+    setDialogOpen(true);
+  };
+
+  const handleCloseDialog = () => {
+    setDialogOpen(false);
+  };
+
+  const [dialogOpen, setDialogOpen] = React.useState(false);
+
   return (
     <AppBar position="static" style={{ backgroundColor: "rgb(19 115 134)" }}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           {/* App logo */}
-          <a href={localStorage.isLoggedIn ? "./" : "../login"}>
+          <a href={localStorage.isLoggedIn ? "http://localhost:3000/" : "http://localhost:3000/login"}>
             <img
               alt="logo"
               src="/favicon.png"
@@ -72,7 +83,7 @@ function Header() {
             variant="h6"
             noWrap
             component="a"
-            href={localStorage.isLoggedIn ? "./" : "./login"}
+            href={localStorage.isLoggedIn ? "http://localhost:3000/" : "http://localhost:3000/login"}
             sx={{
               mr: 2,
               display: { xs: "block", md: "block" },
@@ -119,35 +130,30 @@ function Header() {
                 display: { xs: "block", md: "none" },
               }}
             >
-              {pages.map((page) => (
+              {/* {pages.map((page) => (
                 <MenuItem
                   key={page}
                   onClick={(e) => {
                     handleCloseNavMenu(e);
                     console.log(page);
                     if (page === "Institutions") {
-                      window.location.href = "../institutions";
+                      window.location.href = "http://localhost:3000/institutions";
                     } else if (page === "Programs") {
-                      window.location.href = "../programs";
+                      window.location.href = "http://localhost:3000/programs";
                     }
                   }}
-                >
-                  <Typography variant="text">
-                    <Link
-                      to={
-                        page === "Insitutions"
-                          ? "../institutions"
-                          : page === "Programs"
-                          ? "../programs"
-                          : "./"
-                      }
-                    >
+                > */}
+                  {/* <Typography
+                      onClick= {() =>{
+                        console.log("clicked");
+                        window.location.href = "http://localhost:3000/programs";
+                    }
+                    }>
                       {" "}
                       {page}{" "}
-                    </Link>
-                  </Typography>
-                </MenuItem>
-              ))}
+                  </Typography> */}
+                {/* </MenuItem>
+              ))} */}
             </Menu>
           </Box>
           <AdbIcon sx={{ display: { xs: "flex", md: "none" }, mr: 1 }} />
@@ -157,13 +163,27 @@ function Header() {
             {pages.map((page) => (
               <Button
                 key={page}
-                onClick={handleCloseNavMenu}
+                onClick= {() =>{
+                  if (page === "Institutions") {
+                    window.location.href = "http://localhost:3000/institutions";
+                  } else if (page === "Programs") {
+                    window.location.href = "http://localhost:3000/programs";
+                  } else {
+                    handleClickOpenDialog();
+                  }
+              }}
                 sx={{ my: 2, color: "white", display: "block" }}
               >
                 {page}
               </Button>
             ))}
           </Box>
+          <DialogController
+              open={dialogOpen}
+              setOpen={setDialogOpen}
+              handleClose={handleCloseDialog}
+              dialogType={"Upload Application"}
+            />
 
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
@@ -194,11 +214,11 @@ function Header() {
                     handleCloseUserMenu();
                     if (setting === "Logout") {
                       localStorage.clear();
-                      window.location.href = "../login";
+                      window.location.href = "http://localhost:3000/login";
                     } else if (setting === "Login") {
-                      window.location.href = "../login";
+                      window.location.href = "http://localhost:3000/login";
                     } else if (setting === "Profile") {
-                      window.location.href = "../profile";
+                      window.location.href = "http://localhost:3000/profile";
                     }
                   }}
                 >
@@ -213,3 +233,12 @@ function Header() {
   );
 }
 export default Header;
+
+
+// window.location.href = (
+//   page === "Insitutions"
+//     ? "http://localhost:3000/institutions"
+//     : page === "Programs"
+//     ? "http://localhost:3000/programs"
+//     : "http://localhost:3000/"
+// )

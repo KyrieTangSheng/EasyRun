@@ -268,7 +268,7 @@ export default function Register() {
       setShowAlert={setShowAlert}/>
 
       <Paper style={paperStyle} variant="outlined">
-        <a href="./home">
+        <a href="http://localhost:3000/">
           <Avatar style={avatarStyle}>
             <LockIcon />
           </Avatar>
