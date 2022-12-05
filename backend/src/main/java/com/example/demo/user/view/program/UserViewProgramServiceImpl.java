@@ -3,9 +3,10 @@ package com.example.demo.user.view.program;
 import com.example.demo.objects.entity.Program;
 import com.example.demo.objects.entity.Star;
 import com.example.demo.objects.entity.University;
-import com.example.demo.objects.service.impl.ProgramServiceImpl;
+import com.example.demo.objects.service.iface.UniversityService;
+import com.example.demo.objects.service.proxy.ProgramServiceProxy;
 import com.example.demo.objects.service.impl.StarServiceImpl;
-import com.example.demo.objects.service.impl.UniversityServiceImpl;
+import com.example.demo.objects.service.proxy.UniversityServiceProxy;
 import com.example.demo.student.Student;
 import com.example.demo.student.account.StudentAccountServiceImpl;
 import com.example.demo.user.view.institution.UserViewInstitutionServiceImpl;
@@ -23,24 +24,24 @@ import java.util.Optional;
 @Service
 public class UserViewProgramServiceImpl implements UserViewProgramService{
 
-    private ProgramServiceImpl programServiceImpl;
+    private ProgramServiceProxy programServiceProxy;
     private StarServiceImpl starServiceImpl;
-    private UniversityServiceImpl universityServiceImpl;
     private StudentAccountServiceImpl studentAccountServiceImpl;
+    private UniversityServiceProxy universityServiceProxy;
     @Autowired
-    public UserViewProgramServiceImpl(ProgramServiceImpl programServiceImpl,
+    public UserViewProgramServiceImpl(ProgramServiceProxy programServiceProxy,
                                       StarServiceImpl starServiceImpl,
                                       StudentAccountServiceImpl studentAccountServiceImpl,
-                                      UniversityServiceImpl universityServiceImpl){
-        this.programServiceImpl = programServiceImpl;
+                                      UniversityServiceProxy universityServiceProxy){
+        this.programServiceProxy = programServiceProxy;
         this.starServiceImpl = starServiceImpl;
         this.studentAccountServiceImpl = studentAccountServiceImpl;
-        this.universityServiceImpl = universityServiceImpl;
+        this.universityServiceProxy = universityServiceProxy;
     }
 
     @Override
     public Response getProgramById(Long programId,Long studentId){
-        Program program = programServiceImpl.getProgramById(programId);
+        Program program = programServiceProxy.getProgramById(programId);
         Boolean starred = starServiceImpl.alreadyStarred(studentId,programId);
 
         ObjectMapper mapper = new ObjectMapper();
@@ -61,10 +62,10 @@ public class UserViewProgramServiceImpl implements UserViewProgramService{
 
     @Override
     public Response starProgram(Long programId,Long studentId){
-        University university = universityServiceImpl.getUniversityByProgramId(programId);
+        University university = universityServiceProxy.getUniversityByProgramId(programId);
         Long universityId = university.getId();
 
-        Program program = programServiceImpl.getProgramById(programId);
+        Program program = programServiceProxy.getProgramById(programId);
         Student student = studentAccountServiceImpl.getStudentInfoById(studentId).get();
 
         Star newStar = new Star(
@@ -97,11 +98,11 @@ public class UserViewProgramServiceImpl implements UserViewProgramService{
 
     @Override
     public Response getSpecificSchoolInfo(Long schoolId){
-        University university = universityServiceImpl.getUniversityById(schoolId);
+        University university = universityServiceProxy.getUniversityById(schoolId);
         List<Long> programIds = university.getPrograms();
         List<Program> programs = new ArrayList<Program>();
         for(Long programId:programIds){
-            Program program = programServiceImpl.getProgramById(programId);
+            Program program = programServiceProxy.getProgramById(programId);
             programs.add(program);
         }
 
@@ -129,18 +130,18 @@ public class UserViewProgramServiceImpl implements UserViewProgramService{
         List<Program> tempPrograms = new ArrayList<Program>();
 
         if (Objects.equals(schoolKeyword,"all")) {
-            universities = universityServiceImpl.getAllUniversities();
+            universities = universityServiceProxy.getAllUniversities();
         }else {
-            universities = universityServiceImpl.getUniversitiesByKeyword(schoolKeyword);
+            universities = universityServiceProxy.getUniversitiesByKeyword(schoolKeyword);
         }
         for(University university:universities){
             universityIds.add(university.getId());
         }
 
         if(Objects.equals(programKeyword,"all")){
-            tempPrograms = programServiceImpl.getAllPrograms();
+            tempPrograms = programServiceProxy.getAllPrograms();
         }else{
-            tempPrograms = programServiceImpl.getProgramsByKeyword(programKeyword);
+            tempPrograms = programServiceProxy.getProgramsByKeyword(programKeyword);
         }
         for(Program program:tempPrograms){
             if (universityIds.contains(program.getUniversityId())){
