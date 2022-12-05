@@ -9,7 +9,7 @@ import java.util.List;
 
 public interface ContractService {
     List<Contract> getContractsByStudentId(Long studentId);
-    void changeContractStatus(Long contractId,String newStatus);
+    void changeContractStatus(Long contractId,Integer newStatus);
     List<Contract> getContractsByInstitutionId(Long institutionId);
     Contract generateNewContract(Long studentId, Long institutionId,
                                  String content, Long instructorId,

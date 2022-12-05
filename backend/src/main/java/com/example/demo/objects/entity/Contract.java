@@ -41,14 +41,14 @@ public class Contract {
     @JoinColumn(name = "institution")
     private Institution institution;
 
-    private String status;
-//    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
+    private Integer status; //0 is accepted, 1 is rejected, 2 is in-process
+
     private LocalDateTime updateDateTime;
     private String content;
 
     public Contract(){
     }
-    public Contract(Long studentId, Long instructorId, Long institutionId, String status, String content,
+    public Contract(Long studentId, Long instructorId, Long institutionId, Integer status, String content,
                     Student student, Instructor instructor, Institution institution) {
         this.studentId = studentId;
         this.instructorId = instructorId;
@@ -61,7 +61,7 @@ public class Contract {
         this.institution = institution;
     }
 
-    public Contract(Long id, Long studentId, Long instructorId, Long institutionId, String status, String content,
+    public Contract(Long id, Long studentId, Long instructorId, Long institutionId, Integer status, String content,
                     Student student, Instructor instructor, Institution institution) {
         this.id = id;
         this.studentId = studentId;
@@ -163,11 +163,11 @@ public class Contract {
         this.institution = institution;
     }
 
-    public String getStatus() {
+    public Integer getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(Integer status) {
         this.status = status;
     }
 

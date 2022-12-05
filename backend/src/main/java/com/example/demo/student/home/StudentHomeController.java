@@ -33,7 +33,7 @@ public class StudentHomeController {
     @PostMapping(path="viewContract")
     public Response changeContractStatus(@RequestBody Contract contract){
         Long contractId = contract.getId();
-        String newStatus = contract.getStatus();
+        Integer newStatus = contract.getStatus();
         Long studentId = contract.getStudentId();
         return studentHomeServiceImpl.changeContractStatus(contractId,newStatus,studentId);
     }

@@ -41,6 +41,7 @@ public class Comment {
     @JoinColumn(name="student",nullable = true)
     private Student student;
     private LocalDateTime dateTime;
+    private String parentUserName;
     public Comment(){
 
     }
@@ -64,6 +65,14 @@ public class Comment {
         this.studentUserName = studentUserName;
         this.dateTime = LocalDateTime.now();
         this.childComments = new ArrayList<>();
+    }
+
+    public String getParentUserName() {
+        return parentUserName;
+    }
+
+    public void setParentUserName(String parentUserName) {
+        this.parentUserName = parentUserName;
     }
 
     public Long getId() {

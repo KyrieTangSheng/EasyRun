@@ -32,4 +32,9 @@ public class RatingServiceImpl implements RatingService {
     public Optional<Rating> getRatingById(Long ratingId){
         return ratingRepository.findById(ratingId);
     }
+
+    @Override
+    public Optional<Rating> getRatingsByInstitutionIdAndStudentId(Long studentId, Long institutionId){
+        return ratingRepository.findByStudentIdAndInstitutionId(studentId,institutionId);
+    }
 }

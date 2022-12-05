@@ -92,13 +92,11 @@ public class UserApplicationServiceImpl implements UserApplicationService{
     @Override
 //    @Transactional
     public Response uploadApplicationResult(Application application){
+
         Program program = programServiceImpl.getProgramById(application.getProgramId());
         application.setProgram(program);
         Optional<Institution> optionalInstitution = institutionServiceImpl.getInstitutionByName(application.getInstitutionName());
-//        if (Objects.isNull(institution.getApplications())){
-//            institution.setApplications(new ArrayList<>());
-//        }
-//        application.setInstitution(institution);
+
         if (optionalInstitution.isPresent()){
             application.setInstitution(optionalInstitution.get());
         }

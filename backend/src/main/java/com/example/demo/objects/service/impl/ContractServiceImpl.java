@@ -31,7 +31,7 @@ public class ContractServiceImpl implements ContractService {
 
     @Override
     @Transactional
-    public void changeContractStatus(Long contractId, String newStatus){
+    public void changeContractStatus(Long contractId, Integer newStatus){
         Optional<Contract> optionalContract = contractRepository.findById(contractId);
         Contract contract = optionalContract.get();
         contract.setStatus(newStatus);
@@ -52,7 +52,7 @@ public class ContractServiceImpl implements ContractService {
                 studentId,
                 instructorId,
                 institutionId,
-                "inProcess",
+                2,
                 content,
                 student,
                 instructor,

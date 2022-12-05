@@ -10,4 +10,6 @@ public interface RatingService {
 
     Rating addNewRating(Rating rating);
     Optional<Rating> getRatingById(Long ratingId);
+
+    Optional<Rating> getRatingsByInstitutionIdAndStudentId(Long studentId, Long institutionId);
 }

@@ -82,6 +82,7 @@ public class UserViewInstitutionServiceImpl implements UserViewInstitutionServic
 
     @Override
     public Response getSpecificInstitutionInfo(String institutionName, Long studentId){
+
         Optional<Institution> optionalInstitution = institutionServiceImpl.getInstitutionByName(institutionName);
         if (optionalInstitution.isEmpty()){
             Response response = new Response(0,1,null);
@@ -133,6 +134,7 @@ public class UserViewInstitutionServiceImpl implements UserViewInstitutionServic
 
     @Override
     public Response rateInstitution(Rating rating){
+
         Long studentId = rating.getStudentId();
         Optional<Student> optionalStudent = studentAccountServiceImpl.getStudentInfoById(studentId);
         Student student = optionalStudent.get();
@@ -149,6 +151,15 @@ public class UserViewInstitutionServiceImpl implements UserViewInstitutionServic
 
         rating.setDateTime(LocalDateTime.now());
 
+        //Check if the student has already rated the institution
+        Optional<Rating> optionalRating = ratingServiceImpl.getRatingsByInstitutionIdAndStudentId(studentId,institutionId);
+
+        if (optionalRating.isPresent()){
+            if(optionalRating.get().getId() != rating.getId()){
+            Response response = new Response(0,0,"Already rated");
+            return response;
+            }
+        }
         Rating savedRating = ratingServiceImpl.addNewRating(rating);
 
         ObjectMapper mapper = new ObjectMapper();

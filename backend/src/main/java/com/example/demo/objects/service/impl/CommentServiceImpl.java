@@ -36,9 +36,8 @@ public class CommentServiceImpl implements CommentService {
     public Comment addNewComment(Comment comment){
         if (Objects.nonNull(comment.getParentId())){
             Comment fatherComment = commentRepository.findById(comment.getParentId()).get();
+            comment.setParentUserName(fatherComment.getStudentUserName());
             comment.setChildComments(new ArrayList<Comment>());
-//            comment.setParentComment(fatherComment);
-//            fatherComment.addChildComment(comment);
             return commentRepository.save(comment);
         }else {
             Comment newComment = commentRepository.save(comment);
@@ -47,7 +46,6 @@ public class CommentServiceImpl implements CommentService {
             newComment.setParentComment(comment);
             newComment.addChildComment(comment);
             newComment.setId(comment.getId());
-            System.out.println("bbbbbbbbbb");
             return commentRepository.save(newComment);
         }
 
