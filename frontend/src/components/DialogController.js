@@ -7,13 +7,22 @@ import {
   DialogTitle,
   Button,
 } from "@mui/material";
-import Alerting from "../components/Alerting";
-import ResetPassword from "../user action pages/ResetPassword";
-import ProfileApplication from "../user action pages/EditProfile";
-import EditInsInfo from "../user action pages/EditInsInfo";
-import UploadApplication from "../user action pages/UploadApplication";
-import SendNewContract from "../user action pages/SendNewContract";
-import SignContract from "../user action pages/SignContract";
+import Alerting from "./Alerting";
+import ResetPassword from "../user actions/ResetPassword";
+import ProfileApplication from "../user actions/EditProfile";
+import EditInsInfo from "../user actions/EditInsInfo";
+import UploadApplication from "../user actions/UploadApplication";
+import SendNewContract from "../user actions/SendNewContract";
+import SignContract from "../user actions/SignContract";
+import RateInstitution from "../user actions/RateInstitution";
+import Specific from "../program page/Specific";
+import Currentnstitution from "../institution page/CurrentInstitution";
+import PostComment from "./PostComment";
+
+// The dialog controller controls all the behaviors of opening dialog,
+// which including "Edit Profile", "Edit Institution Information", "Reset User Password"
+// "Send New Contract", "Sign Contract", "Upload Application Result", "Rate Institution",
+// "Specific University", "Specific Program", "Specific Institution"
 
 export default function DialogController(props) {
   const dialogContent = {
@@ -28,31 +37,53 @@ export default function DialogController(props) {
     "Send a Contract": "You can send a contract to a student.",
     "Sign Contract":
       "Make sure if you are going to sign this contract. You can either choose Accept or Reject, or you can close the window to make a second thought.",
+    "Rate Institution":
+      "You can rate your signed institution here. Your comment would help others to supervise the institution behaviors. You can change your rating result by rating again.",
+    "Post Comment":
+      "Comment on others"
   };
   const [showAlert, setShowAlert] = React.useState(false);
   const [severity, setSeverity] = React.useState("success");
   const [alertMsg, setAlertMsg] = React.useState("");
 
   return (
-    <Dialog open={props.open} onClose={props.handleClose}>
+    <Dialog
+      open={props.open}
+      onClose={props.handleClose}
+      fullScreen={
+        // fullscreen when showing specific page
+        props.dialogType === "Specific University" ||
+        props.dialogType === "Specific Program" ||
+        props.dialogType === "Specific Institution"
+      }
+    >
+      {/* Alerting result */}
       <Alerting
         severity={severity}
         msg={alertMsg}
         showAlert={showAlert}
         setShowAlert={setShowAlert}
       />
-      <DialogTitle>{props.dialogType}</DialogTitle>
+
+      {/* Dialog Title */}
+      <DialogTitle style={{ fontSize: 28, fontFamily: ["Segoe UI"] }}>
+        {props.dialogType}
+      </DialogTitle>
+
       <DialogContent>
-        {props.dialogType === ("Sign Contract" || "Send a Contract") ? (
+        {/* Dialog Content Text */}
+        {props.dialogType === ("Sign Contract" || "Send a Contract") ? ( // Warning Only when it calls Contract related actions
           <DialogContentText style={{ fontSize: 24, color: "red" }}>
             WARNING: THIS ACTION CANNOT BE UNDONE!
           </DialogContentText>
         ) : (
-          <React.Fragment></React.Fragment>
+          <React.Fragment />
         )}
-        <DialogContentText sx={{ pt: 2 }}>
+        <DialogContentText sx={{ fontFamily: ["Segoe UI"] }}>
           {dialogContent[props.dialogType]}
         </DialogContentText>
+
+        {/* Dialog Content Body Render */}
         {props.dialogType === "Reset Password" ? (
           <ResetPassword
             handleClose={props.handleClose}
@@ -95,6 +126,48 @@ export default function DialogController(props) {
             setShowAlert={setShowAlert}
             setSeverity={setSeverity}
             setAlertMsg={setAlertMsg}
+          />
+        ) : props.dialogType === "Rate Institution" ? (
+          <RateInstitution
+            handleClose={props.handleClose}
+            setShowAlert={setShowAlert}
+            setSeverity={setSeverity}
+            setAlertMsg={setAlertMsg}
+          />
+        ) : props.dialogType === "Comment Others" ? (
+          <PostComment
+            handleClose={props.handleClose}
+            setShowAlert={setShowAlert}
+            setSeverity={setSeverity}
+            setAlertMsg={setAlertMsg}
+            type="comment"
+          />
+        ) : props.dialogType === "Specific University" ? (
+          <Specific
+            handleClose={props.handleClose}
+            setShowAlert={setShowAlert}
+            setSeverity={setSeverity}
+            setAlertMsg={setAlertMsg}
+            specific={props.specific}
+            type="university"
+          />
+        ) : props.dialogType === "Specific Program" ? (
+          <Specific
+            handleClose={props.handleClose}
+            setShowAlert={setShowAlert}
+            setSeverity={setSeverity}
+            setAlertMsg={setAlertMsg}
+            specific={props.specific}
+            type="program"
+          />
+        ) : props.dialogType === "Specific Institution" ? (
+          <Currentnstitution
+            handleClose={props.handleClose}
+            setShowAlert={setShowAlert}
+            setSeverity={setSeverity}
+            setAlertMsg={setAlertMsg}
+            specific={props.specific}
+            type="institution"
           />
         ) : (
           <React.Fragment />

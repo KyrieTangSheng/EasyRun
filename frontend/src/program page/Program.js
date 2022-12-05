@@ -8,11 +8,12 @@ import FavoriteSharpIcon from "@mui/icons-material/FavoriteSharp";
 import LoyaltyIcon from "@mui/icons-material/Loyalty";
 
 export default function Program(props) {
-  const universityName = "all";
   const programName = "all";
+  const universityName = "all";
 
-  // Check if it is for student star page
+  // Check if it is for student star page or specific university page
   const checkStar = props.checkStar || false;
+  const checkUniversity = props.universityName || false;
 
   // for table init
   const [tableRows, setTableRows] = React.useState([]);
@@ -21,9 +22,10 @@ export default function Program(props) {
       field: "star",
       headerName: "Star",
       width: 100,
+      // If not student type user logged in, the user cannot star the program
       hide: !(localStorage.isLoggedIn && localStorage.userType === "student"),
       // render a Star Icon to star the program
-      renderCell: (params) => ( 
+      renderCell: (params) => (
         <Checkbox
           icon={<FavoriteBorderIcon />}
           indeterminateIcon={<LoyaltyIcon />}
@@ -37,10 +39,15 @@ export default function Program(props) {
     },
     { field: "id", headerName: "Program ID", width: 150 },
     { field: "name", headerName: "Program Name", width: checkStar ? 207 : 400 },
-    { field: "universityName", headerName: "University Name", width: checkStar ? 206 : 400 },
+    {
+      field: "universityName",
+      headerName: "University Name",
+      width: checkStar ? 206 : 400,
+      hide: checkUniversity,
+    },
   ];
 
-  function handleStarChange(clickedRow) {
+  const handleStarChange = (clickedRow) => {
     let studentId = JSON.parse(localStorage.userInfo).id;
     let programId = null;
     let starStatus = null;
@@ -65,10 +72,10 @@ export default function Program(props) {
       }
     });
     setTableRows(updatedData);
-  }
+  };
 
   React.useEffect(() => {
-    let userID = 0;
+    let userID = -1;
     if (
       // only student can star programs
       Boolean(localStorage.isLoggedIn) === true &&
@@ -76,11 +83,11 @@ export default function Program(props) {
     ) {
       userID = JSON.parse(localStorage.userInfo).id;
     } else {
-      userID = 0;
+      userID = -1;
     }
 
     // retrieve programs from back-end
-    if (checkStar === false) {
+    if (checkStar === false && checkUniversity === false) {
       // for program view page
       ProgramServices.ListPrograms(universityName, programName, userID)
         .then((response) => response.json())
@@ -97,7 +104,7 @@ export default function Program(props) {
             }))
           );
         });
-    } else {
+    } else if (checkStar === true) {
       // for student starred program view page
       StudentHomepageServices.ViewStarredPrograms(userID)
         .then((response) => response.json())
@@ -115,14 +122,17 @@ export default function Program(props) {
           );
         });
     }
-  }, [setTableRows, checkStar]);
+  }, [setTableRows, checkStar, checkUniversity]);
 
   return (
     <React.Fragment>
       {checkStar ? (
         <React.Fragment />
+      ) : checkUniversity ? (
+        ""
       ) : (
         <React.Fragment>
+          {" "}
           <Typography>
             You can double click on the program name to see specific program
             information,
@@ -130,15 +140,15 @@ export default function Program(props) {
           <Typography>
             or double click on the university name to see specific university
             information.
-          </Typography>
+          </Typography>{" "}
         </React.Fragment>
       )}
       <Table
         columns={tableColumns}
-        rows={tableRows}
-        height={checkStar ? 380 : 575}
+        rows={checkUniversity? props.content : tableRows}
+        height={checkStar ? 380 : checkUniversity? 540 : 575}
         PageSize={checkStar ? 5 : 10}
-        tableType="program"
+        tableType={checkUniversity? "specificUniversityPrograms" : "program"}
       ></Table>
     </React.Fragment>
   );

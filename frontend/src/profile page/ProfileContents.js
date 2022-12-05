@@ -6,7 +6,7 @@ import BorderColorRoundedIcon from "@mui/icons-material/BorderColorRounded";
 import UploadFileRoundedIcon from "@mui/icons-material/UploadFileRounded";
 import RoomPreferencesRoundedIcon from "@mui/icons-material/RoomPreferencesRounded";
 import GavelRoundedIcon from "@mui/icons-material/GavelRounded";
-import DialogController from "./DialogController";
+import DialogController from "../components/DialogController";
 import AccountPage from "./content pages/AccountPage";
 import EducationPage from "./content pages/EducationPage";
 import StarOrEnrollStudentPage from "./content pages/StarOrEnrollStudentPage";

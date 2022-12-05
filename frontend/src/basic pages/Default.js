@@ -4,7 +4,7 @@ import BusinessIcon from "@mui/icons-material/Business";
 import SchoolIcon from "@mui/icons-material/School";
 import Grid from "@mui/material/Grid";
 
-export default function Defualt() {
+export default function Default() {
   return (
     <Grid sx={{ flexGrow: 1 }} container spacing={2}>
       <Grid item xs={12} sm={3}>
@@ -15,7 +15,7 @@ export default function Defualt() {
                     We'll show you a list of institutions, and each institution
                     with its rating from their enrolled students."
           icon={<BusinessIcon />}
-          page="./institutions"
+          page="../institutions"
         />
       </Grid>
       <Grid item xs={12} sm={3}>
@@ -27,7 +27,7 @@ export default function Defualt() {
                     show you a list of master programs, and you can specify 
                     some keywords for mapping."
           icon={<SchoolIcon />}
-          page="./programs"
+          page="../programs"
         />
       </Grid>
     </Grid>

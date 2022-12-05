@@ -114,7 +114,7 @@ export default function Login() {
             });
             setShowAlert(true);
             setTimeout(() => {
-              window.location.href = "./home/profile";
+              window.location.href = "./profile";
             }, 3000);
           } else {
             // handle the fail login conditions
@@ -165,7 +165,7 @@ export default function Login() {
       setShowAlert={setShowAlert}/>
 
       <Paper style={paperStyle} variant="outlined">
-        <a href="./home">
+        <a href="http://localhost:3000/">
           <Avatar style={avatarStyle}>
             <DirectionsRunIcon />
           </Avatar>

@@ -166,6 +166,7 @@ export default function UploadApplication(props) {
       internExp: PAvalues.internshipExperience || "",
       status: result,
     };
+
     ApplicationServices.UpLoadApplicationResult(ApplicationResultInfo)
       .then((response) => response.json())
       .then((result) => {
@@ -174,8 +175,7 @@ export default function UploadApplication(props) {
           props.setAlertMsg(
             "Upload application result success. Thank you for your contribution.contract success. Refresh the contract page to see the updates"
           );
-        }
-        else {
+        } else {
           props.setSeverity("error");
           props.setAlertMsg(
             "Upload application result fail. Some error occurs."

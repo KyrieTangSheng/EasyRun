@@ -73,7 +73,7 @@ const Selecting = (props) => {
               ? props.errors.programError.msg
               : props.type === "result"
               ? props.errors.resultError.msg
-              : null
+              : "Optional filed. you can click on Next button to skip this step."
           }
         />
       )}
