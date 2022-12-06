@@ -8461,6 +8461,11 @@
   optionalDependencies:
     "fsevents" "^2.3.2"
 
+"react-svg-radar-chart@^1.4.0":
+  "integrity" "sha512-flOJQrVOq7SqNMooWPrsgJqN8Lx/BedQoGHDIgdmmpJS0i2P7WJK6u8JeDA8Sjbobxh9QqvFFSxLdFn6Aua8Zg=="
+  "resolved" "https://registry.npmjs.org/react-svg-radar-chart/-/react-svg-radar-chart-1.4.0.tgz"
+  "version" "1.4.0"
+
 "react-transition-group@^4.4.0", "react-transition-group@^4.4.5":
   "integrity" "sha512-pZcd1MCJoiKiBR2NRxeCRg13uCXbydPnmB4EOeRrY7480qNWO8IIgQG6zlDkm6uRMsURXPuKq0GWtiM59a5Q6g=="
   "resolved" "https://registry.npmjs.org/react-transition-group/-/react-transition-group-4.4.5.tgz"
