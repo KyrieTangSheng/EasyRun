@@ -10,6 +10,7 @@ import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import FavoriteSharpIcon from "@mui/icons-material/FavoriteSharp";
 import LoyaltyIcon from "@mui/icons-material/Loyalty";
 import ProgramServices from "../services/programs";
+import Radar from "./Radar";
 
 // student can star program in detailed page
 const handleStarChange = (programId, star, object, setObject) => {
@@ -74,15 +75,21 @@ export default function InfoCard(props) {
         </IconButton>
       )}
 
-      {/* Image */}
-      <AspectRatio minHeight="120px" maxHeight="200px" sx={{ my: 2 }}>
-        <img
-          src="https://images.unsplash.com/photo-1527549993586-dff825b37782?auto=format&fit=crop&w=286"
-          srcSet="https://images.unsplash.com/photo-1527549993586-dff825b37782?auto=format&fit=crop&w=286&dpr=2 2x"
-          loading="lazy"
-          alt=""
-        />
-      </AspectRatio>
+      {/* Radar or Image */}
+      {props.cardType === "institution" ? (
+        <Box sx={{ml:"70px"}}>
+          <Radar></Radar>
+        </Box>
+      ) : (
+        <AspectRatio minHeight="120px" maxHeight="200px" sx={{ my: 2 }}>
+          <img
+            src="https://images.unsplash.com/photo-1527549993586-dff825b37782?auto=format&fit=crop&w=286"
+            srcSet="https://images.unsplash.com/photo-1527549993586-dff825b37782?auto=format&fit=crop&w=286&dpr=2 2x"
+            loading="lazy"
+            alt=""
+          />
+        </AspectRatio>
+      )}
 
       {/* Body */}
       <Box sx={{ display: "flex" }}>
