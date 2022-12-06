@@ -241,8 +241,9 @@ export default function UploadApplication(props) {
     if (localStorage.userType === "student") {
       setPAvalues(JSON.parse(localStorage.userInfo)); // set education info
       let data = JSON.parse(localStorage.contractData);
+      let contracts = JSON.parse(data.contracts)
       setAllInstitutions(
-        data.map((row) => ({
+        contracts.map((row) => ({
           label: row.institutionName,
           institutionName: row.institutionName,
           instructorName: row.instructorName,

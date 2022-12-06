@@ -8,6 +8,8 @@ import InsInfoPage from "./InsInfoPageFour";
 export default function PageFour(props) {
   // Set Institution Data for Instructor Homepage
   let institutionData = null;
+  let ratings = localStorage.ratings
+  let contractD = localStorage.contractData
 
   // Table columns and rows for contracts
   // Set Contract Data for Student Homepage
@@ -18,7 +20,7 @@ export default function PageFour(props) {
       headerName: "Status",
       width: 100,
       renderCell: (params) => {
-        if (params.row?.status === "inProcess") {
+        if (params.row?.status === 2) {
           // choose accept or reject the contract
           return (
             <Button
@@ -37,7 +39,7 @@ export default function PageFour(props) {
               Sign
             </Button>
           );
-        } else if (params.row?.status === "accepted") {
+        } else if (params.row?.status === 0) {
           // rate on the institution
           return (
             <Button
@@ -53,6 +55,10 @@ export default function PageFour(props) {
                     studentUserName: userName,
                   })
                 );
+                localStorage.setItem(
+                  "rating",
+                  JSON.stringify(params.row.rating)
+                );
                 props.handleClickOpenDialog();
                 props.handleSetDialogType("Rate Institution");
               }}
@@ -60,6 +66,8 @@ export default function PageFour(props) {
               Rate
             </Button>
           );
+        } else {
+          return "Rejected";
         }
       },
     },
@@ -80,20 +88,27 @@ export default function PageFour(props) {
     // Should keep updating in case of new contract
     // get contract info
     if (localStorage.userType === "student") {
+      delete localStorage.ratings;
       const studentId = JSON.parse(localStorage.userInfo).id;
       StudentHomepageServices.GetContract(studentId)
         .then((response) => response.json())
         .then((result) => {
-          localStorage.setItem("contractData", result.data);
+          const data = JSON.parse(result.data);
+          const ratings = JSON.parse(data.ratings);
+          localStorage.setItem("contractData", data.contracts);
           setContractData(
-            JSON.parse(result.data).map((x) => ({
+            JSON.parse(data.contracts).map((x, idx) => ({
               ...x,
-              rate: x.status === "accepted" ? x.overallRate || "Not rated yet" : "Rate Invalid", // check if the institution could be rated
+              rate:
+                x.status === 0
+                  ? ratings[idx].overallRating || "Not rated yet"
+                  : "Rate Invalid", // check if the institution could be rated
+              rating: ratings[idx],
             }))
           );
         });
     }
-  }, [setContractData]);
+  }, [setContractData, contractD, ratings]);
 
   // student need to render a table for the contract
   if (props.userType === "student") {

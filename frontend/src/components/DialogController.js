@@ -17,7 +17,7 @@ import SignContract from "../user actions/SignContract";
 import RateInstitution from "../user actions/RateInstitution";
 import Specific from "../program page/Specific";
 import Currentnstitution from "../institution page/CurrentInstitution";
-import PostComment from "./PostComment";
+import PostComment from "../user actions/PostComment";
 
 // The dialog controller controls all the behaviors of opening dialog,
 // which including "Edit Profile", "Edit Institution Information", "Reset User Password"
@@ -140,6 +140,7 @@ export default function DialogController(props) {
             setShowAlert={setShowAlert}
             setSeverity={setSeverity}
             setAlertMsg={setAlertMsg}
+            setUpdate={props.setUpdate}
             type="comment"
           />
         ) : props.dialogType === "Specific University" ? (
