@@ -6,7 +6,6 @@ import Commentbox from "../rating forum/Comment";
 
 
 export default function Currentnstitution(props) {
-  console.log(props)
 
   const OfferColumns = [
     {

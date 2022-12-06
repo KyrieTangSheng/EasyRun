@@ -22,7 +22,6 @@ const handleStarChange = (programId, star, object, setObject) => {
       if (result.status !== 1) {
         window.alert("Failed to star / cancel star due to some error.");
       } else {
-        console.log(result);
         setObject({ ...object, star: !star });
       }
     });
@@ -64,21 +63,24 @@ export default function InfoCard(props) {
           }}
         />
       ) : (
-        <IconButton
-          aria-label="bookmark Bahamas Islands"
-          variant="plain"
-          color="neutral"
-          size="sm"
-          sx={{ position: "absolute", top: "0.5rem", right: "0.5rem" }}
-        >
-          <ExploreIcon size="lg" />
-        </IconButton>
+        <React.Fragment>
+          {/* <Typography>test</Typography> */}
+          <IconButton
+            aria-label="bookmark Bahamas Islands"
+            variant="plain"
+            color="neutral"
+            size="sm"
+            sx={{ position: "absolute", top: "0.5rem", right: "0.5rem" }}
+          >
+            <ExploreIcon size="lg" />
+          </IconButton>
+        </React.Fragment>
       )}
 
       {/* Radar or Image */}
       {props.cardType === "institution" ? (
-        <Box sx={{ml:"70px"}}>
-          <Radar></Radar>
+        <Box sx={{ ml: "70px" }}>
+          <Radar object={object}></Radar>
         </Box>
       ) : (
         <AspectRatio minHeight="120px" maxHeight="200px" sx={{ my: 2 }}>
