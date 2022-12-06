@@ -18,7 +18,6 @@ export default function Institution() {
       .then((response) => response.json())
       .then((result) => {
         const data = JSON.parse(result.data);
-        console.log(data)
         setMyRows(data);
       });
   }, [name]);
