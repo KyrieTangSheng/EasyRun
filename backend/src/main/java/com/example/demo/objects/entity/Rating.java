@@ -30,20 +30,20 @@ public class Rating {
     @JoinColumn(name="student",nullable = true)
     private Student student;
     private String studentUserName;
-    private Integer overallRating;
-    private Integer criteria1Rating;
-    private Integer criteria2Rating;
-    private Integer criteria3Rating;
-    private Integer criteria4Rating;
-    private Integer criteria5Rating;
-    private Integer criteria6Rating;
+    private Float overallRating;
+    private Float criteria1Rating;
+    private Float criteria2Rating;
+    private Float criteria3Rating;
+    private Float criteria4Rating;
+    private Float criteria5Rating;
+    private Float criteria6Rating;
     private String review;
     private LocalDateTime dateTime;
 
     public Rating(){
     }
 
-    public Rating(Long institutionId, String institutionName, Institution institution, Long studentId, Student student, String studentUserName, Integer overallRating, Integer criteria1Rating, Integer criteria2Rating, Integer criteria3Rating, Integer criteria4Rating, Integer criteria5Rating, Integer criteria6Rating, String review) {
+    public Rating(Long institutionId, String institutionName, Institution institution, Long studentId, Student student, String studentUserName, Float overallRating, Float criteria1Rating, Float criteria2Rating, Float criteria3Rating, Float criteria4Rating, Float criteria5Rating, Float criteria6Rating, String review) {
         this.institutionId = institutionId;
         this.institutionName = institutionName;
         this.institution = institution;
@@ -60,7 +60,7 @@ public class Rating {
         this.review = review;
         this.dateTime = LocalDateTime.now();
     }
-    public Rating(Long id, Long institutionId, String institutionName, Institution institution, Long studentId, Student student, String studentUserName, Integer overallRating, Integer criteria1Rating, Integer criteria2Rating, Integer criteria3Rating, Integer criteria4Rating, Integer criteria5Rating, Integer criteria6Rating, String review) {
+    public Rating(Long id, Long institutionId, String institutionName, Institution institution, Long studentId, Student student, String studentUserName, Float overallRating, Float criteria1Rating, Float criteria2Rating, Float criteria3Rating, Float criteria4Rating, Float criteria5Rating, Float criteria6Rating, String review) {
         this.id = id;
         this.institutionId = institutionId;
         this.institutionName = institutionName;
@@ -135,59 +135,59 @@ public class Rating {
         this.studentUserName = studentUserName;
     }
 
-    public Integer getOverallRating() {
+    public Float getOverallRating() {
         return overallRating;
     }
 
-    public void setOverallRating(Integer overallRating) {
+    public void setOverallRating(Float overallRating) {
         this.overallRating = overallRating;
     }
 
-    public Integer getCriteria1Rating() {
+    public Float getCriteria1Rating() {
         return criteria1Rating;
     }
 
-    public void setCriteria1Rating(Integer criteria1Rating) {
+    public void setCriteria1Rating(Float criteria1Rating) {
         this.criteria1Rating = criteria1Rating;
     }
 
-    public Integer getCriteria2Rating() {
+    public Float getCriteria2Rating() {
         return criteria2Rating;
     }
 
-    public void setCriteria2Rating(Integer criteria2Rating) {
+    public void setCriteria2Rating(Float criteria2Rating) {
         this.criteria2Rating = criteria2Rating;
     }
 
-    public Integer getCriteria3Rating() {
+    public Float getCriteria3Rating() {
         return criteria3Rating;
     }
 
-    public void setCriteria3Rating(Integer criteria3Rating) {
+    public void setCriteria3Rating(Float criteria3Rating) {
         this.criteria3Rating = criteria3Rating;
     }
 
-    public Integer getCriteria4Rating() {
+    public Float getCriteria4Rating() {
         return criteria4Rating;
     }
 
-    public void setCriteria4Rating(Integer criteria4Rating) {
+    public void setCriteria4Rating(Float criteria4Rating) {
         this.criteria4Rating = criteria4Rating;
     }
 
-    public Integer getCriteria5Rating() {
+    public Float getCriteria5Rating() {
         return criteria5Rating;
     }
 
-    public void setCriteria5Rating(Integer criteria5Rating) {
+    public void setCriteria5Rating(Float criteria5Rating) {
         this.criteria5Rating = criteria5Rating;
     }
 
-    public Integer getCriteria6Rating() {
+    public Float getCriteria6Rating() {
         return criteria6Rating;
     }
 
-    public void setCriteria6Rating(Integer criteria6Rating) {
+    public void setCriteria6Rating(Float criteria6Rating) {
         this.criteria6Rating = criteria6Rating;
     }
 

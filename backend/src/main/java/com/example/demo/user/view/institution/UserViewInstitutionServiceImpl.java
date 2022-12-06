@@ -53,6 +53,40 @@ public class UserViewInstitutionServiceImpl implements UserViewInstitutionServic
     public Response getAllInstitutions(){
         List<Institution> institutions = institutionServiceImpl.getAllInstitutions();
 
+        List<Rating> ratings;
+        Integer ratingCount;
+        Float score1,score2,score3,score4,score5,score6,overallScore;
+        for(Institution institution:institutions){
+            ratings = ratingServiceImpl.getRatingsByInstitutionName(institution.getName());
+            if (ratings.isEmpty()){
+                continue;
+            }
+            ratingCount = ratings.size();
+            score1 = 0F;
+            score2 = 0F;
+            score3 = 0F;
+            score4 = 0F;
+            score5 = 0F;
+            score6 = 0F;
+            overallScore = 0F;
+            for(Rating rating:ratings){
+                score1 += rating.getCriteria1Rating()/ratingCount;
+                score2 += rating.getCriteria2Rating()/ratingCount;
+                score3 += rating.getCriteria3Rating()/ratingCount;
+                score4 += rating.getCriteria4Rating()/ratingCount;
+                score5 += rating.getCriteria5Rating()/ratingCount;
+                score6 += rating.getCriteria6Rating()/ratingCount;
+                overallScore += rating.getOverallRating()/ratingCount;
+            }
+            institution.setAvgScore1(score1);
+            institution.setAvgScore2(score2);
+            institution.setAvgScore3(score3);
+            institution.setAvgScore4(score4);
+            institution.setAvgScore5(score5);
+            institution.setAvgScore6(score6);
+            institution.setAvgOverallScore(overallScore);
+        }
+
         ObjectMapper mapper = new ObjectMapper();
         try{
             String jsonInstitutions= mapper.writerWithDefaultPrettyPrinter().writeValueAsString(institutions);
@@ -67,6 +101,40 @@ public class UserViewInstitutionServiceImpl implements UserViewInstitutionServic
     @Override
     public Response getInstitutionsByKeyword(String keyword){
         List<Institution> institutions = institutionServiceImpl.getAllInstitutionsByKeyword(keyword);
+
+        List<Rating> ratings;
+        Integer ratingCount;
+        Float score1,score2,score3,score4,score5,score6,overallScore;
+        for(Institution institution:institutions){
+            ratings = ratingServiceImpl.getRatingsByInstitutionName(institution.getName());
+            if (ratings.isEmpty()){
+                continue;
+            }
+            ratingCount = ratings.size();
+            score1 = 0F;
+            score2 = 0F;
+            score3 = 0F;
+            score4 = 0F;
+            score5 = 0F;
+            score6 = 0F;
+            overallScore = 0F;
+            for(Rating rating:ratings){
+                score1 += rating.getCriteria1Rating()/ratingCount;
+                score2 += rating.getCriteria2Rating();
+                score3 += rating.getCriteria3Rating();
+                score4 += rating.getCriteria4Rating();
+                score5 += rating.getCriteria5Rating();
+                score6 += rating.getCriteria6Rating();
+                overallScore += rating.getOverallRating();
+            }
+            institution.setAvgScore1(score1);
+            institution.setAvgScore2(score2);
+            institution.setAvgScore3(score3);
+            institution.setAvgScore4(score4);
+            institution.setAvgScore5(score5);
+            institution.setAvgScore6(score6);
+            institution.setAvgOverallScore(overallScore);
+        }
 
         ObjectMapper mapper = new ObjectMapper();
         try{
