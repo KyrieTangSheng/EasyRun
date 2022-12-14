@@ -77,7 +77,7 @@ public class InstructorHomeServiceImpl implements InstructorHomeService{
         Instructor instructor = instructorRepository.findById(instructorId).get();
         Contract newContract = contractServiceImpl.generateNewContract(student.getId(), institutionId, content,instructorId
         ,student,instructor,institution);
-        
+
         ObjectMapper mapper = new ObjectMapper();
         try{
             String jsonContract = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(newContract);
