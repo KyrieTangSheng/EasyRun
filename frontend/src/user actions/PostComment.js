@@ -19,44 +19,51 @@ export default function PostComment(props) {
     setValue(comment);
   };
 
-
-
   const handleSubmit = (e) => {
     e.preventDefault();
-    let studentId = JSON.parse(localStorage.userInfo).id;
-    let ratingId = localStorage.ratingId;
-    let parentId = localStorage.parentId
-    let msg = { studentId, ratingId, parentId, content: value };
-    if (value === "") {
-      let newError = { status: true, msg: "Comment cannot be empty." };
-      setError(newError);
+    if (localStorage.isLoggedIn) {
+      let studentId = JSON.parse(localStorage.userInfo).id;
+      let ratingId = localStorage.ratingId;
+      let parentId = localStorage.parentId;
+      let msg = { studentId, ratingId, parentId, content: value };
+      if (value === "") {
+        let newError = { status: true, msg: "Comment cannot be empty." };
+        setError(newError);
+      } else {
+        InstitutionServices.PostComment(msg)
+          .then((response) => response.json())
+          .then((result) => {
+            if (result.status === 1) {
+              setShowAlert(true);
+              setUpdate(true);
+              props.setSeverity("success");
+              props.setAlertMsg(
+                "Comment posted success. Close the window to see the update."
+              );
+              //console.log(result);
+            } else {
+              props.setSeverity("error");
+              props.setAlertMsg("some error occurs.");
+            }
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+        setValue("");
+      }
     } else {
-      InstitutionServices.PostComment(msg)
-        .then((response) => response.json())
-        .then((result) => {
-          if (result.status === 1) {
-            setShowAlert(true);
-            setUpdate(true)
-            props.setSeverity("success");
-            props.setAlertMsg(
-              "Comment posted success. Close the window to see the update."
-            );
-            //console.log(result);
-          } else {
-            props.setSeverity("error");
-            props.setAlertMsg("some error occurs.");
-          }
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-      setValue("");
+      setShowAlert(true);
+      props.setSeverity("error");
+      props.setAlertMsg("Please login to make a comment.");
+      setTimeout(() => {
+        window.location.href = "./login";
+      }, 3000);
     }
   };
 
   React.useEffect(() => {
     setShowAlert(false);
-    setUpdate(false)
+    setUpdate(false);
   }, [setShowAlert, setUpdate]);
 
   return (

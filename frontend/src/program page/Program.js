@@ -94,6 +94,7 @@ export default function Program(props) {
         .then((result) => {
           const data = JSON.parse(result.data); // program data and school data
           const rows = JSON.parse(data.programs); // set program data to rows
+          //console.log(rows)
           const starStatus = JSON.parse(data.starStatus); // get star status list
           // map table values with star contribute
           setTableRows(

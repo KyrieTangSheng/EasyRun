@@ -173,7 +173,7 @@ export default function UploadApplication(props) {
         if (result.status === 1) {
           props.setSeverity("success");
           props.setAlertMsg(
-            "Upload application result success. Thank you for your contribution.contract success. Refresh the contract page to see the updates"
+            "Upload application result success. Thank you for your contribution."
           );
         } else {
           props.setSeverity("error");
@@ -241,6 +241,7 @@ export default function UploadApplication(props) {
     if (localStorage.userType === "student") {
       setPAvalues(JSON.parse(localStorage.userInfo)); // set education info
       let data = JSON.parse(localStorage.contractData);
+      console.log(data)
       let contracts = JSON.parse(data.contracts)
       setAllInstitutions(
         contracts.map((row) => ({
