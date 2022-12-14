@@ -126,6 +126,7 @@ export default function PageFour(props) {
 
   // instructor gets the institution information page
   else {
+    console.log(localStorage.institutionData)
     institutionData = JSON.parse(localStorage.institutionData);
     return <InsInfoPage institutionData={institutionData} />;
   }

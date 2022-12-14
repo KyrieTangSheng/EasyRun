@@ -210,6 +210,7 @@ export default function UploadApplication(props) {
       .then((response) => response.json())
       .then((result) => {
         const universities = JSON.parse(result.data);
+        console.log(universities)
         setAllUniversities(universities.map((x, index) => ({ label: x.name })));
       })
       .catch((err) => {

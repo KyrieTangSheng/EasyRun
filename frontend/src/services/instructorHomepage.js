@@ -11,8 +11,8 @@ const GetEnrolledStudents= (institutionId) => {
   });
 }
 
-const ViewInstitutionInfo= (instructorId) => {
-  return fetch(rootURL + "institutionInfo/" + instructorId, {
+const ViewInstitutionInfo= (institutionId) => {
+  return fetch(rootURL + "institutionInfo/" + institutionId, {
     method: "GET",
     mode: "cors",
     headers: {
