@@ -47,7 +47,7 @@ public class InstructorHomeServiceImpl implements InstructorHomeService{
         List<Contract> contracts = contractServiceImpl.getContractsByInstitutionId(institutionId);
         List<Student> students = new ArrayList<Student>();
         for(Contract contract:contracts){
-            if (Objects.equals(contract.getStatus(),"accepted")){
+            if (Objects.equals(contract.getStatus(),0)){
                 students.add(studentAccountServiceImpl.getStudentInfoById(contract.getStudentId()).get());
             }
         }
