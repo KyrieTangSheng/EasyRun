@@ -6,7 +6,7 @@ import Commentbox from "../rating forum/Comment";
 
 
 export default function Currentnstitution(props) {
-
+  
   const OfferColumns = [
     {
       field: "status",
@@ -73,18 +73,19 @@ export default function Currentnstitution(props) {
     );
   };
 
-  const Test = () => {
+  const Comment = () => {
     return(
     <Commentbox
     name = {props.specific.name}/>
     );
   };
 
+
   return (
     <SpecificPageSkeleton
       InfoCard={ProgramInfoCard}
       Table1={StaffTable}
-      Table2={Test}
+      Table2={Comment}
       Table3={OfferTable}
       type="institution"
     />

@@ -9,7 +9,7 @@ export default function PageFour(props) {
   // Set Institution Data for Instructor Homepage
   let institutionData = null;
   let ratings = localStorage.ratings
-  let contractD = localStorage.contractData
+  let contractD = localStorage.contractDataUpdate
 
   // Table columns and rows for contracts
   // Set Contract Data for Student Homepage
@@ -95,7 +95,8 @@ export default function PageFour(props) {
         .then((result) => {
           const data = JSON.parse(result.data);
           const ratings = JSON.parse(data.ratings);
-          localStorage.setItem("contractData", data.contracts);
+          localStorage.setItem("contractData", result.data);
+          localStorage.setItem("contractDataUpdate", true)
           setContractData(
             JSON.parse(data.contracts).map((x, idx) => ({
               ...x,
@@ -125,6 +126,7 @@ export default function PageFour(props) {
 
   // instructor gets the institution information page
   else {
+    console.log(localStorage.institutionData)
     institutionData = JSON.parse(localStorage.institutionData);
     return <InsInfoPage institutionData={institutionData} />;
   }

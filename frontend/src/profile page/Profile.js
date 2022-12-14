@@ -10,8 +10,8 @@ export default function Profile() {
 
   React.useEffect(() => {
     if (localStorage.isLoggedIn && localStorage.userType === "instructor"){
-      const instructorId = JSON.parse(localStorage.userInfo).id;
-      InstructorHomepageServices.ViewInstitutionInfo(instructorId)
+      const institutionId = JSON.parse(localStorage.userInfo).institution;
+      InstructorHomepageServices.ViewInstitutionInfo(institutionId)
         .then((response) => response.json())
         .then((result) => {
           localStorage.setItem("institutionData", result.data)

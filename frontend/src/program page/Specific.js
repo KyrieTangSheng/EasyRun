@@ -19,6 +19,29 @@ const GetNewUniversity = (currentId, setSpecificObj, setSpecificContent) => {
     });
 };
 
+// Specific program Information api call
+const GetNewProgram = (
+  currentId,
+  setSpecificObj,
+  setSpecificContent,
+  studentId
+) => {
+  ProgramServices.ViewSpecificProgram(currentId, studentId)
+    .then((response) => response.json())
+    .then((result) => {
+      let data = JSON.parse(result.data);
+      let specificProgram = JSON.parse(data.program);
+      specificProgram.star = data.starred;
+      let applications = specificProgram.applications;
+      setSpecificObj(specificProgram);
+      setSpecificContent(applications);
+      localStorage.setItem("specificProgram", JSON.stringify(specificProgram));
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+};
+
 export default function Specific(props) {
   // Use localStorage.specificUniversity to store a specific university information
   // If clicked university id equals to localStorage.specificUniversity.id equals to
@@ -51,10 +74,36 @@ export default function Specific(props) {
         GetNewUniversity(currentId, setSpecificObj, setSpecificContent);
       }
     }
+
     // set the information for specific Program
     else if (specificType === "program") {
       setSpecificObj(props.specific);
       setSpecificContent(props.specific.applications);
+      let studentId =
+        localStorage.isLoggedIn && localStorage.userType === "student"
+          ? JSON.parse(localStorage.userInfo).id
+          : 0;
+
+      if (localStorage.specificProgram) {
+        //set Specific Info
+        let specificProgram = JSON.parse(localStorage.specificProgram);
+        let applications = specificProgram.applications;
+        // check if localstorage Program is the Program that the user clicked on
+        if (specificProgram.id === currentId) {
+          setSpecificObj(specificProgram);
+          setSpecificContent(applications);
+        } else {
+          GetNewProgram(
+            currentId,
+            setSpecificObj,
+            setSpecificContent,
+            studentId
+          );
+        }
+      } else {
+        // If localstorage no specific university data
+        GetNewProgram(currentId, setSpecificObj, setSpecificContent, studentId);
+      }
     }
   }, [currentId, specificType, props.specific]);
 

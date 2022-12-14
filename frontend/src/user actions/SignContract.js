@@ -53,7 +53,7 @@ export default function SignContract(props) {
   // update the contract data table to prevent re-modify
   React.useEffect(() => {
     if (updateSuccess === true) {
-      localStorage.setItem("contractData", "needs to be updated");
+      localStorage.setItem("contractDataUpdate", "needs to be updated");
     }
   }, [updateSuccess]);
 
