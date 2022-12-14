@@ -20,6 +20,7 @@ export default function StarOrEnrollStudentPage(props) {
         .then((response) => response.json())
         .then((result) => {
           const data = JSON.parse(result.data);
+          console.log(data)
           setEnrolledStudentRows(data);
         })
     }
