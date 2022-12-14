@@ -5,8 +5,10 @@ import com.example.demo.objects.entity.Contract;
 import com.example.demo.objects.entity.Institution;
 import com.example.demo.objects.repo.ContractRepository;
 import com.example.demo.objects.service.iface.ContractService;
+import com.example.demo.observers.NewContractEvent;
 import com.example.demo.student.Student;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -17,7 +19,8 @@ import java.util.Optional;
 @Service
 public class ContractServiceImpl implements ContractService {
     private ContractRepository contractRepository;
-
+    @Autowired
+    private ApplicationEventPublisher applicationEventPublisher;
     @Autowired
     public ContractServiceImpl(ContractRepository contractRepository){
         this.contractRepository = contractRepository;
@@ -52,13 +55,19 @@ public class ContractServiceImpl implements ContractService {
                 studentId,
                 instructorId,
                 institutionId,
-                2,
+                2, //means "in-process"
                 content,
                 student,
                 instructor,
                 institution);
         newContract.setInstructorName(instructor.getFirstName()+" "+instructor.getLastName());
         newContract.setInstitutionName(institution.getName());
-        return contractRepository.save(newContract);
+
+        Contract savedContract = contractRepository.save(newContract);
+
+        //Publish to observer
+        applicationEventPublisher.publishEvent(new NewContractEvent(this, student,instructor,institution));
+
+        return savedContract;
     }
 }
