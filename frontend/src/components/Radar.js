@@ -1,4 +1,3 @@
-import { Box, minWidth } from "@mui/system";
 import React from "react";
 import RadarChart from "react-svg-radar-chart";
 import "react-svg-radar-chart/build/css/index.css";
@@ -43,7 +42,7 @@ export default function Radar(props) {
         options={{
           scales: 5,
           dots: true,
-          zoomDistance: 0.95,
+          zoomDistance: 1.2,
           dotProps: () => ({
             className: "dot",
             mouseEnter: (dot) => {

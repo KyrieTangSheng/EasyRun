@@ -7,6 +7,7 @@ export default function Commentbox(props) {
   const [Ratings, setRatings] = React.useState([]);
   const [Comments, setComments] = React.useState([]);
   const [update, setUpdate] = React.useState(false);
+  const InsName = props.name
 
   // console.log(localStorage)
   const studentId = localStorage.isLoggedIn
@@ -14,7 +15,7 @@ export default function Commentbox(props) {
     : 0;
 
   React.useEffect(() => {
-    InstitutionServices.SpecificInstutionInfo(props.name, studentId)
+    InstitutionServices.SpecificInstutionInfo(InsName, studentId)
       .then((response) => response.json())
       .then((result) => {
         let allData = JSON.parse(result.data);
@@ -22,7 +23,7 @@ export default function Commentbox(props) {
         setRatings(JSON.parse(allData.ratings));
         setComments(JSON.parse(allData.comments));
       });
-  }, [props.name, studentId, update]);
+  }, [InsName, studentId, update]);
 
   return (
     <Box
