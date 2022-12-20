@@ -17,8 +17,8 @@ A web app that provides American graduate school application service and interme
 ## Running the Frontend
 - Download Frontend folder from the Github page
 - Open it in any editor
-- Under the current directory, type terminal command npm install
-- Then run npm start 
+- Under the current directory, type terminal command: `npm install`
+- Then run `npm start`
 
 # Open the Application
 - Go to any browser, go to http://localhost:3000/
